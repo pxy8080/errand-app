@@ -1,15 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Activity.MainActivity">
+    tools:context="com.erradns.Activity.MainActivity"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/logo" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/edit_background"
+        android:drawableLeft="@drawable/account_logo"
+        android:hint="输入邮箱"
+        android:paddingLeft="5dp" />
+
+    <LinearLayout
+        android:id="@+id/pass"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="60dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:hint="输入密码"
+            android:background="@drawable/edit_background"
+            android:drawableLeft="@drawable/password_lock"
+            android:inputType="textPassword" />
+
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@drawable/edit_background"-->
+<!--            android:src="@drawable/show_password"/>-->
+    </LinearLayout>
+
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/pass"
+        android:layout_alignLeft="@+id/pass"
+        android:layout_marginTop="20dp"
+        android:text="记住密码"
+        android:textColor="@color/forget_password" />
 
     <Button
-        android:id="@+id/btn1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="test"/>
+        android:layout_width="274dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/pass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:gravity="center"
+        android:text="登      录"
+        android:textColor="@color/black"
+        android:textSize="23sp" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/pass"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="60dp"
+        android:text="忘记密码?"
+        android:textColor="@color/forget_password" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:text="验证登录"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/pass"
+        android:textColor="@color/forget_password" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="13dp"
+        android:gravity="center"
+        android:text="新用户注册"
+        android:textColor="@color/forget_password" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Design By @errands"
+        android:textColor="@color/black"
+        android:textSize="10sp" />
+
+
+
+
+</RelativeLayout>

@@ -1,8 +1,13 @@
 package com.erradns.sophix;
 
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Keep;
 
@@ -59,9 +64,13 @@ public class SophixStubApplication extends SophixApplication {
                     public void onLoad(final int mode, final int code, final String info, final int handlePatchVersion) {
                         if (code == PatchStatus.CODE_LOAD_SUCCESS) {
                             Log.i(TAG, "sophix load patch success!");
+
                         } else if (code == PatchStatus.CODE_LOAD_RELAUNCH) {
                             // 如果需要在后台重启，建议此处用SharePreference保存状态。
                             Log.i(TAG, "sophix preload patch success. restart app to make effect.");
+                            Looper.prepare();
+                            Toast.makeText(getApplicationContext(),"补丁成功",Toast.LENGTH_SHORT).show();
+                            Looper.loop();
                         }
                     }
                 }).initialize();
