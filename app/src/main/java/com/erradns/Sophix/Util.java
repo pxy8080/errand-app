@@ -1,7 +1,6 @@
-package com.erradns.sophix;
+package com.erradns.Sophix;
 
 import android.util.Log;
-import android.widget.Toast;
 
 public class Util {
     public static void test(){

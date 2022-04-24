@@ -1,4 +1,4 @@
-package com.erradns.sophix;
+package com.erradns.Sophix;
 
 import org.junit.Test;
 

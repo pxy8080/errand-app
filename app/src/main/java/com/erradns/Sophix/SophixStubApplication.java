@@ -1,10 +1,6 @@
-package com.erradns.sophix;
+package com.erradns.Sophix;
 
-import android.app.AlarmManager;
-import android.app.Application;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;

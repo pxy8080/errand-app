@@ -32,7 +32,7 @@
 #防止inline
 -dontoptimize
 
--keepclassmembers class com.erradns.sophix.MainApplication {
+-keepclassmembers class com.erradns.Sophix.MainApplication {
     public <init>();
 }
 # 如果不使用android.support.annotation.Keep则需加上此行

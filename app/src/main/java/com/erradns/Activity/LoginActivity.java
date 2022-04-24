@@ -3,6 +3,7 @@ package com.erradns.Activity;
 import androidx.percentlayout.widget.PercentLayoutHelper;
 import androidx.percentlayout.widget.PercentRelativeLayout;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.view.View;
@@ -10,11 +11,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.erradns.sophix.R;
+import com.erradns.Sophix.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
@@ -30,6 +32,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private CheckBox remember_pwd;
     private Button login,register;
 
+    private boolean issave=false;//是否记住密码
+    private String saveemail,savepwd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +42,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
 
         initView();
+        initData();
 
 
     }
@@ -48,8 +54,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         llSignup.setOnClickListener(this);
         tvSignupInvoker = findViewById(R.id.tvSignupInvoker);
         tvSigninInvoker =  findViewById(R.id.tvSigninInvoker);
-
-
 
         login=findViewById(R.id.btn_login);
         login.setOnClickListener(this);
@@ -63,6 +67,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         register_nickname=findViewById(R.id.register_nickname_input);
         register_phone=findViewById(R.id.register_phone_input);
         remember_pwd=findViewById(R.id.remember_pwd);
+
 
         tvSignupInvoker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +84,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             }
         });
         showSigninForm();
+
+        remember_pwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (remember_pwd.isChecked()){
+                    issave=true;
+                }
+                else{
+                    issave=false;
+                }
+            }
+        });
 
 
     }
@@ -130,6 +147,37 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
     }
 
+    void  savemessage(boolean a){
+        String email,password;
+        SharedPreferences sp = getSharedPreferences("message", MODE_PRIVATE);
+        if(a){
+            email=login_email.getText().toString().trim();
+            password=login_pwd.getText().toString().trim();
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putString("email", email);
+            edit.putString("password",password);
+            edit.putBoolean("remember_pwd",true);
+            boolean commit = edit.commit();
+        }
+        else{
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putString("email", "");
+            edit.putString("password","");
+            boolean commit = edit.commit();
+            edit.putBoolean("remember_pwd",false);
+        }
+    }
+
+    void initData() {
+        //获取输入框上次存储的账号密码
+        SharedPreferences sp = getSharedPreferences("message", MODE_PRIVATE);
+        saveemail = sp.getString("email", "");
+        savepwd=sp.getString("password","");
+        Boolean a=sp.getBoolean("remember_pwd",false);
+        login_email.setText(saveemail);
+        login_pwd.setText(savepwd);
+        remember_pwd.setChecked(a);
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -137,6 +185,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 String s1=login_email.getText().toString().trim();
                 String s2=login_pwd.getText().toString().trim();
                 showToast("click login！");
+                savemessage(issave);
                 break;
             case R.id.btn_register:
                 String s3=register_email.getText().toString().trim();

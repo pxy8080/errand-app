@@ -4,8 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.erradns.sophix.R;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+import com.erradns.Sophix.R;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 public class BaseActivity extends AppCompatActivity {
