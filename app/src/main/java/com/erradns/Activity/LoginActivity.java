@@ -3,6 +3,7 @@ package com.erradns.Activity;
 import androidx.percentlayout.widget.PercentLayoutHelper;
 import androidx.percentlayout.widget.PercentRelativeLayout;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -31,6 +32,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private TextInputEditText login_email,login_pwd,register_email,register_pwd,register_nickname,register_phone;
     private CheckBox remember_pwd;
     private Button login,register;
+    private TextView forget_pwd;
 
     private boolean issave=false;//是否记住密码
     private String saveemail,savepwd;
@@ -67,7 +69,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         register_nickname=findViewById(R.id.register_nickname_input);
         register_phone=findViewById(R.id.register_phone_input);
         remember_pwd=findViewById(R.id.remember_pwd);
-
+        forget_pwd=findViewById(R.id.forget_pwd);
+        forget_pwd.setOnClickListener(this);
 
         tvSignupInvoker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +189,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 String s2=login_pwd.getText().toString().trim();
                 showToast("click login！");
                 savemessage(issave);
+                Intent home_intent=new Intent(this,HomeActivity.class);
+                startActivity(home_intent);
                 break;
             case R.id.btn_register:
                 String s3=register_email.getText().toString().trim();
@@ -195,6 +200,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 showToast("click register");
                 break;
             case R.id.remember_pwd:
+                break;
+            case R.id.forget_pwd:
+                Intent forgetpwd_intent=new Intent(this,ForgetPwdActivity.class);
+                startActivity(forgetpwd_intent);
                 break;
 
             default:

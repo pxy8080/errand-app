@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.erradns.Sophix.R;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

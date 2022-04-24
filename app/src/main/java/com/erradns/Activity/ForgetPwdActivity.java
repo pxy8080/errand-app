@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.erradns.Sophix.R;
 
-public class ForgetPwdActivity extends AppCompatActivity {
+public class ForgetPwdActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
