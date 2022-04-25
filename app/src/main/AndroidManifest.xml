@@ -17,6 +17,15 @@
         android:theme="@style/Theme.Sophix"
         android:usesCleartextTraffic="true">
         <activity
+            android:name="com.erradns.Activity.FeedbackActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.erradns.Activity.AboutActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.erradns.Activity.MyinfoActivity"
+            android:exported="true" />
+        <activity
             android:name="com.erradns.Activity.ForgetPwdActivity"
             android:exported="true" />
         <activity

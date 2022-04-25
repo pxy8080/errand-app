@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.erradns.Sophix.R;
 
-public class Fragment_home extends Fragment {
+public class Fragment_home extends Fragment implements View.OnClickListener{
 private ImageView back;
 private TextView title;
 private View rootView;
@@ -46,9 +46,17 @@ private View rootView;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView=inflater.inflate(R.layout.fragment_home,null);
+        back=rootView.findViewById(R.id.back_img);
+        back.setVisibility(View.INVISIBLE);
+        title=rootView.findViewById(R.id.title);
+        title.setText("首页");
         return rootView;
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

@@ -25,8 +25,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private Fragment fragment_home=new Fragment_home();
     private Fragment fragment_message=new Fragment_message();
     private Fragment fragment_mine=new Fragment_mine();
-    private Fragment f;
-    private FrameLayout frameLayout;
     private ViewPager2 viewPager2;
     ArrayList<Fragment> fragments=new ArrayList<>();
     @Override
@@ -50,7 +48,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
             }
-
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
@@ -65,8 +62,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initView() {
-
-
         navigation_home = findViewById(R.id.navigation_home);
         navigation_home.setOnClickListener(this);
         navigation_message = findViewById(R.id.navigation_message);
@@ -121,7 +116,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-//        changeTab(view.getId());
     }
 
     //导航栏选中颜色变换

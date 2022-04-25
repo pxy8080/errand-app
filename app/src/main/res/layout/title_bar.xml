@@ -3,7 +3,7 @@
     android:id="@+id/title_bar"
     android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:background="@color/title_bar_bg"
+    android:background="@color/navigat_background"
     android:layout_height="wrap_content">
 
     <ImageView
