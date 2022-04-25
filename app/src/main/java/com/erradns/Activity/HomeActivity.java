@@ -1,5 +1,6 @@
 package com.erradns.Activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -113,6 +114,16 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             }
         }
 
+    void getpersonalmessage() {
+        SharedPreferences sharedPreferences = getSharedPreferences("personalmessage",MODE_PRIVATE);
+        String id = sharedPreferences.getString("id","");
+        String phone = sharedPreferences.getString("phone","");
+        String email=sharedPreferences.getString("email","");
+        String nickname=sharedPreferences.getString("nickname","");
+        String headportrait=sharedPreferences.getString("headportrait","");
+        String school=sharedPreferences.getString("school","");
+        sharedPreferences.getBoolean("married",false);
+    }
 
     @Override
     public void onClick(View view) {

@@ -150,6 +150,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
     }
 
+    //记住账号密码
     void  savemessage(boolean a){
         String email,password;
         SharedPreferences sp = getSharedPreferences("message", MODE_PRIVATE);
