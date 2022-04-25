@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.erradns.Model.User;
 import com.erradns.Sophix.R;
 
 public class Fragment_home extends Fragment implements View.OnClickListener{

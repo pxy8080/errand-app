@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.erradns.Activity.LoginActivity;
 import com.erradns.Activity.MyinfoActivity;
+import com.erradns.Model.User;
 import com.erradns.Sophix.R;
 
 /**
@@ -21,6 +23,7 @@ import com.erradns.Sophix.R;
 public class Fragment_mine extends Fragment implements View.OnClickListener {
     private View rootView;
     private LinearLayout mine_center;
+    private User user;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -28,18 +31,19 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
 
-    public Fragment_mine() {
+    public Fragment_mine(User user) {
         // Required empty public constructor
+        this.user=user;
     }
 
-    public static Fragment_mine newInstance(String param1, String param2) {
-        Fragment_mine fragment = new Fragment_mine();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static Fragment_mine newInstance(String param1, String param2) {
+//        Fragment_mine fragment = new Fragment_mine(user);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,8 +66,14 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mine_center:
-                Intent to_mine_info = new Intent(getActivity(), MyinfoActivity.class);
-                startActivity(to_mine_info);
+                if (!user.getId().isEmpty()){
+                    Intent to_mine_info = new Intent(getActivity(), MyinfoActivity.class);
+                    startActivity(to_mine_info);
+                }else{
+                    Intent to_login=new Intent(getActivity(), LoginActivity.class);
+                    startActivity(to_login);
+                }
+
                 break;
         }
     }

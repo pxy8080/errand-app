@@ -15,6 +15,7 @@ import com.erradns.Adapter.ViewPager2Adapter;
 import com.erradns.Fragment.Fragment_home;
 import com.erradns.Fragment.Fragment_message;
 import com.erradns.Fragment.Fragment_mine;
+import com.erradns.Model.User;
 import com.erradns.Sophix.R;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
@@ -23,18 +24,22 @@ import java.util.ArrayList;
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout navigation_home, navigation_message, navigation_mine;
-    private Fragment fragment_home=new Fragment_home();
-    private Fragment fragment_message=new Fragment_message();
-    private Fragment fragment_mine=new Fragment_mine();
+    private Fragment fragment_home;
+    private Fragment fragment_message;
+    private Fragment fragment_mine;
     private ViewPager2 viewPager2;
     ArrayList<Fragment> fragments=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        initData();
         initView();
         initPager();
+    }
+
+    private void initData() {
+        getpersonalmessage();
     }
 
     private void initPager() {
@@ -63,6 +68,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initView() {
+        fragment_home=new Fragment_home();
+        fragment_message=new Fragment_message();
+        fragment_mine=new Fragment_mine(user);
+
         navigation_home = findViewById(R.id.navigation_home);
         navigation_home.setOnClickListener(this);
         navigation_message = findViewById(R.id.navigation_message);
@@ -114,16 +123,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             }
         }
 
-    void getpersonalmessage() {
-        SharedPreferences sharedPreferences = getSharedPreferences("personalmessage",MODE_PRIVATE);
-        String id = sharedPreferences.getString("id","");
-        String phone = sharedPreferences.getString("phone","");
-        String email=sharedPreferences.getString("email","");
-        String nickname=sharedPreferences.getString("nickname","");
-        String headportrait=sharedPreferences.getString("headportrait","");
-        String school=sharedPreferences.getString("school","");
-        sharedPreferences.getBoolean("married",false);
-    }
+
 
     @Override
     public void onClick(View view) {
