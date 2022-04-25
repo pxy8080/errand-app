@@ -66,7 +66,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mine_center:
-                if (!user.getId().isEmpty()){
+                if (user.getIslogin()){
                     Intent to_mine_info = new Intent(getActivity(), MyinfoActivity.class);
                     startActivity(to_mine_info);
                 }else{
