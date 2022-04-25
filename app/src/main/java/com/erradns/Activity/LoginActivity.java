@@ -32,7 +32,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private TextInputEditText login_email,login_pwd,register_email,register_pwd,register_nickname,register_phone;
     private CheckBox remember_pwd;
     private Button login,register;
-    private TextView forget_pwd;
+    private TextView login_forget_pwd;
 
     private boolean issave=false;//是否记住密码
     private String saveemail,savepwd;
@@ -69,8 +69,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         register_nickname=findViewById(R.id.register_nickname_input);
         register_phone=findViewById(R.id.register_phone_input);
         remember_pwd=findViewById(R.id.remember_pwd);
-        forget_pwd=findViewById(R.id.forget_pwd);
-        forget_pwd.setOnClickListener(this);
+        login_forget_pwd=findViewById(R.id.login_forget_pwd);
+        login_forget_pwd.setOnClickListener(this);
 
         tvSignupInvoker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,7 +201,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.remember_pwd:
                 break;
-            case R.id.forget_pwd:
+            case R.id.login_forget_pwd:
                 Intent forgetpwd_intent=new Intent(this,ForgetPwdActivity.class);
                 startActivity(forgetpwd_intent);
                 break;

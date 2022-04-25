@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.erradns.Activity.ForgetPwdActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/title_bar"/>
+<LinearLayout
+    android:id="@+id/get_securitycode"
+    android:layout_width="match_parent"
+    android:layout_marginTop="60dp"
+    android:layout_below="@+id/title_bar"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/forget_email"
+        android:layout_width="wrap_content"
+        android:layout_weight="9"
+        android:hint="输入邮箱:"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:layout_weight="1"
+        android:text="获取验证码"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/securitycode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="输入验证码："
+        android:layout_below="@+id/get_securitycode"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/repeat_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="输入新密码："
+        android:layout_below="@+id/securitycode"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/repeat_pwd_again"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="重新输入新密码："
+        android:layout_below="@+id/repeat_pwd"/>
+
+    <com.qmuiteam.qmui.layout.QMUIButton
+        android:id="@+id/forget_sure_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="确认修改"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/repeat_pwd_again"/>
+
+
+</RelativeLayout>

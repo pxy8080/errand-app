@@ -65,7 +65,7 @@
             android:textColor="#FFFFFF" />
 
         <TextView
-            android:id="@+id/forget_pwd"
+            android:id="@+id/login_forget_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

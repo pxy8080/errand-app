@@ -13,4 +13,7 @@
     <color name="colorPrimaryTrans">#a0673AB7</color>
     <color name="colorAccentTrans">#a0009688</color>
     <color name="colorBlackTrans">#a0000000</color>
+
+    <color name="title_bar_bg">#C8D4DA</color>
+    <color name="navigat_background">#EBEBEB</color>
 </resources>
