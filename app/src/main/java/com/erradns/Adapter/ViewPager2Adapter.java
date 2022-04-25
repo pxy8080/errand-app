@@ -18,7 +18,7 @@ public class ViewPager2Adapter extends FragmentStateAdapter {
 
     @NonNull
     @Override
-    public androidx.fragment.app.Fragment createFragment(int position) {
+    public Fragment createFragment(int position) {
         return views.get(position);
     }
 
