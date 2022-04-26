@@ -57,6 +57,7 @@ dependencies {
     implementation 'com.aliyun.ams:alicloud-android-ha-crashreporter:1.2.5'
 
     implementation 'com.qmuiteam:qmui:2.0.0-alpha10'
+    //noinspection GradleCompatible,GradleCompatible,GradleCompatible
     implementation 'com.android.support:percent:25.3.0'
-
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
 }
