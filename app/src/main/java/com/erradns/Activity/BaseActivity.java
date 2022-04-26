@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.erradns.Model.User;
 import com.erradns.Sophix.R;
@@ -40,5 +41,8 @@ public class BaseActivity extends AppCompatActivity {
         user.setHeadportrait(headportrait);
         user.setSchool(school);
         user.setIslogin(islogin);
+    }
+    void showToast(String s){
+        Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
     }
 }

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Sophix"
         android:usesCleartextTraffic="true">
         <activity
+            android:name="com.erradns.Activity.MoneyActivity"
+            android:exported="true" />
+        <activity
             android:name="com.erradns.Activity.FeedbackActivity"
             android:exported="true" />
         <activity
@@ -32,24 +35,22 @@
             android:exported="true" />
         <activity
             android:name="com.erradns.Activity.StartActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.erradns.Activity.MainActivity"
-            android:exported="true" >
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name="com.erradns.Activity.BaseActivity"
             android:exported="true" />
         <activity
             android:name="com.erradns.Activity.LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

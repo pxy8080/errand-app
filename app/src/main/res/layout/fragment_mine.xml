@@ -28,6 +28,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tip_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
@@ -36,6 +37,7 @@
                 android:textColor="@color/forget_password" />
 
             <TextView
+                android:id="@+id/id_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
@@ -62,6 +64,7 @@
         android:layout_marginTop="30dp">
 
         <LinearLayout
+            android:id="@+id/money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -72,7 +75,6 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/money"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
@@ -89,6 +91,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/order_managerment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="30dp"
@@ -98,7 +101,6 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/order_managerment"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="20dp"
@@ -201,6 +203,7 @@
     </LinearLayout>
 
     <com.qmuiteam.qmui.layout.QMUIButton
+        android:id="@+id/exit_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/feedback"
