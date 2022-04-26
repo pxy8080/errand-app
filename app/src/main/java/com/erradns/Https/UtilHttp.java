@@ -1,4 +1,4 @@
-package com.erradns.Util;
+package com.erradns.Https;
 
 import android.widget.Toast;
 
@@ -20,14 +20,14 @@ public class UtilHttp {
     public UtilHttp() {
         client=new OkHttpClient();
     }
-    String utilGet(String url) throws IOException {
+    public String utilGet(String url) throws IOException {
         Request request = new Request.Builder()
                 .get()
                 .url(baseUrl+url)
                 .build();
         Call call = client.newCall(request);
         //同步调用,返回Response,会抛出IO异常
-        Response response = call.execute();
+//        Response response = call.execute();
         //异步调用,并设置回调函数
         call.enqueue(new Callback() {
             @Override
@@ -106,6 +106,7 @@ public class UtilHttp {
         });
         return ""+res;
     }
+
     String untilPostString(String url,String postString)
     {
         MediaType mediaType = MediaType.parse("text/x-markdown; charset=utf-8");

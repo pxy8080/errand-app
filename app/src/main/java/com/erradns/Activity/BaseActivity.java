@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.erradns.Model.User;
 import com.erradns.Sophix.R;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
+import org.w3c.dom.Text;
+
 public class BaseActivity extends AppCompatActivity {
     User user=new User();
-
+private TextView line;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,7 @@ public class BaseActivity extends AppCompatActivity {
 //        System.out.println("状态栏高"+ QMUIDisplayHelper.getStatusBarHeight(this));
         QMUIStatusBarHelper.translucent(this);
         QMUIStatusBarHelper.setStatusBarLightMode(this);
+
 
     }
 
@@ -42,6 +46,9 @@ public class BaseActivity extends AppCompatActivity {
         user.setSchool(school);
         user.setIslogin(islogin);
     }
+
+
+
     void showToast(String s){
         Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
     }

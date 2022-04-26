@@ -3,6 +3,7 @@ package com.erradns.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 ;
@@ -82,7 +83,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         navigation_home.performClick();
 
         viewPager2 = findViewById(R.id.viewpager2);
-        viewPager2.setY(QMUIStatusBarHelper.getStatusbarHeight(this));
+        viewPager2.setY(QMUIStatusBarHelper.getStatusbarHeight(this));//QMUIStatusBarHelper.getStatusbarHeight(this)
 
         navigation_home.setOnClickListener(new View.OnClickListener() {
             @Override

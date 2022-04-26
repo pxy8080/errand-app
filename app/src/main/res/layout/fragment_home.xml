@@ -1,14 +1,17 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.erradns.Fragment.Fragment_home">
 
     <include layout="@layout/title_bar" />
-    <com.amap.api.maps2d.MapView
-        android:id="@+id/map"
+<com.amap.api.maps.MapView
+    android:id="@+id/maptest"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"/>
+    <TextView
+        android:layout_below="@+id/maptest"
+        android:id="@+id/test"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        />
-
-</FrameLayout>
+        android:layout_height="300dp"/>
+</RelativeLayout>
