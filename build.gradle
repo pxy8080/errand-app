@@ -5,6 +5,7 @@ buildscript {
         maven { url "https://maven.aliyun.com/repository/jcenter" }
         maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
         maven { url "https://maven.aliyun.com/repository/releases" }
+        jcenter()
 
     }
     dependencies {

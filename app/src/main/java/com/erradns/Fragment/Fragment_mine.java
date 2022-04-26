@@ -36,7 +36,6 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
     private TextView tip_tx, id_tx; //提示注册登录，id展示
     private Button exit_login;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 

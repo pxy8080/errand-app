@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amap.api.maps2d.MapView;
 import com.erradns.Model.User;
 import com.erradns.Sophix.R;
 
@@ -17,6 +18,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener{
 private ImageView back;
 private TextView title;
 private View rootView;
+private MapView mapView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -53,8 +55,13 @@ private View rootView;
         back.setVisibility(View.INVISIBLE);
         title=rootView.findViewById(R.id.title);
         title.setText("首页");
+
+        mapView=rootView.findViewById(R.id.map);
+        //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
+        mapView.onCreate(savedInstanceState);
         return rootView;
     }
+
 
     @Override
     public void onClick(View view) {

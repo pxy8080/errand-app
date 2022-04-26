@@ -4,5 +4,11 @@
     android:layout_height="match_parent"
     tools:context="com.erradns.Fragment.Fragment_home">
 
-<include layout="@layout/title_bar"/>
+    <include layout="@layout/title_bar" />
+    <com.amap.api.maps2d.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
+
 </FrameLayout>
