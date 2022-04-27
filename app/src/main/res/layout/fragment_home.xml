@@ -5,20 +5,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.erradns.Fragment.Fragment_home">
 
-    <include layout="@layout/title_bar" />
+<!--    <include layout="@layout/title_bar" />-->
 <com.synnapps.carouselview.CarouselView
-    android:layout_below="@+id/title_bar"
     android:id="@+id/banner"
     android:layout_marginTop="5dp"
     android:layout_width="match_parent"
     android:layout_height="200dp"/>
 
-
+<include layout="@layout/service"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_below="@+id/banner"/>
     <TextView
         android:id="@+id/test"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@+id/banner" />
+        android:layout_below="@+id/service" />
 
 </RelativeLayout>
