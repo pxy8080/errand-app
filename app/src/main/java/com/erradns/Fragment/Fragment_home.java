@@ -44,8 +44,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
                     .into(imageView);
         }
     };
-    private ImageView back;
-    private TextView title, test;
+    private TextView test;
     private View rootView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -78,10 +77,6 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, null);
-        back = rootView.findViewById(R.id.back_img);
-        back.setVisibility(View.INVISIBLE);
-        title = rootView.findViewById(R.id.title);
-        title.setText("首页");
 
         test = rootView.findViewById(R.id.test);
         cardView = rootView.findViewById(R.id.banner);
@@ -91,11 +86,12 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
         cardView.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
-                Uri uri = Uri.parse("https://www.baidu.com");
+                Uri uri = Uri.parse("https://console.amap.com/dev/ticket/list?selected=2505015131513283");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
         });
+
         return rootView;
     }
 
