@@ -54,7 +54,6 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     private CarouselView cardView;
     private String mParam1;
     private String mParam2;
-    private Button buttontest;
 
 
     public Fragment_home() {
@@ -88,7 +87,6 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
         title.setText("首页");
 
         test = rootView.findViewById(R.id.test);
-        buttontest=rootView.findViewById(R.id.testbt);
         cardView = rootView.findViewById(R.id.banner);
         cardView.setPageCount(sampleImages.length);
 
@@ -101,101 +99,38 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
                 startActivity(intent);
             }
         });
-        buttontest.setOnClickListener(new View.OnClickListener() {
+        UtilHttp utilHttp=UtilHttp.obtain();
+        UtilHttp.ICallBack callback =new UtilHttp.ICallBack() {
             @Override
-            public void onClick(View view) {
-                UtilHttp utilHttp=UtilHttp.obtain();
-                UtilHttp.ICallBack callback =new UtilHttp.ICallBack() {
-                    @Override
-                    public void onFailure(String throwable) {
-                        test.setText(throwable);
-                    }
-                    @Override
-                    public void onSuccess(String response) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                test.setText(response==""?"返回值为null":response);
-                            }
-                        });
-                    }
-                };
-                try {
-                    utilHttp.utilGet("order/showAllOrder",callback);
-                }
-                catch (Exception e)
-                {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            test.setText(e.toString());
-                        }
-                    });
-                }
+            public void onFailure(String throwable) {
+                test.setText(throwable);
             }
-        });
+            @Override
+            public void onSuccess(String response) {
+                test.setText(response);
+            }
+        };
+        try {
+            utilHttp.utilGet("order/showAllOrder",callback);
+        }
+        catch (Exception e)
+        {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    test.setText(e.toString());
+                }
+            });
+        }
         return rootView;
     }
 
 
     @Override
     public void onClick(View view) {
-//        UtilHttp utilHttp=UtilHttp.obtain();
-//        UtilHttp.ICallBack callback =new UtilHttp.ICallBack() {
-//            @Override
-//            public void onFailure(String throwable) {
-//            }
-//            @Override
-//            public void onSuccess(String response) {
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        test.setText(response);
-//                    }
-//                });
-//            }
-//        };
-//        try {
-//            utilHttp.utilGet("order/showAllOrder",callback);
-//        }
-//        catch (Exception e)
-//        {
-//
-//        }
+
 
     }
 
-//    public String utilGet(String url) throws IOException {
-//        OkHttpClient client = new OkHttpClient();
-//        Request request = new Request.Builder()
-//                .get()
-//                .url("https://baidu.com")
-//                .build();
-//        Call call = client.newCall(request);
-//        //同步调用,返回Response,会抛出IO异常
-////        Response response = call.execute();
-//
-//        //异步调用,并设置回调函数
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                Log.e("TAG", "onFailure: 出错" + e.toString(), null);
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, final Response response) throws IOException {
-//                String res = response.body().string();
-//                Log.e("TAG", "onResponse: " + res, null);
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        test.setText(res);
-//                    }
-//                });
-//            }
-//        });
-//        return "";
-//    }
 
 }
