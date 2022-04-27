@@ -19,7 +19,7 @@ import okhttp3.Response;
 
 public class UtilHttp {
     private static String baseUrl="http://10.0.2.2:8080/";//本地地址
-//    private static String baseUrl="http://baidu.com";
+//    private static Strin baseUrl="http://baidu.com";
     private static OkHttpClient client;
     private static UtilHttp mInstance;
     private Handler mHandler;
