@@ -1,8 +1,12 @@
 package com.erradns.Https;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -16,11 +20,30 @@ import okhttp3.Response;
 public class UtilHttp {
     private static String baseUrl="http://localhost:8080/";//本地地址
     private static OkHttpClient client;
-    private String res;
+    private static UtilHttp mInstance;
+    private Handler mHandler;
     public UtilHttp() {
-        client=new OkHttpClient();
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS);
+//                .cache(new Cache(sdcache.getAbsoluteFile(), cacheSize));//设置缓存的路径
+
+
+        client = builder.build();
+        mHandler = new Handler(Looper.getMainLooper());
     }
-    public String utilGet(String url) throws IOException {
+    public static UtilHttp obtain() {
+        if (mInstance == null) {
+            synchronized (UtilHttp.class) {
+                if (mInstance == null) {
+                    mInstance = new UtilHttp();
+                }
+            }
+        }
+        return mInstance;
+    }
+    public void utilGet(String url,final ICallBack callBack) throws IOException {
         Request request = new Request.Builder()
                 .get()
                 .url(baseUrl+url)
@@ -37,7 +60,9 @@ public class UtilHttp {
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                  res= response.body().string();
+                Log.i("TAG", "onResponse: " + Thread.currentThread());
+                boolean isSuccessful = response.isSuccessful();
+                sendSuccessCallback(callBack, isSuccessful, response);
 //                runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -46,14 +71,13 @@ public class UtilHttp {
 //                });
             }
         });
-        return ""+res;
     }
     /**
      * @param formBody: 表单
      * @param url: 请求地址
      * @return: 结果
      */
-    String untilPostForm(FormBody formBody,String url)
+    void untilPostForm(FormBody formBody,String url,final ICallBack callBack)
     {
         final Request request = new Request.Builder()
                 .url(baseUrl+url)
@@ -68,7 +92,8 @@ public class UtilHttp {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                 res = response.body().string();
+                boolean isSuccessful = response.isSuccessful();
+                sendSuccessCallback(callBack, isSuccessful, response);
 //                runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -77,7 +102,6 @@ public class UtilHttp {
 //                });
             }
         });
-        return ""+res;
     }
     //提交json
     /**
@@ -85,7 +109,7 @@ public class UtilHttp {
      * @param postJson: 请求的json形势
      * @return: 结果
      */
-    String untilPostJson(String url,String postJson)
+    void untilPostJson(String url,String postJson,final ICallBack callBack)
     {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), postJson);
         Request request = new Request.Builder()
@@ -100,14 +124,14 @@ public class UtilHttp {
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                res=response.body().string();
+                boolean isSuccessful = response.isSuccessful();
+                sendSuccessCallback(callBack, isSuccessful, response);
 //                Log.d(TAG, "onResponse: "+response.body().string());
             }
         });
-        return ""+res;
     }
 
-    String untilPostString(String url,String postString)
+    void untilPostString(String url,String postString,final ICallBack callBack)
     {
         MediaType mediaType = MediaType.parse("text/x-markdown; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType,postString);
@@ -123,11 +147,54 @@ public class UtilHttp {
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                res=response.body().string();
+                boolean isSuccessful = response.isSuccessful();
+                sendSuccessCallback(callBack, isSuccessful, response);
 //                Log.d(TAG, "onResponse: "+response.body().string());
             }
         });
-        return ""+res;
+    }
+    /**
+     * 请求成功
+     *
+     * @param callback
+     * @param isSuccess
+     * @param response
+     */
+    private void sendSuccessCallback(final ICallBack callback, final boolean isSuccess, final Response response) {
+
+        try {
+            final String responseString = response.body().string();
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (isSuccess == true) {
+                        callback.onSuccess(responseString);
+                    } else
+                        callback.onFailure(response.message().toString());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * 请求失败
+     *
+     * @param callback
+     * @param throwable
+     */
+    private void sendFailCallback(final ICallBack callback, final String throwable) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onFailure(throwable);
+            }
+        });
+    }
+    public interface ICallBack {
+        void onFailure(String throwable);
+
+        void onSuccess(String response);
+    }
 }
