@@ -46,8 +46,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
                     .into(imageView);
         }
     };
-    private ImageView back;
-    private TextView title, test;
+    private TextView test;
     private View rootView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -81,24 +80,20 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, null);
-        back = rootView.findViewById(R.id.back_img);
-        back.setVisibility(View.INVISIBLE);
-        title = rootView.findViewById(R.id.title);
-        title.setText("首页");
+
 
         test = rootView.findViewById(R.id.test);
         cardView = rootView.findViewById(R.id.banner);
         cardView.setPageCount(sampleImages.length);
-
         cardView.setImageListener(imageListener);
         cardView.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
-                Uri uri = Uri.parse("order/showAllOrder");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
+                Uri uri = Uri.parse("https://www.baidu.com");
+                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);            }
         });
+
         UtilHttp utilHttp=UtilHttp.obtain();
         UtilHttp.ICallBack callback =new UtilHttp.ICallBack() {
             @Override
@@ -111,7 +106,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
             }
         };
         try {
-            utilHttp.utilGet("order/showAllOrder",callback);
+            utilHttp.utilGet("http://www.baidu.com",callback);
         }
         catch (Exception e)
         {
@@ -119,6 +114,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
                 @Override
                 public void run() {
                     test.setText(e.toString());
+                    System.out.println("111"+e.toString());
                 }
             });
         }

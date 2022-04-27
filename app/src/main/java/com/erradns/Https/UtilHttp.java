@@ -18,8 +18,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class UtilHttp {
-    private static String baseUrl="http://10.0.2.2:8080/";//本地地址
-//    private static String baseUrl="http://baidu.com";
+    private static String baseUrl="http://localhost:8080/";//本地地址
     private static OkHttpClient client;
     private static UtilHttp mInstance;
     private Handler mHandler;
@@ -57,7 +56,6 @@ public class UtilHttp {
             @Override
             public void onFailure(Call call, IOException e) {
 //                Toast.makeText(OkHttpActivity.this, "get failed", Toast.LENGTH_SHORT).show();
-                sendFailCallback(callBack,e.toString());
             }
 
             @Override
@@ -82,7 +80,7 @@ public class UtilHttp {
     void untilPostForm(FormBody formBody,String url,final ICallBack callBack)
     {
         final Request request = new Request.Builder()
-                .url(baseUrl+url)
+                .url(url)
                 .post(formBody)
                 .build();
         Call call = client.newCall(request);
@@ -90,7 +88,6 @@ public class UtilHttp {
             @Override
             public void onFailure(Call call, IOException e) {
 //                Toast.makeText(OkHttpActivity.this, "Post Failed", Toast.LENGTH_SHORT).show();
-                sendFailCallback(callBack,e.toString());
             }
 
             @Override
@@ -124,7 +121,6 @@ public class UtilHttp {
             @Override
             public void onFailure(Call call, IOException e) {
 //                Log.d(TAG, "onFailure: ");
-                sendFailCallback(callBack,e.toString());
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
@@ -148,7 +144,6 @@ public class UtilHttp {
             @Override
             public void onFailure(Call call, IOException e) {
 //                Log.d(TAG, "onFailure: ");
-                sendFailCallback(callBack, e.toString());
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
