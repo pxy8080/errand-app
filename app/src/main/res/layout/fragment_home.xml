@@ -20,4 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_below="@+id/banner" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/testbt"
+        android:text="test"
+        android:layout_below="@+id/test">
+
+    </Button>
 </RelativeLayout>

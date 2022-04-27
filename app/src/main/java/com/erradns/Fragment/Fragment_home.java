@@ -11,12 +11,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.erradns.Https.UtilHttp;
 import com.erradns.Sophix.R;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
@@ -52,6 +54,8 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     private CarouselView cardView;
     private String mParam1;
     private String mParam2;
+    private Button buttontest;
+
 
     public Fragment_home() {
     }
@@ -84,6 +88,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
         title.setText("首页");
 
         test = rootView.findViewById(R.id.test);
+        buttontest=rootView.findViewById(R.id.testbt);
         cardView = rootView.findViewById(R.id.banner);
         cardView.setPageCount(sampleImages.length);
 
@@ -91,9 +96,43 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
         cardView.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
-                Uri uri = Uri.parse("https://www.baidu.com");
+                Uri uri = Uri.parse("order/showAllOrder");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
+            }
+        });
+        buttontest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UtilHttp utilHttp=UtilHttp.obtain();
+                UtilHttp.ICallBack callback =new UtilHttp.ICallBack() {
+                    @Override
+                    public void onFailure(String throwable) {
+                        test.setText(throwable);
+                    }
+                    @Override
+                    public void onSuccess(String response) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                test.setText(response==""?"返回值为null":response);
+                            }
+                        });
+                    }
+                };
+                try {
+                    utilHttp.utilGet("order/showAllOrder",callback);
+                }
+                catch (Exception e)
+                {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            test.setText(e.toString());
+                        }
+                    });
+                }
             }
         });
         return rootView;
@@ -102,39 +141,61 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+//        UtilHttp utilHttp=UtilHttp.obtain();
+//        UtilHttp.ICallBack callback =new UtilHttp.ICallBack() {
+//            @Override
+//            public void onFailure(String throwable) {
+//            }
+//            @Override
+//            public void onSuccess(String response) {
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        test.setText(response);
+//                    }
+//                });
+//            }
+//        };
+//        try {
+//            utilHttp.utilGet("order/showAllOrder",callback);
+//        }
+//        catch (Exception e)
+//        {
+//
+//        }
 
     }
 
-    public String utilGet(String url) throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .get()
-                .url("https://baidu.com")
-                .build();
-        Call call = client.newCall(request);
-        //同步调用,返回Response,会抛出IO异常
-//        Response response = call.execute();
-
-        //异步调用,并设置回调函数
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("TAG", "onFailure: 出错" + e.toString(), null);
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                String res = response.body().string();
-                Log.e("TAG", "onResponse: " + res, null);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        test.setText(res);
-                    }
-                });
-            }
-        });
-        return "";
-    }
+//    public String utilGet(String url) throws IOException {
+//        OkHttpClient client = new OkHttpClient();
+//        Request request = new Request.Builder()
+//                .get()
+//                .url("https://baidu.com")
+//                .build();
+//        Call call = client.newCall(request);
+//        //同步调用,返回Response,会抛出IO异常
+////        Response response = call.execute();
+//
+//        //异步调用,并设置回调函数
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.e("TAG", "onFailure: 出错" + e.toString(), null);
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, final Response response) throws IOException {
+//                String res = response.body().string();
+//                Log.e("TAG", "onResponse: " + res, null);
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        test.setText(res);
+//                    }
+//                });
+//            }
+//        });
+//        return "";
+//    }
 
 }
