@@ -1,17 +1,13 @@
 package com.erradns.Activity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
+import android.widget.LinearLayout;
+
+import androidx.fragment.app.Fragment;
+
+import androidx.viewpager2.widget.ViewPager2;
 import com.erradns.Adapter.ViewPager2Adapter;
 import com.erradns.Fragment.Fragment_home;
 import com.erradns.Fragment.Fragment_message;
@@ -34,6 +30,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+
         initData();
         initView();
         initPager();
@@ -81,6 +80,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         navigation_mine.setOnClickListener(this);
         navigation_home.setSelected(true);
         navigation_home.performClick();
+
+
 
         viewPager2 = findViewById(R.id.viewpager2);
         viewPager2.setY(QMUIStatusBarHelper.getStatusbarHeight(this));//QMUIStatusBarHelper.getStatusbarHeight(this)

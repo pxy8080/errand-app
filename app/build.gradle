@@ -67,4 +67,10 @@ dependencies {
     implementation 'com.amap.api:location:3.3.0'
     implementation 'com.amap.api:search:5.0.0'
 
+    implementation 'com.synnapps:carouselview:0.1.5'
+
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
+
 }

@@ -8,12 +8,6 @@
 
 
 
-<!--<com.qmuiteam.qmui.layout.QMUIFrameLayout-->
-<!--    android:id="@+id/frameLayout"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_weight="1"-->
-<!--    android:layout_height="match_parent"/>-->
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager2"
         android:layout_width="match_parent"

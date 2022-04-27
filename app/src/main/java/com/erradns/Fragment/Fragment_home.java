@@ -1,7 +1,10 @@
 package com.erradns.Fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -9,16 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.amap.api.maps.MapView;
-import com.erradns.Https.UtilHttp;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.erradns.Sophix.R;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageClickListener;
+import com.synnapps.carouselview.ImageListener;
+
 
 import java.io.IOException;
+import java.net.URL;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -27,14 +33,23 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class Fragment_home extends Fragment implements View.OnClickListener {
+    int[] sampleImages = {R.drawable.logo, R.drawable.abc_vector_test, R.drawable.ali_feedback_common_back_btn_bg, R.drawable.logo, R.drawable.logo};
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+//            imageView.setImageResource(sampleImages[position]);
+//            Glide.with(getActivity()).load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F10048724177%2F1000.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1653621577&t=619e48af3ceb11873fab986a9811b4e7")
+//                    .into(imageView);
+            Glide.with(getActivity()).load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.aiimg.com%2Fuploads%2Fallimg%2F200603%2F263915-200603113151.jpg&refer=http%3A%2F%2Fimg.aiimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1653621968&t=6bbaf01ed311451e2e33d6571bc1a47d")
+                    .into(imageView);
+        }
+    };
     private ImageView back;
     private TextView title, test;
     private View rootView;
-    private MapView mapView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
+    private CarouselView cardView;
     private String mParam1;
     private String mParam2;
 
@@ -69,8 +84,18 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
         title.setText("首页");
 
         test = rootView.findViewById(R.id.test);
-        mapView=rootView.findViewById(R.id.maptest);
-        mapView.onCreate(savedInstanceState);
+        cardView = rootView.findViewById(R.id.banner);
+        cardView.setPageCount(sampleImages.length);
+
+        cardView.setImageListener(imageListener);
+        cardView.setImageClickListener(new ImageClickListener() {
+            @Override
+            public void onClick(int position) {
+                Uri uri = Uri.parse("https://www.baidu.com");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 
@@ -109,8 +134,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
                 });
             }
         });
-        System.out.println("this2");
         return "";
-
     }
+
 }

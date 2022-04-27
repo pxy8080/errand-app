@@ -16,6 +16,14 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--允许访问网络，必选权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--允许获取粗略位置，若用GPS实现定位小蓝点功能则必选-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!--允许写设备缓存，用于问题排查-->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
 
     <application
         android:name=".SophixStubApplication"
@@ -62,8 +70,9 @@
             android:name="com.erradns.Activity.LoginActivity"
             android:exported="true"></activity>
 
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="903304c3b20d4484c8942bd08eb5a323">
-        </meta-data>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="ef53a0794c6f033d6b94f9e7ca8dc1d2	"/>
     </application>
 
 </manifest>

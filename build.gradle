@@ -5,7 +5,7 @@ buildscript {
         maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
         maven { url "https://maven.aliyun.com/repository/releases" }
         jcenter()
-
+        maven { url "https://s01.oss.sonatype.org/content/groups/public" }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.0"
