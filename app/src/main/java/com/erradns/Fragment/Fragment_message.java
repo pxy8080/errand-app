@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amap.api.maps.MapView;
 import com.erradns.Sophix.R;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
@@ -21,7 +22,7 @@ public class Fragment_message extends Fragment {
     private ImageView back;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+private MapView mapView;
     private String mParam1;
     private String mParam2;
 
@@ -54,6 +55,11 @@ public class Fragment_message extends Fragment {
         back.setVisibility(View.INVISIBLE);
         title=rootView.findViewById(R.id.title);
         title.setText("消息");
+
+        mapView=rootView.findViewById(R.id.maptest);
+        mapView.onCreate(savedInstanceState);
+
+
         return rootView;
     }
 }

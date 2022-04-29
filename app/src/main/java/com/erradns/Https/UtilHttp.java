@@ -18,7 +18,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class UtilHttp {
-    private static String baseUrl="http://localhost:8080/";//本地地址
+    private static String baseUrl="http://10.0.2.2:8080/";//本地地址
     private static OkHttpClient client;
     private static UtilHttp mInstance;
     private Handler mHandler;
@@ -55,7 +55,7 @@ public class UtilHttp {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-//                Toast.makeText(OkHttpActivity.this, "get failed", Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "onFailure: "+e.toString(),null );
             }
 
             @Override
