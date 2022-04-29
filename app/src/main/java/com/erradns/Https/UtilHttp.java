@@ -56,6 +56,7 @@ public class UtilHttp {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.e("TAG", "onFailure: "+e.toString(),null );
+                sendFailCallback(callBack,e.getMessage());
             }
 
             @Override
@@ -88,6 +89,7 @@ public class UtilHttp {
             @Override
             public void onFailure(Call call, IOException e) {
 //                Toast.makeText(OkHttpActivity.this, "Post Failed", Toast.LENGTH_SHORT).show();
+                sendFailCallback(callBack,e.getMessage());
             }
 
             @Override
@@ -121,6 +123,7 @@ public class UtilHttp {
             @Override
             public void onFailure(Call call, IOException e) {
 //                Log.d(TAG, "onFailure: ");
+                sendFailCallback(callBack,e.getMessage());
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
@@ -143,6 +146,7 @@ public class UtilHttp {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                sendFailCallback(callBack,e.getMessage());
 //                Log.d(TAG, "onFailure: ");
             }
             @Override
