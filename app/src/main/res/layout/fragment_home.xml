@@ -5,23 +5,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.erradns.Fragment.Fragment_home">
 
-<!--    <include layout="@layout/title_bar" />-->
-<com.synnapps.carouselview.CarouselView
-    android:id="@+id/banner"
-    android:layout_marginTop="5dp"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"/>
-
-<include layout="@layout/service"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
-    android:layout_below="@+id/banner"/>
-    <TextView
-        android:id="@+id/test"
-        android:layout_marginTop="5dp"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_below="@+id/service" />
+        android:layout_height="40dp"
+        android:background="@drawable/search_selector"
+        app:queryHint="Serach..." />
+
+    <include
+        layout="@layout/service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search"
+        android:layout_marginTop="5dp" />
+
+    <com.synnapps.carouselview.CarouselView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/service"
+        android:layout_marginTop="5dp" />
+
+
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/banner">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ll"
+            android:layout_marginTop="5dp"
+            android:background="#fff"
+            android:overScrollMode="never" />
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 
 </RelativeLayout>

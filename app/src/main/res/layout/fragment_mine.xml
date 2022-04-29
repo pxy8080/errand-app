@@ -4,28 +4,31 @@
     android:layout_height="match_parent"
     tools:context="com.erradns.Fragment.Fragment_mine">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/mine_center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_background"
-        android:orientation="horizontal">
+        android:background="@drawable/edit_background">
 
         <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
             android:id="@+id/portrait"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_weight="1"
             android:src="@mipmap/logo" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/portrait"
             android:orientation="vertical">
 
             <TextView
@@ -33,8 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
-                android:layout_weight="1"
-                android:text="注册/登录"
+                android:text="昵称："
                 android:textColor="@color/forget_password" />
 
             <TextView
@@ -42,20 +44,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:layout_weight="1"
+                android:maxLines="2"
                 android:text="id:" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:gravity="right"
             android:text="个人设置->" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <com.qmuiteam.qmui.layout.QMUILinearLayout
         android:id="@+id/money_order"

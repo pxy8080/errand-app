@@ -46,6 +46,7 @@
             android:layout_weight="1"
             android:background="@color/service_bg2"
             android:src="@drawable/service_2" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,8 +60,8 @@
         android:id="@+id/service_3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <com.qmuiteam.qmui.widget.QMUIRadiusImageView
             android:layout_width="40dp"
@@ -70,6 +71,7 @@
             android:layout_weight="1"
             android:background="@color/service_bg3"
             android:src="@drawable/service_3" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,8 +85,8 @@
         android:id="@+id/service_4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <com.qmuiteam.qmui.widget.QMUIRadiusImageView
             android:layout_width="40dp"
@@ -94,6 +96,7 @@
             android:layout_weight="1"
             android:background="@color/service_bg4"
             android:src="@drawable/service_4" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

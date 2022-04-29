@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="..\:/Android/sophix/app/src/main/res/drawable/ search_selector.xml" value="0.3277777777777778" />
         <entry key="..\:/Android/sophix/app/src/main/res/drawable/account_logo.xml" value="0.3723076923076923" />
         <entry key="..\:/Android/sophix/app/src/main/res/drawable/edit_background.xml" value="0.3723076923076923" />
         <entry key="..\:/Android/sophix/app/src/main/res/drawable/home_selector.xml" value="0.3764102564102564" />
@@ -14,6 +15,8 @@
         <entry key="..\:/Android/sophix/app/src/main/res/drawable/mine_selector.xml" value="0.3764102564102564" />
         <entry key="..\:/Android/sophix/app/src/main/res/drawable/order_bg.xml" value="0.3764102564102564" />
         <entry key="..\:/Android/sophix/app/src/main/res/drawable/password_lock.xml" value="0.3723076923076923" />
+        <entry key="..\:/Android/sophix/app/src/main/res/drawable/search_focused.xml" value="0.3277777777777778" />
+        <entry key="..\:/Android/sophix/app/src/main/res/drawable/search_selector.xml" value="0.3277777777777778" />
         <entry key="..\:/Android/sophix/app/src/main/res/drawable/show_password.xml" value="0.3723076923076923" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_about.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_base.xml" value="0.3177083333333333" />
@@ -33,8 +36,11 @@
         <entry key="..\:/Android/sophix/app/src/main/res/layout/layout_signin.xml" value="0.25" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/layout_signup.xml" value="0.24166666666666667" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/navigation.xml" value="0.36614583333333334" />
+        <entry key="..\:/Android/sophix/app/src/main/res/layout/order_layout.xml" value="0.3619791666666667" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/service.xml" value="0.36614583333333334" />
+        <entry key="..\:/Android/sophix/app/src/main/res/layout/task_layout.xml" value="0.29444444444444445" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/title_bar.xml" value="0.36614583333333334" />
+        <entry key="..\:/Android/sophix/app/src/main/res/menu/main.xml" value="0.36614583333333334" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_message.xml" value="0.1" />
