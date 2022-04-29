@@ -92,7 +92,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="5"
             android:paddingLeft="20dp"
-            android:text="nick"
+            android:text="地址"
             android:textSize="18sp" />
         <TextView
             android:id="@+id/address"

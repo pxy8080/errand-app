@@ -262,11 +262,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         editor.putString("user_id", user.getId());
         editor.putInt("user_phone", user.getPhone());
         editor.putString("use_email", user.getEmail());
-        editor.putString("use_nicknamel", user.getNickname());
+        editor.putString("use_nickname", user.getNickname());
         editor.putString("use_headportrait", user.getHeadportrait());
         editor.putString("use_school", user.getSchool());
         editor.putBoolean("use_islogin", user.getIslogin());
-        System.out.println("bbb"+user.getIslogin());
         editor.commit();
     }
 }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.erradns.Activity.AboutActivity;
@@ -27,7 +28,7 @@ import com.erradns.Sophix.R;
  */
 public class Fragment_mine extends Fragment implements View.OnClickListener {
     private View rootView;
-    private LinearLayout mine_center;
+    private RelativeLayout mine_center;
     private User user;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -82,8 +83,6 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
         exit_login=rootView.findViewById(R.id.exit_login);
         exit_login.setOnClickListener(this);
 
-        System.out.println("user"+user.getIslogin());
-
         if (!user.getIslogin()){
             tip_tx.setVisibility(View.INVISIBLE);
             exit_login.setVisibility(View.INVISIBLE);
@@ -91,6 +90,9 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
         else {
             tip_tx.setVisibility(View.VISIBLE);
             exit_login.setVisibility(View.VISIBLE);
+            tip_tx.setText("昵称:"+user.getNickname());
+            id_tx.setText("id:"+user.getId());
+
         }
     }
 

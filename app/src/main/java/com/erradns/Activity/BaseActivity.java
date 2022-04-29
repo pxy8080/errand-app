@@ -34,8 +34,8 @@ public class BaseActivity extends AppCompatActivity {
         String id = sharedPreferences.getString("user_id", "");
         int phone = sharedPreferences.getInt("user_phone", 0);
         String email = sharedPreferences.getString("user_email", "");
-        String nickname = sharedPreferences.getString("user_nickname", "");
-        String headportrait = sharedPreferences.getString("user_headportrait", "");
+        String nickname = sharedPreferences.getString("use_nickname", "");
+        String headportrait = sharedPreferences.getString("use_headportrait", "");
         String school = sharedPreferences.getString("user_school", "");
         Boolean islogin = sharedPreferences.getBoolean("use_islogin", false);
         user.setId(id);
