@@ -1,5 +1,6 @@
 package com.erradns.Activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,7 +13,6 @@ import com.erradns.Adapter.ViewPager2Adapter;
 import com.erradns.Fragment.Fragment_home;
 import com.erradns.Fragment.Fragment_message;
 import com.erradns.Fragment.Fragment_mine;
-import com.erradns.Model.User;
 import com.erradns.Sophix.R;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
@@ -31,15 +31,13 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-
         initData();
         initView();
         initPager();
     }
 
     private void initData() {
-        getpersonalmessage();
+//        getpersonalmessage();
     }
 
     private void initPager() {
@@ -70,6 +68,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private void initView() {
         fragment_home=new Fragment_home();
         fragment_message=new Fragment_message();
+        System.out.println("user1"+user.getIslogin());
         fragment_mine=new Fragment_mine(user);
 
         navigation_home = findViewById(R.id.navigation_home);
@@ -131,6 +130,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View view) {
     }
 
+
     //导航栏选中颜色变换
     void select(LinearLayout linearLayout) {
         navigation_home.setSelected(false);
@@ -138,4 +138,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         navigation_mine.setSelected(false);
         linearLayout.setSelected(true);
     }
+
+
 }

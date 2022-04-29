@@ -82,6 +82,8 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
         exit_login=rootView.findViewById(R.id.exit_login);
         exit_login.setOnClickListener(this);
 
+        System.out.println("user"+user.getIslogin());
+
         if (!user.getIslogin()){
             tip_tx.setVisibility(View.INVISIBLE);
             exit_login.setVisibility(View.INVISIBLE);
@@ -102,6 +104,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 } else {
                     getActivity().onBackPressed();
                 }
+                break;
             case R.id.money:
                 if (user.getIslogin()) {
                     Intent to_mine_info = new Intent(getActivity(), MoneyActivity.class);
@@ -146,6 +149,10 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                     Intent to_login = new Intent(getActivity(), LoginActivity.class);
                     startActivity(to_login);
                 }
+                break;
+            case R.id.exit_login:
+                Intent to_mine_info = new Intent(getActivity(), LoginActivity.class);
+                startActivity(to_mine_info);
                 break;
 
         }

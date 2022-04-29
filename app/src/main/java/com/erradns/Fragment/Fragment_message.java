@@ -22,7 +22,6 @@ public class Fragment_message extends Fragment {
     private ImageView back;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-private MapView mapView;
     private String mParam1;
     private String mParam2;
 
@@ -56,8 +55,6 @@ private MapView mapView;
         title=rootView.findViewById(R.id.title);
         title.setText("消息");
 
-        mapView=rootView.findViewById(R.id.maptest);
-        mapView.onCreate(savedInstanceState);
 
 
         return rootView;

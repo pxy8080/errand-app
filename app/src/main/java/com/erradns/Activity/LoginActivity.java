@@ -3,10 +3,12 @@ package com.erradns.Activity;
 import androidx.percentlayout.widget.PercentLayoutHelper;
 import androidx.percentlayout.widget.PercentRelativeLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,12 +17,17 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.erradns.Https.UtilHttp;
+import com.erradns.Model.Result;
+import com.erradns.Model.User;
 import com.erradns.Sophix.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener{
+
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean isSigninScreen = true;
     private TextView tvSignupInvoker;
@@ -29,13 +36,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private LinearLayout llSignin;
 
 
-    private TextInputEditText login_email,login_pwd,register_email,register_pwd,register_nickname,register_phone;
+    private TextInputEditText login_email, login_pwd, register_email, register_pwd, register_nickname, register_phone;
     private CheckBox remember_pwd;
-    private Button login,register;
+    private Button login, register;
     private TextView login_forget_pwd;
 
-    private boolean issave=false;//是否记住密码
-    private String saveemail,savepwd;
+    private boolean issave = false;//是否记住密码
+    private String saveemail, savepwd;
+    private Result result = new Result();
+    private User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,26 +59,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void initView() {
-        llSignin =  findViewById(R.id.llSignin);
+        llSignin = findViewById(R.id.llSignin);
         llSignin.setOnClickListener(this);
-        llSignup =findViewById(R.id.llSignup);
+        llSignup = findViewById(R.id.llSignup);
         llSignup.setOnClickListener(this);
         tvSignupInvoker = findViewById(R.id.tvSignupInvoker);
-        tvSigninInvoker =  findViewById(R.id.tvSigninInvoker);
+        tvSigninInvoker = findViewById(R.id.tvSigninInvoker);
 
-        login=findViewById(R.id.btn_login);
+        login = findViewById(R.id.btn_login);
         login.setOnClickListener(this);
-        register=findViewById(R.id.btn_register);
+        register = findViewById(R.id.btn_register);
         register.setOnClickListener(this);
 
-        login_email=findViewById(R.id.login_email_input);
-        login_pwd=findViewById(R.id.login_pwd_input);
-        register_email=findViewById(R.id.register_email_input);
-        register_pwd=findViewById(R.id.register_pwd_input);
-        register_nickname=findViewById(R.id.register_nickname_input);
-        register_phone=findViewById(R.id.register_phone_input);
-        remember_pwd=findViewById(R.id.remember_pwd);
-        login_forget_pwd=findViewById(R.id.login_forget_pwd);
+        login_email = findViewById(R.id.login_email_input);
+        login_pwd = findViewById(R.id.login_pwd_input);
+        register_email = findViewById(R.id.register_email_input);
+        register_pwd = findViewById(R.id.register_pwd_input);
+        register_nickname = findViewById(R.id.register_nickname_input);
+        register_phone = findViewById(R.id.register_phone_input);
+        remember_pwd = findViewById(R.id.remember_pwd);
+        login_forget_pwd = findViewById(R.id.login_forget_pwd);
         login_forget_pwd.setOnClickListener(this);
 
         tvSignupInvoker.setOnClickListener(new View.OnClickListener() {
@@ -91,11 +100,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         remember_pwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (remember_pwd.isChecked()){
-                    issave=true;
-                }
-                else{
-                    issave=false;
+                if (remember_pwd.isChecked()) {
+                    issave = true;
+                } else {
+                    issave = false;
                 }
             }
         });
@@ -117,10 +125,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
         tvSignupInvoker.setVisibility(View.GONE);
         tvSigninInvoker.setVisibility(View.VISIBLE);
-        Animation translate= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.translate_right_to_left);
+        Animation translate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.translate_right_to_left);
         llSignup.startAnimation(translate);
 
-        Animation clockwise= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_right_to_left);
+        Animation clockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_right_to_left);
         login.startAnimation(clockwise);
 
     }
@@ -137,36 +145,34 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         infoSignup.widthPercent = 0.15f;
         llSignup.requestLayout();
 
-        Animation translate= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.translate_left_to_right);
+        Animation translate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.translate_left_to_right);
         llSignin.startAnimation(translate);
 
         tvSignupInvoker.setVisibility(View.VISIBLE);
         tvSigninInvoker.setVisibility(View.GONE);
-        Animation clockwise= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_left_to_right);
+        Animation clockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_left_to_right);
         register.startAnimation(clockwise);
     }
 
 
-
     //记住账号密码
-    void  savemessage(boolean a){
-        String email,password;
-        SharedPreferences sp = getSharedPreferences("message", MODE_PRIVATE);
-        if(a){
-            email=login_email.getText().toString().trim();
-            password=login_pwd.getText().toString().trim();
+    void savemessage(boolean a) {
+        String email, password;
+        @SuppressLint("WrongConstant") SharedPreferences sp = getSharedPreferences("message", MODE_ENABLE_WRITE_AHEAD_LOGGING);
+        if (a) {
+            email = login_email.getText().toString().trim();
+            password = login_pwd.getText().toString().trim();
             SharedPreferences.Editor edit = sp.edit();
             edit.putString("email", email);
-            edit.putString("password",password);
-            edit.putBoolean("remember_pwd",true);
+            edit.putString("password", password);
+            edit.putBoolean("remember_pwd", true);
             boolean commit = edit.commit();
-        }
-        else{
+        } else {
             SharedPreferences.Editor edit = sp.edit();
             edit.putString("email", "");
-            edit.putString("password","");
+            edit.putString("password", "");
             boolean commit = edit.commit();
-            edit.putBoolean("remember_pwd",false);
+            edit.putBoolean("remember_pwd", false);
         }
     }
 
@@ -174,34 +180,73 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         //获取输入框上次存储的账号密码
         SharedPreferences sp = getSharedPreferences("message", MODE_PRIVATE);
         saveemail = sp.getString("email", "");
-        savepwd=sp.getString("password","");
-        Boolean a=sp.getBoolean("remember_pwd",false);
+        savepwd = sp.getString("password", "");
+        Boolean a = sp.getBoolean("remember_pwd", false);
         login_email.setText(saveemail);
         login_pwd.setText(savepwd);
         remember_pwd.setChecked(a);
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_login:
-                String s1=login_email.getText().toString().trim();
-                String s2=login_pwd.getText().toString().trim();
-                showToast("click login！");
+                String s1 = login_email.getText().toString().trim();
+                String s2 = login_pwd.getText().toString().trim();
                 savemessage(issave);
-                Intent home_intent=new Intent(this,HomeActivity.class);
-                startActivity(home_intent);
+
+                UtilHttp utilHttp = UtilHttp.obtain();
+                UtilHttp.ICallBack callback = new UtilHttp.ICallBack() {
+                    @Override
+                    public void onFailure(String throwable) {
+                        Log.i("TAG", "onFailure: " + throwable);
+                    }
+                    @Override
+                    public void onSuccess(String response) {
+                        Gson gson1 = new Gson();
+                        result = gson1.fromJson(response, new TypeToken<Result>() {
+                        }.getType());
+                        Gson gson2 = new Gson();
+                        if (result.getCode() == 100) {
+                            user = gson2.fromJson(result.getData().toString(), new TypeToken<User>() {
+                            }.getType());
+                            user.setIslogin(true);
+//                            showToast(user.toString());
+                            Intent home_intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(home_intent);
+                        } else {
+                            user.setIslogin(false);
+                            showToast("账号密码错误，请重新输入");
+                        }
+                        savepersonalmessage(user);
+                    }
+
+                };
+                try {
+                    utilHttp.utilGet("user/getUserinfobyemail?email=" + s1 + "&password=" + s2, callback);
+                } catch (Exception e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                        }
+                    });
+                }
+
+
+
                 break;
             case R.id.btn_register:
-                String s3=register_email.getText().toString().trim();
-                String s4=register_phone.getText().toString().trim();
-                String s5=register_pwd.getText().toString().trim();
-                String s6=register_nickname.getText().toString().trim();
+                String s3 = register_email.getText().toString().trim();
+                String s4 = register_phone.getText().toString().trim();
+                String s5 = register_pwd.getText().toString().trim();
+                String s6 = register_nickname.getText().toString().trim();
                 showToast("click register");
                 break;
             case R.id.remember_pwd:
                 break;
             case R.id.login_forget_pwd:
-                Intent forgetpwd_intent=new Intent(this,ForgetPwdActivity.class);
+                Intent forgetpwd_intent = new Intent(this, ForgetPwdActivity.class);
                 startActivity(forgetpwd_intent);
                 break;
 
@@ -209,6 +254,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 break;
 
         }
+    }
+
+    void savepersonalmessage(User user) {
+        SharedPreferences pref = getSharedPreferences("userinfo",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("user_id", user.getId());
+        editor.putInt("user_phone", user.getPhone());
+        editor.putString("use_email", user.getEmail());
+        editor.putString("use_nicknamel", user.getNickname());
+        editor.putString("use_headportrait", user.getHeadportrait());
+        editor.putString("use_school", user.getSchool());
+        editor.putBoolean("use_islogin", user.getIslogin());
+        System.out.println("bbb"+user.getIslogin());
+        editor.commit();
     }
 }
 

@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
                 android:layout_weight="1"
-                android:text="注册/登录"
+                android:text="昵称："
                 android:textColor="@color/forget_password" />
 
             <TextView
