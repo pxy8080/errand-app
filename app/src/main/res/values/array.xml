@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="ItemArray">
+        <item>拍照</item>
+        <item>打开相册</item>
+    </array>
+    <array name="schools" >
+        <item >桂林电子科技大学</item>
+        <item>广西大学</item>
+        <item>广西师范大学</item>
+        <item>桂林航空工业学院</item>
+        <item>广西科技大学</item>
+        <item>广西民族大学</item>
+    </array>
+</resources>

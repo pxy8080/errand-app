@@ -1,29 +1,24 @@
 package com.erradns.Fragment;
 
-import android.app.Person;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.erradns.Activity.MainActivity;
 import com.erradns.Adapter.TaskAdapter;
-import com.erradns.Https.UtilHttp;
 import com.erradns.Sophix.R;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
@@ -39,7 +34,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
     private SearchView searchView;
-private RecyclerView home_recyclerview;
+    private RecyclerView home_recyclerview;
 
     public Fragment_home() {
     }
@@ -109,11 +104,18 @@ private RecyclerView home_recyclerview;
     }
 
     private void initview() {
-        home_recyclerview=rootView.findViewById(R.id.home_recyclerview);
+        home_recyclerview = rootView.findViewById(R.id.home_recyclerview);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         home_recyclerview.setLayoutManager(staggeredGridLayoutManager);
         TaskAdapter adapter = new TaskAdapter();
         home_recyclerview.setAdapter(adapter);
+        adapter.setOnItemClikListener(new TaskAdapter.OnItemClikListener() {
+            @Override
+            public void onItem(int position) {
+                Log.i("TAG", "onItem: 点击了" + position);
+                Toast.makeText(getActivity(), "点击了" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 //    private void initSearchView() {
@@ -191,6 +193,7 @@ private RecyclerView home_recyclerview;
                     .into(imageView);
         }
     };
+
 
     @Override
     public void onClick(View view) {

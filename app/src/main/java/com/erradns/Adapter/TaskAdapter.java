@@ -21,11 +21,28 @@ public class TaskAdapter extends RecyclerView.Adapter<VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, @SuppressLint("RecyclerView") int position) {
-        holder.task_state.setText("dhsjhd");
+        holder.task_state.setText("这是一个简介");
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onItemClikListener!=null){
+                    onItemClikListener.onItem(position);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return 10;
+    }
+
+    public interface OnItemClikListener{
+        void onItem(int position);
+    }
+    OnItemClikListener onItemClikListener;
+
+    public void setOnItemClikListener(OnItemClikListener onItemClikListener) {
+        this.onItemClikListener = onItemClikListener;
     }
 }

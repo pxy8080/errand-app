@@ -24,6 +24,7 @@ public class Fragment_message extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
+    private MapView mapView;
 
     public Fragment_message() {
     }
@@ -49,13 +50,14 @@ public class Fragment_message extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView=inflater.inflate(R.layout.fragment_message, container, false);
-        back=rootView.findViewById(R.id.back_img);
+        rootView = inflater.inflate(R.layout.fragment_message, container, false);
+        back = rootView.findViewById(R.id.back_img);
         back.setVisibility(View.INVISIBLE);
-        title=rootView.findViewById(R.id.title);
+        title = rootView.findViewById(R.id.title);
         title.setText("消息");
-
-
+        //
+        //mapView=rootView.findViewById(R.id.map_test);
+        //mapView.onCreate(savedInstanceState);
 
         return rootView;
     }

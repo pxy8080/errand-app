@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_background"
+        android:gravity="center"
+        android:text="拍照"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_below="@+id/take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/forget_password"
+        />
+    <TextView
+        android:id="@+id/Photo_album"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_below="@+id/take_photo"
+        android:background="@drawable/edit_background"
+        android:gravity="center"
+        android:text="相册选择"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+</RelativeLayout>

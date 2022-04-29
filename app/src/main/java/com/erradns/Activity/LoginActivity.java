@@ -12,10 +12,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.erradns.Https.UtilHttp;
@@ -30,6 +32,7 @@ import com.google.gson.reflect.TypeToken;
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean isSigninScreen = true;
+    private Spinner school_choose;
     private TextView tvSignupInvoker;
     private LinearLayout llSignup;
     private TextView tvSigninInvoker;
@@ -80,6 +83,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         remember_pwd = findViewById(R.id.remember_pwd);
         login_forget_pwd = findViewById(R.id.login_forget_pwd);
         login_forget_pwd.setOnClickListener(this);
+        school_choose = findViewById(R.id.school_choose);
 
         tvSignupInvoker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,6 +205,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     public void onFailure(String throwable) {
                         Log.i("TAG", "onFailure: " + throwable);
                     }
+
                     @Override
                     public void onSuccess(String response) {
                         Gson gson1 = new Gson();
@@ -220,7 +225,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         }
                         savepersonalmessage(user);
                     }
-
                 };
                 try {
                     utilHttp.utilGet("user/getUserinfobyemail?email=" + s1 + "&password=" + s2, callback);
@@ -233,15 +237,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     });
                 }
 
-
-
                 break;
             case R.id.btn_register:
                 String s3 = register_email.getText().toString().trim();
                 String s4 = register_phone.getText().toString().trim();
                 String s5 = register_pwd.getText().toString().trim();
                 String s6 = register_nickname.getText().toString().trim();
-                showToast("click register");
+                String s7 = school_choose.getSelectedItem().toString();
+                showToast("click register" + s7);
                 break;
             case R.id.remember_pwd:
                 break;
@@ -257,7 +260,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     void savepersonalmessage(User user) {
-        SharedPreferences pref = getSharedPreferences("userinfo",MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences("userinfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("user_id", user.getId());
         editor.putInt("user_phone", user.getPhone());

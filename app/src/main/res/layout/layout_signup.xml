@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="手机号"
-            android:inputType="textPassword"
+            android:inputType="phone"
             android:textColor="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="密码："
-            android:inputType="phone"
+            android:inputType="textPassword"
             android:textColor="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,9 +69,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="昵称："
-            android:inputType="phone"
+            android:inputType="textPassword"
             android:textColor="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/school_choose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:entries="@array/schools"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/btn_register"
