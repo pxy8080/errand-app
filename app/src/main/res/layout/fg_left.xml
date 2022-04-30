@@ -4,32 +4,12 @@
     android:layout_height="match_parent"
     android:background="#B3E6E8E7">
 
-<!--    <Button-->
-<!--        android:id="@+id/btn_one"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="菜单项一" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/btn_two"-->
-<!--        android:layout_below="@+id/btn_one"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="菜单项二" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/btn_three"-->
-<!--        android:layout_below="@+id/btn_two"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="菜单项三" />-->
-
     <include
         layout="@layout/service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_below="@+id/btn_three" />
+        android:layout_below="@+id/btn_three"
+        android:layout_centerVertical="true" />
 
 
 </RelativeLayout>
