@@ -24,7 +24,6 @@ import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 import org.w3c.dom.Text;
 
-import me.shaohui.bottomdialog.BottomDialog;
 
 public class MyinfoActivity extends BaseActivity implements View.OnClickListener {
     private Toolbar title_bar;

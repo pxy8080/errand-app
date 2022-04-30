@@ -1,19 +1,28 @@
 package com.erradns.Fragment;
 
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,8 +35,12 @@ import com.synnapps.carouselview.ImageListener;
 
 
 public class Fragment_home extends Fragment implements View.OnClickListener {
+    private static final String TAG = "tips";
+
     int[] sampleImages = {R.drawable.logo, R.drawable.abc_vector_test, R.drawable.ali_feedback_common_back_btn_bg, R.drawable.logo, R.drawable.logo};
     private View rootView;
+    private DrawerLayout drawerLayout;
+    private ImageView add_menu;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private CarouselView cardView;
@@ -35,6 +48,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     private String mParam2;
     private SearchView searchView;
     private RecyclerView home_recyclerview;
+
 
     public Fragment_home() {
     }
@@ -116,7 +130,16 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "点击了" + position, Toast.LENGTH_SHORT).show();
             }
         });
+        add_menu = rootView.findViewById(R.id.add_menu);
+        add_menu.setOnClickListener(this);
+        drawerLayout = rootView.findViewById(R.id.drawer_layout);
+
+
+
     }
+
+
+
 
 //    private void initSearchView() {
 //        searchView=rootView.findViewById(R.id.search);
@@ -197,7 +220,14 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.add_menu:
+                drawerLayout.openDrawer(GravityCompat.START);
+                break;
 
+            default:
+                break;
+        }
 
     }
 
