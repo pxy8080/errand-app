@@ -1,6 +1,5 @@
 package com.erradns.Activity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -68,8 +67,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private void initView() {
         fragment_home=new Fragment_home();
         fragment_message=new Fragment_message();
-        System.out.println("user1"+user.getIslogin());
-        fragment_mine=new Fragment_mine(user);
+        System.out.println("user1"+ account.getIslogin());
+        fragment_mine=new Fragment_mine(account);
 
         navigation_home = findViewById(R.id.navigation_home);
         navigation_home.setOnClickListener(this);

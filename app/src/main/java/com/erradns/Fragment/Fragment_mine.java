@@ -19,7 +19,7 @@ import com.erradns.Activity.FeedbackActivity;
 import com.erradns.Activity.LoginActivity;
 import com.erradns.Activity.MoneyActivity;
 import com.erradns.Activity.MyinfoActivity;
-import com.erradns.Model.User;
+import com.erradns.Model.account;
 import com.erradns.Sophix.R;
 
 /**
@@ -29,7 +29,7 @@ import com.erradns.Sophix.R;
 public class Fragment_mine extends Fragment implements View.OnClickListener {
     private View rootView;
     private RelativeLayout mine_center;
-    private User user;
+    private account account;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private LinearLayout money, order_managerment, bill_record, about_app, feedback; //余额，订单管理，账单，关于，反馈
@@ -40,8 +40,8 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
 
-    public Fragment_mine(User user) {
-        this.user = user;
+    public Fragment_mine(account account) {
+        this.account = account;
     }
 
     @Override
@@ -83,15 +83,15 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
         exit_login=rootView.findViewById(R.id.exit_login);
         exit_login.setOnClickListener(this);
 
-        if (!user.getIslogin()){
+        if (!account.getIslogin()){
             tip_tx.setVisibility(View.INVISIBLE);
             exit_login.setVisibility(View.INVISIBLE);
         }
         else {
             tip_tx.setVisibility(View.VISIBLE);
             exit_login.setVisibility(View.VISIBLE);
-            tip_tx.setText("昵称:"+user.getNickname());
-            id_tx.setText("id:"+user.getId());
+            tip_tx.setText("昵称:"+ account.getNickname());
+            id_tx.setText("id:"+ account.getId());
 
         }
     }
@@ -100,7 +100,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mine_center:
-                if (user.getIslogin()) {
+                if (account.getIslogin()) {
                     Intent to_mine_info = new Intent(getActivity(), MyinfoActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -108,7 +108,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.money:
-                if (user.getIslogin()) {
+                if (account.getIslogin()) {
                     Intent to_mine_info = new Intent(getActivity(), MoneyActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -117,7 +117,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.order_managerment:
-                if (user.getIslogin()) {
+                if (account.getIslogin()) {
                     Intent to_mine_info = new Intent(getActivity(), MoneyActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -126,7 +126,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.bill_record:
-                if (user.getIslogin()) {
+                if (account.getIslogin()) {
                     Intent to_mine_info = new Intent(getActivity(), MoneyActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -135,7 +135,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.about_app:
-                if (user.getIslogin()) {
+                if (account.getIslogin()) {
                     Intent to_mine_info = new Intent(getActivity(), AboutActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -144,7 +144,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.feedback:
-                if (user.getIslogin()) {
+                if (account.getIslogin()) {
                     Intent to_mine_info = new Intent(getActivity(), FeedbackActivity.class);
                     startActivity(to_mine_info);
                 } else {

@@ -4,6 +4,7 @@ import androidx.percentlayout.widget.PercentLayoutHelper;
 import androidx.percentlayout.widget.PercentRelativeLayout;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,21 +13,24 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erradns.Https.UtilHttp;
 import com.erradns.Model.Result;
 import com.erradns.Model.User;
+import com.erradns.Model.account;
 import com.erradns.Sophix.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import okhttp3.FormBody;
 
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -47,7 +51,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private boolean issave = false;//是否记住密码
     private String saveemail, savepwd;
     private Result result = new Result();
-    private User user = new User();
+    private account account = new account();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,10 +199,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
+                ProgressDialog dialog2 = new ProgressDialog(this);
+                dialog2.setMessage("正在登录");
+                dialog2.show();
                 String s1 = login_email.getText().toString().trim();
                 String s2 = login_pwd.getText().toString().trim();
                 savemessage(issave);
-
                 UtilHttp utilHttp = UtilHttp.obtain();
                 UtilHttp.ICallBack callback = new UtilHttp.ICallBack() {
                     @Override
@@ -213,17 +219,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         }.getType());
                         Gson gson2 = new Gson();
                         if (result.getCode() == 100) {
-                            user = gson2.fromJson(result.getData().toString(), new TypeToken<User>() {
+                            account = gson2.fromJson(result.getData().toString(), new TypeToken<account>() {
                             }.getType());
-                            user.setIslogin(true);
-//                            showToast(user.toString());
+                            account.setIslogin(true);
+//                            showToast(account.toString());
+                            dialog2.dismiss();
                             Intent home_intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(home_intent);
                         } else {
-                            user.setIslogin(false);
+                            account.setIslogin(false);
                             showToast("账号密码错误，请重新输入");
                         }
-                        savepersonalmessage(user);
+                        savepersonalmessage(account);
                     }
                 };
                 try {
@@ -238,15 +245,51 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
 
                 break;
+
             case R.id.btn_register:
+                ProgressDialog dialog = new ProgressDialog(this);
+                dialog.setMessage("正在注册");
+                dialog.show();
                 String s3 = register_email.getText().toString().trim();
                 String s4 = register_phone.getText().toString().trim();
                 String s5 = register_pwd.getText().toString().trim();
                 String s6 = register_nickname.getText().toString().trim();
                 String s7 = school_choose.getSelectedItem().toString();
-                showToast("click register" + s7);
-                break;
-            case R.id.remember_pwd:
+                FormBody.Builder frombody = new FormBody.Builder();
+                frombody.add("phone", s4);
+                frombody.add("email", s3);
+                frombody.add("password", s5);
+                frombody.add("nickname", s6);
+                frombody.add("headportrait", "www.oss.com");
+                frombody.add("school", s7);
+                UtilHttp utilHttp2 = UtilHttp.obtain();
+                UtilHttp.ICallBack callback2 = new UtilHttp.ICallBack() {
+                    @Override
+                    public void onFailure(String throwable) {
+                        Log.i("TAG", "onFailure: " + throwable);
+                        showToast(throwable);
+                    }
+
+                    @Override
+                    public void onSuccess(String response) {
+                        Gson gson3 = new Gson();
+                        result = gson3.fromJson(response, new TypeToken<Result>() {}.getType());
+//                        Log.i("TAG", "onSuccess: " + result.getMessage(), null);
+                        dialog.dismiss();
+                        showToast(result.getMessage()+",请返回登录界面登录");
+                    }
+
+                };
+                try {
+                    utilHttp2.untilPostForm(frombody.build(), "user/adduser", callback2);
+                } catch (Exception e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showToast("注册失败，请重试"+e.toString());
+                        }
+                    });
+                }
                 break;
             case R.id.login_forget_pwd:
                 Intent forgetpwd_intent = new Intent(this, ForgetPwdActivity.class);
@@ -259,16 +302,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    void savepersonalmessage(User user) {
+    void savepersonalmessage(account account) {
         SharedPreferences pref = getSharedPreferences("userinfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("user_id", user.getId());
-        editor.putInt("user_phone", user.getPhone());
-        editor.putString("use_email", user.getEmail());
-        editor.putString("use_nickname", user.getNickname());
-        editor.putString("use_headportrait", user.getHeadportrait());
-        editor.putString("use_school", user.getSchool());
-        editor.putBoolean("use_islogin", user.getIslogin());
+        editor.putString("user_id", account.getId());
+        editor.putInt("user_phone", account.getPhone());
+        editor.putString("use_email", account.getEmail());
+        editor.putString("use_nickname", account.getNickname());
+        editor.putString("use_headportrait", account.getHeadportrait());
+        editor.putString("use_school", account.getSchool());
+        editor.putBoolean("use_islogin", account.getIslogin());
         editor.commit();
     }
 }

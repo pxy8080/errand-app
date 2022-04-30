@@ -10,40 +10,40 @@ package com.erradns.Model;
  * school 用户学校
  */
 
-public class User {
+public class account {
     private String id;
     private int phone;
     private String email;
-    private String password;
     private String nickname;
     private String headportrait;
     private String school;
-
+    private Boolean islogin;
 
     @Override
     public String toString() {
-        return "User{" +
+        return "account{" +
                 "  id='" + id + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email +'\''+
-                ", password='" + password +'\''+
                 ", nickname='" + nickname + '\'' +
                 ", headportrait='" + headportrait +'\''+
                 ", school='" + school + '\'' +
+                ", islogin='" + islogin + '\'' +
                 '}';
     }
 
-    public User(String id, int phone, String email, String password, String nickname, String headportrait, String school) {
+
+    public account() {
+    }
+
+    public account(String id, int phone, String email, String nickname, String headportrait, String school, Boolean islogin) {
         this.id = id;
         this.phone = phone;
         this.email = email;
-        this.password = password;
         this.nickname = nickname;
         this.headportrait = headportrait;
         this.school = school;
-    }
-
-    public User() {
+        this.islogin = islogin;
     }
 
     public String getId() {
@@ -54,11 +54,11 @@ public class User {
         this.id = id;
     }
 
-    public int getphone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setphone(int phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
@@ -68,14 +68,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getNickname() {
@@ -100,6 +92,14 @@ public class User {
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public Boolean getIslogin() {
+        return islogin;
+    }
+
+    public void setIslogin(Boolean islogin) {
+        this.islogin = islogin;
     }
 }
 

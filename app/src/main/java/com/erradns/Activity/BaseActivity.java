@@ -2,19 +2,18 @@ package com.erradns.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.erradns.Model.User;
+import com.erradns.Model.account;
 import com.erradns.Sophix.R;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 
 public class BaseActivity extends AppCompatActivity {
-    User user = new User();
+    account account = new account();
     private TextView line;
 
     @Override
@@ -38,15 +37,15 @@ public class BaseActivity extends AppCompatActivity {
         String headportrait = sharedPreferences.getString("use_headportrait", "");
         String school = sharedPreferences.getString("user_school", "");
         Boolean islogin = sharedPreferences.getBoolean("use_islogin", false);
-        user.setId(id);
-        user.setPhone(phone);
-        user.setEmail(email);
-        user.setNickname(nickname);
-        user.setHeadportrait(headportrait);
-        user.setSchool(school);
-        user.setIslogin(islogin);
-        System.out.println("aaaaa"+user.getId());
-        System.out.println("aaaaa"+user.getIslogin());
+        account.setId(id);
+        account.setPhone(phone);
+        account.setEmail(email);
+        account.setNickname(nickname);
+        account.setHeadportrait(headportrait);
+        account.setSchool(school);
+        account.setIslogin(islogin);
+        System.out.println("aaaaa"+ account.getId());
+        System.out.println("aaaaa"+ account.getIslogin());
     }
 
 
