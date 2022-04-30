@@ -77,10 +77,10 @@ public class UtilHttp {
      * @param url: 请求地址
      * @return: 结果
      */
-    void untilPostForm(FormBody formBody,String url,final ICallBack callBack)
+    public void untilPostForm(FormBody formBody, String url, final ICallBack callBack)
     {
         final Request request = new Request.Builder()
-                .url(url)
+                .url(baseUrl+url)
                 .post(formBody)
                 .build();
         Call call = client.newCall(request);
