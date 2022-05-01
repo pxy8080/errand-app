@@ -18,10 +18,11 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class UtilHttp {
-    private static String baseUrl="http://10.0.2.2:8080/";//本地地址
+    private static String baseUrl = "http://10.0.2.2:8080/";//本地地址
     private static OkHttpClient client;
     private static UtilHttp mInstance;
     private Handler mHandler;
+
     public UtilHttp() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.SECONDS)
@@ -33,6 +34,7 @@ public class UtilHttp {
         client = builder.build();
         mHandler = new Handler(Looper.getMainLooper());
     }
+
     public static UtilHttp obtain() {
         if (mInstance == null) {
             synchronized (UtilHttp.class) {
@@ -43,19 +45,20 @@ public class UtilHttp {
         }
         return mInstance;
     }
-    public void utilGet(String url,final ICallBack callBack) throws IOException {
+
+    public void utilGet(String url, final ICallBack callBack) throws IOException {
         Request request = new Request.Builder()
                 .get()
-                .url(baseUrl+url)
+                .url(baseUrl + url)
                 .build();
         Call call = client.newCall(request);
         //同步调用,返回Response,会抛出IO异常
-//        Response response = call.execute();
+        //Response response = call.execute();
         //异步调用,并设置回调函数
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.e("TAG", "onFailure: "+e.toString(),null );
+                Log.e("TAG", "onFailure: " + e.toString(), null);
             }
 
             @Override
@@ -72,15 +75,15 @@ public class UtilHttp {
             }
         });
     }
+
     /**
      * @param formBody: 表单
-     * @param url: 请求地址
+     * @param url:      请求地址
      * @return: 结果
      */
-    public void untilPostForm(FormBody formBody, String url, final ICallBack callBack)
-    {
+    public void untilPostForm(FormBody formBody, String url, final ICallBack callBack) {
         final Request request = new Request.Builder()
-                .url(baseUrl+url)
+                .url(baseUrl + url)
                 .post(formBody)
                 .build();
         Call call = client.newCall(request);
@@ -104,16 +107,16 @@ public class UtilHttp {
         });
     }
     //提交json
+
     /**
-     * @param url: 请求地址
+     * @param url:      请求地址
      * @param postJson: 请求的json形势
      * @return: 结果
      */
-    void untilPostJson(String url,String postJson,final ICallBack callBack)
-    {
+    void untilPostJson(String url, String postJson, final ICallBack callBack) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), postJson);
         Request request = new Request.Builder()
-                .url(baseUrl+url)
+                .url(baseUrl + url)
                 .post(requestBody)
                 .build();
         Call call = client.newCall(request);
@@ -122,6 +125,7 @@ public class UtilHttp {
             public void onFailure(Call call, IOException e) {
 //                Log.d(TAG, "onFailure: ");
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 boolean isSuccessful = response.isSuccessful();
@@ -131,12 +135,11 @@ public class UtilHttp {
         });
     }
 
-    void untilPostString(String url,String postString,final ICallBack callBack)
-    {
+    void untilPostString(String url, String postString, final ICallBack callBack) {
         MediaType mediaType = MediaType.parse("text/x-markdown; charset=utf-8");
-        RequestBody requestBody = RequestBody.create(mediaType,postString);
+        RequestBody requestBody = RequestBody.create(mediaType, postString);
         Request request = new Request.Builder()
-                .url(baseUrl+url)
+                .url(baseUrl + url)
                 .post(requestBody)
                 .build();
         Call call = client.newCall(request);
@@ -145,6 +148,7 @@ public class UtilHttp {
             public void onFailure(Call call, IOException e) {
 //                Log.d(TAG, "onFailure: ");
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 boolean isSuccessful = response.isSuccessful();
@@ -153,6 +157,7 @@ public class UtilHttp {
             }
         });
     }
+
     /**
      * 请求成功
      *
@@ -192,6 +197,7 @@ public class UtilHttp {
             }
         });
     }
+
     public interface ICallBack {
         void onFailure(String throwable);
 

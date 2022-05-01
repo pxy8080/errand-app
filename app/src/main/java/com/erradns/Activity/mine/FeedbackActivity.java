@@ -1,4 +1,4 @@
-package com.erradns.Activity;
+package com.erradns.Activity.mine;
 
 import androidx.appcompat.app.AppCompatActivity;
 

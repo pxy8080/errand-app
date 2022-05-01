@@ -4,25 +4,41 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/old_nickname"
+        android:id="@+id/old_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        android:textSize="18sp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:padding="10dp" />
 
     <EditText
-        android:id="@+id/new_nickname"
+        android:id="@+id/new_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/old_nickname"
+        android:layout_below="@+id/old_phone"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:background="@color/white"
-        android:hint="输入新昵称"
+        android:hint="输入新手机号"
+        android:inputType="phone"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/phone_dialog_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_phone"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:hint="输入密码"
+        android:inputType="textPassword"
         android:padding="10dp" />
 </RelativeLayout>

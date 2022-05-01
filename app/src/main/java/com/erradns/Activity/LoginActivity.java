@@ -19,11 +19,9 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.erradns.Https.UtilHttp;
 import com.erradns.Model.Result;
-import com.erradns.Model.User;
 import com.erradns.Model.account;
 import com.erradns.Sophix.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -41,9 +39,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private LinearLayout llSignup;
     private TextView tvSigninInvoker;
     private LinearLayout llSignin;
+    private Button regiseter_send_code;
 
 
-    private TextInputEditText login_email, login_pwd, register_email, register_pwd, register_nickname, register_phone;
+    private TextInputEditText login_email, login_pwd, register_email, register_pwd, register_nickname, register_phone, register_code_input;
     private CheckBox remember_pwd;
     private Button login, register;
     private TextView login_forget_pwd;
@@ -78,6 +77,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         register = findViewById(R.id.btn_register);
         register.setOnClickListener(this);
 
+        //邮箱登录输入
         login_email = findViewById(R.id.login_email_input);
         login_pwd = findViewById(R.id.login_pwd_input);
         register_email = findViewById(R.id.register_email_input);
@@ -85,10 +85,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         register_nickname = findViewById(R.id.register_nickname_input);
         register_phone = findViewById(R.id.register_phone_input);
         remember_pwd = findViewById(R.id.remember_pwd);
+        //忘记密码
         login_forget_pwd = findViewById(R.id.login_forget_pwd);
         login_forget_pwd.setOnClickListener(this);
+        //选择学校
         school_choose = findViewById(R.id.school_choose);
+        //验证码输入
+        register_code_input = findViewById(R.id.register_code_input);
 
+        //发送验证码按钮
+        regiseter_send_code = findViewById(R.id.regiseter_send_code);
+
+        regiseter_send_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showToast("点击了发送");
+                SendPhoneYZM_BT(LoginActivity.this, regiseter_send_code);
+                sendVerificationCode(register_email.getText().toString().trim());
+            }
+        });
         tvSignupInvoker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +134,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     }
 
+    //显示登录模块
     private void showSignupForm() {
         PercentRelativeLayout.LayoutParams paramsLogin = (PercentRelativeLayout.LayoutParams) llSignin.getLayoutParams();
         PercentLayoutHelper.PercentLayoutInfo infoLogin = paramsLogin.getPercentLayoutInfo();
@@ -141,6 +157,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     }
 
+    //显示注册模块
     private void showSigninForm() {
         PercentRelativeLayout.LayoutParams paramsLogin = (PercentRelativeLayout.LayoutParams) llSignin.getLayoutParams();
         PercentLayoutHelper.PercentLayoutInfo infoLogin = paramsLogin.getPercentLayoutInfo();
@@ -247,54 +264,65 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
 
             case R.id.btn_register:
-                ProgressDialog dialog = new ProgressDialog(this);
-                dialog.setMessage("正在注册");
-                dialog.show();
-                String s3 = register_email.getText().toString().trim();
-                String s4 = register_phone.getText().toString().trim();
-                String s5 = register_pwd.getText().toString().trim();
-                String s6 = register_nickname.getText().toString().trim();
-                String s7 = school_choose.getSelectedItem().toString();
-                FormBody.Builder frombody = new FormBody.Builder();
-                frombody.add("phone", s4);
-                frombody.add("email", s3);
-                frombody.add("password", s5);
-                frombody.add("nickname", s6);
-                frombody.add("headportrait", "www.oss.com");
-                frombody.add("school", s7);
-                UtilHttp utilHttp2 = UtilHttp.obtain();
-                UtilHttp.ICallBack callback2 = new UtilHttp.ICallBack() {
-                    @Override
-                    public void onFailure(String throwable) {
-                        Log.i("TAG", "onFailure: " + throwable);
-                        showToast(throwable);
-                    }
-
-                    @Override
-                    public void onSuccess(String response) {
-                        Gson gson3 = new Gson();
-                        result = gson3.fromJson(response, new TypeToken<Result>() {}.getType());
-//                        Log.i("TAG", "onSuccess: " + result.getMessage(), null);
-                        dialog.dismiss();
-                        showToast(result.getMessage()+",请返回登录界面登录");
-                    }
-
-                };
-                try {
-                    utilHttp2.untilPostForm(frombody.build(), "user/adduser", callback2);
-                } catch (Exception e) {
-                    runOnUiThread(new Runnable() {
+                if (register_code_input.getText().toString().trim().equals(String.valueOf(verificationCode))) {
+                    ProgressDialog dialog = new ProgressDialog(this);
+                    dialog.setMessage("正在注册");
+                    dialog.show();
+                    String s3 = register_email.getText().toString().trim();
+                    String s4 = register_phone.getText().toString().trim();
+                    String s5 = register_pwd.getText().toString().trim();
+                    String s6 = register_nickname.getText().toString().trim();
+                    String s7 = school_choose.getSelectedItem().toString();
+                    FormBody.Builder frombody = new FormBody.Builder();
+                    frombody.add("phone", s4);
+                    frombody.add("email", s3);
+                    frombody.add("password", s5);
+                    frombody.add("nickname", s6);
+                    frombody.add("headportrait", "www.oss.com");
+                    frombody.add("school", s7);
+                    UtilHttp utilHttp2 = UtilHttp.obtain();
+                    UtilHttp.ICallBack callback2 = new UtilHttp.ICallBack() {
                         @Override
-                        public void run() {
-                            showToast("注册失败，请重试"+e.toString());
+                        public void onFailure(String throwable) {
+                            Log.i("TAG", "onFailure: " + throwable);
+                            showToast(throwable);
                         }
-                    });
+
+                        @Override
+                        public void onSuccess(String response) {
+                            Gson gson3 = new Gson();
+                            result = gson3.fromJson(response, new TypeToken<Result>() {
+                            }.getType());
+//                        Log.i("TAG", "onSuccess: " + result.getMessage(), null);
+                            dialog.dismiss();
+                            showToast(result.getMessage() + ",请返回登录界面登录");
+                        }
+
+                    };
+                    try {
+                        utilHttp2.untilPostForm(frombody.build(), "user/adduser", callback2);
+                    } catch (Exception e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showToast("注册失败，请重试" + e.toString());
+                            }
+                        });
+                    }
+                } else {
+                    showToast("验证码错误");
                 }
+
                 break;
             case R.id.login_forget_pwd:
                 Intent forgetpwd_intent = new Intent(this, ForgetPwdActivity.class);
                 startActivity(forgetpwd_intent);
                 break;
+//            case R.id.regiseter_send_code:
+//                showToast("点击发送");
+//                SendPhoneYZM_BT(LoginActivity.this, regiseter_send_code);
+//                sendVerificationCode(register_email.getText().toString().trim());
+//                break;
 
             default:
                 break;
@@ -302,16 +330,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
+
+    //存储个人账户信息，后面每个活动都可以获取
     void savepersonalmessage(account account) {
         SharedPreferences pref = getSharedPreferences("userinfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("user_id", account.getId());
         editor.putInt("user_phone", account.getPhone());
-        editor.putString("use_email", account.getEmail());
-        editor.putString("use_nickname", account.getNickname());
-        editor.putString("use_headportrait", account.getHeadportrait());
-        editor.putString("use_school", account.getSchool());
-        editor.putBoolean("use_islogin", account.getIslogin());
+        editor.putString("user_email", account.getEmail());
+        editor.putString("user_nickname", account.getNickname());
+        editor.putString("user_headportrait", account.getHeadportrait());
+        editor.putString("user_school", account.getSchool());
+        editor.putBoolean("user_islogin", account.getIslogin());
         editor.commit();
     }
 }

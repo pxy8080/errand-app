@@ -1,5 +1,7 @@
-package com.erradns.Activity;
+package com.erradns.Activity.mine;
 import android.os.Bundle;
+
+import com.erradns.Activity.BaseActivity;
 import com.erradns.Sophix.R;
 
 public class AboutActivity extends BaseActivity {

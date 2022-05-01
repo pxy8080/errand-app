@@ -67,7 +67,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private void initView() {
         fragment_home=new Fragment_home();
         fragment_message=new Fragment_message();
-        System.out.println("user1"+ account.getIslogin());
         fragment_mine=new Fragment_mine(account);
 
         navigation_home = findViewById(R.id.navigation_home);

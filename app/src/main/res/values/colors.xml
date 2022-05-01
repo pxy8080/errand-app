@@ -17,9 +17,15 @@
     <color name="title_bar_bg">#C8D4DA</color>
     <color name="navigat_background">#EBEBEB</color>
 
+    <color name="wait">#BBBBBB</color>
+
+
+
     <color name="service_bg1">#FE8475</color>
     <color name="service_bg2">#FACA28</color>
     <color name="service_bg3">#36B7CA</color>
     <color name="service_bg4">#B193FD</color>
+
+
 
 </resources>

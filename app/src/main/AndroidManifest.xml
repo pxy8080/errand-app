@@ -22,6 +22,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!--允许写设备缓存，用于问题排查-->
     <!--    <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
+    <!--允许打开相机-->
+    <uses-permission android:name="android.permission-group.CAMERA" />
     <application
         android:name=".SophixStubApplication"
         android:allowBackup="false"
@@ -33,13 +35,13 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
-            android:name="com.erradns.Activity.MoneyActivity"
+            android:name="com.erradns.Activity.mine.MoneyActivity"
             android:exported="true" />
         <activity
-            android:name="com.erradns.Activity.FeedbackActivity"
+            android:name="com.erradns.Activity.mine.FeedbackActivity"
             android:exported="true" />
         <activity
-            android:name="com.erradns.Activity.AboutActivity"
+            android:name="com.erradns.Activity.mine.AboutActivity"
             android:exported="true" />
         <activity
             android:name="com.erradns.Activity.MyinfoActivity"
@@ -71,6 +73,18 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="05887fc44ca79a882d27cca7c5388e67" />
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.erradns.Sophix.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
+
 
 </manifest>

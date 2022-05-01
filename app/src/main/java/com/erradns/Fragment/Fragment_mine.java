@@ -9,18 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.erradns.Activity.AboutActivity;
-import com.erradns.Activity.FeedbackActivity;
+import com.erradns.Activity.mine.AboutActivity;
+import com.erradns.Activity.mine.FeedbackActivity;
 import com.erradns.Activity.LoginActivity;
-import com.erradns.Activity.MoneyActivity;
+import com.erradns.Activity.mine.MoneyActivity;
 import com.erradns.Activity.MyinfoActivity;
 import com.erradns.Model.account;
 import com.erradns.Sophix.R;
+import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,10 +33,9 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private LinearLayout money, order_managerment, bill_record, about_app, feedback; //余额，订单管理，账单，关于，反馈
-    private ImageView portrait;//头像
     private TextView tip_tx, id_tx; //提示注册登录，id展示
     private Button exit_login;
-
+    private QMUIRadiusImageView2 portrait;
     private String mParam1;
     private String mParam2;
 
@@ -80,18 +79,17 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
         portrait = rootView.findViewById(R.id.portrait);
         tip_tx = rootView.findViewById(R.id.tip_tx);
         id_tx = rootView.findViewById(R.id.id_tx);
-        exit_login=rootView.findViewById(R.id.exit_login);
+        exit_login = rootView.findViewById(R.id.exit_login);
         exit_login.setOnClickListener(this);
 
-        if (!account.getIslogin()){
+        if (!account.getIslogin()) {
             tip_tx.setVisibility(View.INVISIBLE);
             exit_login.setVisibility(View.INVISIBLE);
-        }
-        else {
+        } else {
             tip_tx.setVisibility(View.VISIBLE);
             exit_login.setVisibility(View.VISIBLE);
-            tip_tx.setText("昵称:"+ account.getNickname());
-            id_tx.setText("id:"+ account.getId());
+            tip_tx.setText("昵称:" + account.getNickname());
+            id_tx.setText("id:" + account.getId());
 
         }
     }
@@ -104,7 +102,8 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                     Intent to_mine_info = new Intent(getActivity(), MyinfoActivity.class);
                     startActivity(to_mine_info);
                 } else {
-                    getActivity().onBackPressed();
+                    Intent to_login = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(to_login);
                 }
                 break;
             case R.id.money:
