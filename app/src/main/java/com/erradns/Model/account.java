@@ -14,9 +14,11 @@ public class account {
     private String id;
     private int phone;
     private String email;
+    private String password;
     private String nickname;
     private String headportrait;
     private String school;
+
     private Boolean islogin;
 
     @Override
@@ -36,13 +38,14 @@ public class account {
     public account() {
     }
 
-    public account(String id, int phone, String email, String nickname, String headportrait, String school, Boolean islogin) {
+    public account(String id, int phone, String email,String password, String nickname, String headportrait, String school,  Boolean islogin) {
         this.id = id;
         this.phone = phone;
         this.email = email;
         this.nickname = nickname;
         this.headportrait = headportrait;
         this.school = school;
+        this.password = password;
         this.islogin = islogin;
     }
 
@@ -92,6 +95,14 @@ public class account {
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Boolean getIslogin() {

@@ -41,6 +41,7 @@ public class BaseActivity extends AppCompatActivity {
         String id = sharedPreferences.getString("user_id", "");
         int phone = sharedPreferences.getInt("user_phone", 0);
         String email = sharedPreferences.getString("user_email", "");
+        String password=sharedPreferences.getString("user_password", "");
         String nickname = sharedPreferences.getString("user_nickname", "");
         String headportrait = sharedPreferences.getString("user_headportrait", "");
         String school = sharedPreferences.getString("user_school", "");
@@ -48,12 +49,13 @@ public class BaseActivity extends AppCompatActivity {
         account.setId(id);
         account.setPhone(phone);
         account.setEmail(email);
+        account.setPassword(password);
         account.setNickname(nickname);
         account.setHeadportrait(headportrait);
         account.setSchool(school);
         account.setIslogin(islogin);
-        System.out.println("aaaaa" + account.getId());
-        System.out.println("aaaaa" + account.getEmail());
+//        System.out.println("aaaaa" + account.getId());
+//        System.out.println("aaaaa" + account.getEmail());
     }
 
 
@@ -67,7 +69,8 @@ public class BaseActivity extends AppCompatActivity {
         if (!CountDownTimerUtils.is_no) {
             mCountDownTimerUtils.start();
         } else {
-            Log.i(TAG, "SendPhoneYZM_BT: ");        }
+            Log.i(TAG, "SendPhoneYZM_BT: ");
+        }
     }
 
     //发送验证码

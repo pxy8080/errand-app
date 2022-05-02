@@ -3,6 +3,7 @@ package com.erradns.Activity;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,11 +30,15 @@ import androidx.core.content.FileProvider;
 
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
+import com.erradns.Https.UtilHttp;
+import com.erradns.Model.Result;
 import com.erradns.Sophix.R;
 import com.erradns.Util.CountDownTimerUtils;
 import com.erradns.Util.GlideUtil;
 import com.erradns.Util.RandomNumber;
 import com.erradns.Util.SendEmailUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -41,9 +46,10 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import java.io.File;
 
 import io.reactivex.functions.Consumer;
-
+import okhttp3.FormBody;
 
 public class MyinfoActivity extends BaseActivity implements View.OnClickListener, OnItemClickListener {
+
     private Toolbar title_bar;
     private TextView title;
     private ImageView back, icon;
@@ -53,6 +59,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
     private AlertView phone_alertView, pwd_alertView, nickname_alertView;
     private long verificationCode = 0;
     private String account_email;
+    private Result result = new Result();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +104,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         email.setText(account.getEmail());
 
         icon = findViewById(R.id.icon);
-        GlideUtil.loadImageViewSize(this, "https://img1.baidu.com/it/u=2755628084,71849738&fm=253&fmt=auto&app=120&f=JPEG?w=1000&h=563", 30, 30, icon);
+        GlideUtil.loadImageViewSize(this, account.getHeadportrait(), 50, 50, icon);
     }
 
     @Override
@@ -212,28 +219,43 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                 pwd_alertView.show();
                 break;
             case R.id.email_tx:
+                /**
+                 * view5 email更改对话框布局
+                 */
                 View view5 = getLayoutInflater().inflate(R.layout.email_dialog, null);
                 final EditText email_update_security_code = view5.findViewById(R.id.email_update_security_code);
                 final Button btn_send_security_code = view5.findViewById(R.id.btn_send_security_code);
                 final EditText new_email = view5.findViewById(R.id.new_email);
 
-
+                //发送验证码按钮点击
                 btn_send_security_code.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        //按钮不可选中
                         SendPhoneYZM_BT(MyinfoActivity.this, btn_send_security_code);
+                        /**
+                         * new_email  输入的新验证码
+                         */
                         sendVerificationCode(new_email.getText().toString().trim());
                     }
                 });
+                //对话框弹窗
                 pwd_alertView = new AlertView("修改邮箱", null,
                         "取消", null, new String[]{"完成"},
                         this, AlertView.Style.Alert, new OnItemClickListener() {
                     @Override
+                    /**
+                     * 点击完成事件
+                     * email_update_security_code 输入的验证码
+                     * verificationCode 生成的验证码
+                     * updateemail post接口更改邮箱
+                     */
                     public void onItemClick(Object o, int position) {
                         if (email_update_security_code.getText().toString().trim().equals(String.valueOf(verificationCode))) {
-                            Log.i("TAG", "onItemClick: 对了", null);
+                            updateemail(account.getId(),String.valueOf(account.getPhone()),new_email.getText().toString().trim(),account.getPassword(),
+                                    account.getNickname(),account.getHeadportrait(),account.getSchool());
                         } else {
-                            Log.i("TAG", "onItemClick:错了", null);
+                            showToast("验证码错误，重新验证！");
                         }
                     }
                 });
@@ -245,6 +267,9 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+    /**
+     * 调用相机
+     */
     private void OpenCamera() {
         File outputimage = new File(getExternalCacheDir(), "output_image.jpg");
         try {
@@ -276,7 +301,11 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         showToast("点击了" + position + o.getClass().toString());
     }
 
-    //发送验证码
+    /**
+     *
+     * @param email 发送邮箱对象
+     * verificationCode  生成随机验证码
+     */
     public void sendVerificationCode(final String email) {
         try {
             new Thread() {
@@ -298,12 +327,71 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+    /**
+     *
+     * @param context 上下文对象
+     * @param view button对象，不可选中的按钮
+     */
     public static void SendPhoneYZM_BT(Context context, Button view) {
         CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(
                 context, view, 60000, 1000);
         if (!CountDownTimerUtils.is_no) {
             mCountDownTimerUtils.start();
         } else {
-            Log.i(TAG, "SendPhoneYZM_BT: ");        }
+            Log.i(TAG, "SendPhoneYZM_BT: ");
+        }
+    }
+
+    /**
+     *
+     * @param s1 id
+     * @param s2 手机号
+     * @param s3 email
+     * @param s4 pwd
+     * @param s5 nickname
+     * @param s6 headportrait
+     * @param s7 school
+     */
+    void updateemail(String s1, String s2, String s3, String s4, String s5, String s6, String s7) {
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("正在修改");
+        dialog.show();
+        FormBody.Builder frombody = new FormBody.Builder();
+        frombody.add("id", s1);
+        frombody.add("phone", s2);
+        frombody.add("email", s3);
+        frombody.add("password", s4);
+        frombody.add("nickname", s5);
+        frombody.add("headportrait", s6);
+        frombody.add("school", s7);
+        UtilHttp utilHttp2 = UtilHttp.obtain();
+        UtilHttp.ICallBack callback2 = new UtilHttp.ICallBack() {
+            @Override
+            public void onFailure(String throwable) {
+                Log.i("TAG", "onFailure: " + throwable);
+                showToast(throwable);
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                Gson gson3 = new Gson();
+                result = gson3.fromJson(response, new TypeToken<Result>() {
+                }.getType());
+//                        Log.i("TAG", "onSuccess: " + result.getMessage(), null);
+                dialog.dismiss();
+                showToast(result.getMessage() );
+            }
+
+        };
+        try {
+            utilHttp2.untilPostForm(frombody.build(), "user/updateuser", callback2);
+        } catch (Exception e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showToast("修改失败，请重试" + e.toString());
+                }
+            });
+        }
     }
 }

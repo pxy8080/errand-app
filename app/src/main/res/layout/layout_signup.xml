@@ -24,31 +24,35 @@
             android:id="@+id/register_email_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:hint="输入邮箱："
             android:inputType="textEmailAddress"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
 
         <Button
             android:id="@+id/regiseter_send_code"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/register_code"
             android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/register_email_input"
+            android:background="@drawable/register_code"
+            android:gravity="center"
             android:text="发送" />
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/register_code_input"
-        android:textColorHint="#FFFFFF"
-        android:layout_marginTop="24dp"
-        android:textColor="#FFFFFF"
-        android:hint="输入验证码"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="输入验证码"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -62,7 +66,8 @@
             android:layout_height="wrap_content"
             android:hint="手机号"
             android:inputType="phone"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -77,7 +82,8 @@
             android:layout_height="wrap_content"
             android:hint="密码："
             android:inputType="textPassword"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -91,8 +97,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="昵称："
-            android:inputType="textPassword"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner

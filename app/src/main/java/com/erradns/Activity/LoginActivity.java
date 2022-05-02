@@ -99,7 +99,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         regiseter_send_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToast("点击了发送");
+//                showToast("点击了发送");
                 SendPhoneYZM_BT(LoginActivity.this, regiseter_send_code);
                 sendVerificationCode(register_email.getText().toString().trim());
             }
@@ -245,6 +245,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             startActivity(home_intent);
                         } else {
                             account.setIslogin(false);
+                            dialog2.dismiss();
                             showToast("账号密码错误，请重新输入");
                         }
                         savepersonalmessage(account);
@@ -338,6 +339,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         editor.putString("user_id", account.getId());
         editor.putInt("user_phone", account.getPhone());
         editor.putString("user_email", account.getEmail());
+        editor.putString("user_password",account.getPassword());
         editor.putString("user_nickname", account.getNickname());
         editor.putString("user_headportrait", account.getHeadportrait());
         editor.putString("user_school", account.getSchool());

@@ -1,6 +1,9 @@
 package com.erradns.Fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +23,7 @@ import com.erradns.Activity.mine.MoneyActivity;
 import com.erradns.Activity.MyinfoActivity;
 import com.erradns.Model.account;
 import com.erradns.Sophix.R;
+import com.erradns.Util.GlideUtil;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
 /**
@@ -77,6 +81,8 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
         exit_login.setOnClickListener(this);
 
         portrait = rootView.findViewById(R.id.portrait);
+        GlideUtil.loadImageViewSize(getActivity(), account.getHeadportrait(), 30, 30, portrait);
+
         tip_tx = rootView.findViewById(R.id.tip_tx);
         id_tx = rootView.findViewById(R.id.id_tx);
         exit_login = rootView.findViewById(R.id.exit_login);
@@ -126,7 +132,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 break;
             case R.id.bill_record:
                 if (account.getIslogin()) {
-                    Intent to_mine_info = new Intent(getActivity(), MoneyActivity.class);
+                    Intent to_mine_info = new Intent(getActivity(), LoginActivity.class);
                     startActivity(to_mine_info);
                 } else {
                     Intent to_login = new Intent(getActivity(), LoginActivity.class);
@@ -152,10 +158,26 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.exit_login:
+                savepersonalmessage();
                 Intent to_mine_info = new Intent(getActivity(), LoginActivity.class);
                 startActivity(to_mine_info);
                 break;
 
         }
+    }
+
+    //存储个人账户信息，后面每个活动都可以获取
+    void savepersonalmessage() {
+        SharedPreferences pref = getActivity().getSharedPreferences("userinfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("user_id", "");
+        editor.putInt("user_phone", 0);
+        editor.putString("user_email", "");
+        editor.putString("user_password","");
+        editor.putString("user_nickname", "");
+        editor.putString("user_headportrait", "");
+        editor.putString("user_school", "");
+        editor.putBoolean("user_islogin", false);
+        editor.commit();
     }
 }
