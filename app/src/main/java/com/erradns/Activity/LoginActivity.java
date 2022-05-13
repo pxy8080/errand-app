@@ -22,11 +22,14 @@ import android.widget.TextView;
 
 import com.erradns.Https.UtilHttp;
 import com.erradns.Model.Result;
+import com.erradns.Model.User;
 import com.erradns.Model.account;
 import com.erradns.Sophix.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+
 
 import okhttp3.FormBody;
 
@@ -236,10 +239,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         }.getType());
                         Gson gson2 = new Gson();
                         if (result.getCode() == 100) {
-                            account = gson2.fromJson(result.getData().toString(), new TypeToken<account>() {
+                            account = gson2.fromJson(new Gson().toJson(result.getData()),
+                                    new TypeToken<account>() {
                             }.getType());
+                            System.out.println("11111" + account.getHeadportrait());
                             account.setIslogin(true);
-//                            showToast(account.toString());
                             dialog2.dismiss();
                             Intent home_intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(home_intent);
@@ -249,6 +253,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             showToast("账号密码错误，请重新输入");
                         }
                         savepersonalmessage(account);
+
                     }
                 };
                 try {
@@ -339,7 +344,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         editor.putString("user_id", account.getId());
         editor.putInt("user_phone", account.getPhone());
         editor.putString("user_email", account.getEmail());
-        editor.putString("user_password",account.getPassword());
+        editor.putString("user_password", account.getPassword());
         editor.putString("user_nickname", account.getNickname());
         editor.putString("user_headportrait", account.getHeadportrait());
         editor.putString("user_school", account.getSchool());

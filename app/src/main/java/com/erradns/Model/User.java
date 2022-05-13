@@ -12,7 +12,7 @@ package com.erradns.Model;
 
 public class User {
     private String id;
-    private int phone;
+    private String phone;
     private String email;
     private String password;
     private String nickname;
@@ -33,7 +33,7 @@ public class User {
                 '}';
     }
 
-    public User(String id, int phone, String email, String password, String nickname, String headportrait, String school) {
+    public User(String id, String phone, String email, String password, String nickname, String headportrait, String school) {
         this.id = id;
         this.phone = phone;
         this.email = email;
@@ -54,11 +54,11 @@ public class User {
         this.id = id;
     }
 
-    public int getphone() {
+    public String getphone() {
         return phone;
     }
 
-    public void setphone(int phone) {
+    public void setphone(String phone) {
         this.phone = phone;
     }
 

@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import androidx.fragment.app.Fragment;
 
 import androidx.viewpager2.widget.ViewPager2;
+
 import com.erradns.Adapter.ViewPager2Adapter;
 import com.erradns.Fragment.Fragment_home;
 import com.erradns.Fragment.Fragment_message;
@@ -24,7 +25,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private Fragment fragment_message;
     private Fragment fragment_mine;
     private ViewPager2 viewPager2;
-    ArrayList<Fragment> fragments=new ArrayList<>();
+    ArrayList<Fragment> fragments = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +53,13 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
             }
+
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 changeTab(position);
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
@@ -65,9 +69,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initView() {
-        fragment_home=new Fragment_home();
-        fragment_message=new Fragment_message();
-        fragment_mine=new Fragment_mine(account);
+        fragment_home = new Fragment_home();
+        fragment_message = new Fragment_message();
+        fragment_mine = new Fragment_mine(account);
 
         navigation_home = findViewById(R.id.navigation_home);
         navigation_home.setOnClickListener(this);
@@ -77,7 +81,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         navigation_mine.setOnClickListener(this);
         navigation_home.setSelected(true);
         navigation_home.performClick();
-
 
 
         viewPager2 = findViewById(R.id.viewpager2);
@@ -106,22 +109,22 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         });
 
     }
-        void changeTab(int position) {
-            switch (position) {
-                case 0:
-                    select(navigation_home);
-                    break;
-                case 1:
-                    select(navigation_message);
-                    break;
-                case 2:
-                    select(navigation_mine);
-                    break;
-                default:
-                    break;
-            }
-        }
 
+    void changeTab(int position) {
+        switch (position) {
+            case 0:
+                select(navigation_home);
+                break;
+            case 1:
+                select(navigation_message);
+                break;
+            case 2:
+                select(navigation_mine);
+                break;
+            default:
+                break;
+        }
+    }
 
 
     @Override

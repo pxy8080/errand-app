@@ -1,20 +1,19 @@
 plugins {
     id 'com.android.application'
-//    id 'com.aliyun.ams.emas-services'
 }
 
 android {
-    signingConfigs {
-        config {
-            storeFile file('/Users/qinqizhou/AndroidStudioProjects/run-errands-app/key.jsk')
-            storePassword 'android'
-            keyAlias 'qqz'
-            keyPassword 'android'
-        }
-    }
+//    signingConfigs {
+//        config {
+//            storeFile file('E:\\Android\\cache\\yu.jks')
+//            storePassword 'Pxy12081217'
+//            keyAlias 'key'
+//            keyPassword 'Pxy12081217'
+//        }
+//    }
     compileSdk 32
     defaultConfig {
-        applicationId "com.erradns.sophix"
+        applicationId "com.erradns.Sophix"
         sourceSets {
             main {
                 jniLibs.srcDirs = ['libs']
@@ -25,8 +24,7 @@ android {
         versionCode 1
         versionName "1.1"
         ndk {
-            //选择要添加的对应cpu类型的.so库。
-            //热修复支持五种
+            //选择要添加的对应cpu类型的.so库。热修复支持五种
             abiFilters 'arm64-v8a', 'armeabi', 'armeabi-v7a', 'x86', 'x86_64'
         }
         testInstrumentationRunner "androidx.LoginActivity.runner.AndroidJUnitRunner"
@@ -41,6 +39,7 @@ android {
             }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
     }
     compileOptions {
@@ -70,13 +69,14 @@ dependencies {
     implementation 'com.aliyun.ams:alicloud-android-feedback:3.3.7'
     implementation 'com.aliyun.ams:alicloud-android-ha-adapter:1.1.5.1-open'
     implementation 'com.aliyun.ams:alicloud-android-ha-crashreporter:1.2.5'
-
+    //Okhttp3
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
 
-
+    //QMUI
     implementation 'com.qmuiteam:qmui:2.0.0-alpha10'
     implementation 'androidx.percentlayout:percentlayout:1.0.0'
 
+    //高德地图
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.amap.api:3dmap:5.0.0'
     implementation 'com.amap.api:location:3.3.0'
@@ -90,7 +90,7 @@ dependencies {
     implementation 'com.lcodecorex:tkrefreshlayout:1.0.7'
     //圆形图标
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    //glide网络图片加载
+    //GSON
     implementation 'com.google.code.gson:gson:2.8.2'
 
     //权限申请
@@ -99,5 +99,4 @@ dependencies {
 
     //弹窗对话
     implementation 'com.bigkoo:alertview:1.0.3'
-
 }

@@ -24,6 +24,9 @@
     <!--    <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
     <!--允许打开相机-->
     <uses-permission android:name="android.permission-group.CAMERA" />
+
+
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYstemS" />
     <application
         android:name=".SophixStubApplication"
         android:allowBackup="false"
@@ -46,12 +49,15 @@
         <activity
             android:name="com.erradns.Activity.MyinfoActivity"
             android:exported="true" />
+<!--        忘记密码-->
         <activity
             android:name="com.erradns.Activity.ForgetPwdActivity"
             android:exported="true" />
+<!--        HOME-->
         <activity
             android:name="com.erradns.Activity.HomeActivity"
             android:exported="true" />
+<!--        动画帧活动-->
         <activity
             android:name="com.erradns.Activity.StartActivity"
             android:exported="true">
@@ -60,21 +66,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+<!--        主活动-->
         <activity
             android:name="com.erradns.Activity.MainActivity"
             android:exported="true"></activity>
+<!--        复用活动-->
         <activity
             android:name="com.erradns.Activity.BaseActivity"
             android:exported="true" />
+<!--        登录-->
         <activity
             android:name="com.erradns.Activity.LoginActivity"
             android:exported="true"></activity>
-
+<!--高德地图-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="05887fc44ca79a882d27cca7c5388e67" />
+            android:value="79a641e20a05e6a7d3e4e32be020585c"/>
 
-
+<!--文件管理，打开相机相册-->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.erradns.Sophix.provider"
@@ -84,6 +94,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
     </application>
 
 

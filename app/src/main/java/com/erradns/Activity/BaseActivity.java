@@ -34,6 +34,7 @@ public class BaseActivity extends AppCompatActivity {
         QMUIStatusBarHelper.setStatusBarLightMode(this);
 
         getpersonalmessage();
+        System.out.println("获取信息"+account.getHeadportrait());
     }
 
     void getpersonalmessage() {
@@ -54,8 +55,6 @@ public class BaseActivity extends AppCompatActivity {
         account.setHeadportrait(headportrait);
         account.setSchool(school);
         account.setIslogin(islogin);
-//        System.out.println("aaaaa" + account.getId());
-//        System.out.println("aaaaa" + account.getEmail());
     }
 
 
@@ -93,5 +92,21 @@ public class BaseActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    //存储个人账户信息，后面每个活动都可以获取
+    void savepersonalmessage(account account) {
+        SharedPreferences pref = getSharedPreferences("userinfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("user_id", account.getId());
+        editor.putInt("user_phone", account.getPhone());
+        editor.putString("user_email", account.getEmail());
+        editor.putString("user_password", account.getPassword());
+        editor.putString("user_nickname", account.getNickname());
+        editor.putString("user_headportrait", account.getHeadportrait());
+        editor.putString("user_school", account.getSchool());
+        editor.putBoolean("user_islogin", account.getIslogin());
+        editor.commit();
     }
 }

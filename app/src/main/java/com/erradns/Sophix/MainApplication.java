@@ -5,7 +5,6 @@ import android.util.Log;
 import com.alibaba.ha.adapter.AliHaAdapter;
 import com.alibaba.ha.adapter.AliHaConfig;
 import com.alibaba.ha.adapter.Plugin;
-
 /**
  * Date:16/5/17
  */
@@ -31,4 +30,8 @@ public class MainApplication extends Application {
         AliHaAdapter.getInstance().addPlugin(Plugin.crashreporter);
         AliHaAdapter.getInstance().start(config);
     }
+
+
+
+
 }

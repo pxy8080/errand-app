@@ -11,9 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.amap.api.maps.MapView;
 import com.erradns.Sophix.R;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 public class Fragment_message extends Fragment {
     private View rootView;
@@ -24,7 +22,6 @@ public class Fragment_message extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    private MapView mapView;
 
     public Fragment_message() {
     }

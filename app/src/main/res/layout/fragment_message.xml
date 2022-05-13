@@ -5,11 +5,5 @@
     tools:context="com.erradns.Fragment.Fragment_message">
 
 <include layout="@layout/title_bar"/>
-<com.amap.api.maps.MapView
-    android:layout_below="@+id/title_bar"
-    android:id="@+id/map_test"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    />
 
 </RelativeLayout>

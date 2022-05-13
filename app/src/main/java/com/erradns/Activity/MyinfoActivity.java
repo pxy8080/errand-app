@@ -2,20 +2,26 @@ package com.erradns.Activity;
 
 
 import android.Manifest;
-import android.app.Dialog;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.FileUtils;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,14 +30,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
+import androidx.loader.content.CursorLoader;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
 import com.erradns.Https.UtilHttp;
 import com.erradns.Model.Result;
+import com.erradns.Model.User;
 import com.erradns.Sophix.R;
 import com.erradns.Util.CountDownTimerUtils;
 import com.erradns.Util.GlideUtil;
@@ -44,12 +53,27 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.functions.Consumer;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MyinfoActivity extends BaseActivity implements View.OnClickListener, OnItemClickListener {
-
+    private static final int TAKE_PHOTO = 1;
+    private static final int CHOOSE_PHOTO = 2;
     private Toolbar title_bar;
     private TextView title;
     private ImageView back, icon;
@@ -104,15 +128,28 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         email.setText(account.getEmail());
 
         icon = findViewById(R.id.icon);
-        GlideUtil.loadImageViewSize(this, account.getHeadportrait(), 50, 50, icon);
+        GlideUtil.loadImageViewLodingSize(this, account.getHeadportrait(), 50, 50, icon,
+                R.drawable.loading, R.drawable.init_icon);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case 1:
-                System.out.println("拍照地址：" + takephoto_uri);
+            case TAKE_PHOTO:
+                if (resultCode == RESULT_OK) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        updateicon(uriToFileApiQ(takephoto_uri, this));
+                    }
+                } else
+                    showToast("请重新拍照");
+                break;
+            case CHOOSE_PHOTO:
+                Uri selectedImage = data.getData();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    updateicon(uriToFileApiQ(selectedImage, this));
+                } else
+                    showToast("请重新选择照片");
                 break;
             default:
                 break;
@@ -138,10 +175,11 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                                         .subscribe(new Consumer<Boolean>() {
                                             //RxJava的观察者模式
                                             @Override
-                                            public void accept(Boolean aBoolean) {
+                                            public void accept(Boolean aBoolean) throws FileNotFoundException {
                                                 if (aBoolean) {
                                                     //接受
                                                     OpenCamera();
+
                                                 } else {
                                                     //拒绝
                                                     Toast.makeText(MyinfoActivity.this, "授权失败，请前往设置里面授权！", Toast.LENGTH_SHORT).show();
@@ -153,11 +191,8 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                                 showToast("打开相册");
                                 Intent intent = new Intent(Intent.ACTION_PICK, null);
                                 intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                                startActivityForResult(intent, 2);
+                                startActivityForResult(intent, CHOOSE_PHOTO);
                                 break;
-//                            case -1:
-//                                showToast("取消");
-//                                break;
                             default:
                                 break;
                         }
@@ -167,14 +202,25 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
             case R.id.nickname_tx:
                 View view2 = getLayoutInflater().inflate(R.layout.nickname_dialog, null);
                 final TextView old_nickname = view2.findViewById(R.id.old_nickname);
-                old_nickname.setText("原昵称：" + account.getPhone());
+                old_nickname.setText("原昵称：" + account.getNickname());
                 final EditText new_nickname = view2.findViewById(R.id.new_nickname);
                 nickname_alertView = new AlertView("修改昵称", null,
                         "取消", null, new String[]{"完成"},
                         this, AlertView.Style.Alert, new OnItemClickListener() {
                     @Override
                     public void onItemClick(Object o, int position) {
-                        showToast("点击了修改昵称" + new_nickname.getText().toString().trim());
+                        if (o == nickname_alertView && position != AlertView.CANCELPOSITION) {
+                            String name = new_nickname.getText().toString().trim();
+                            if (name.isEmpty()) {
+                                showToast("输入是空");
+
+                            } else {
+                                updateuser(new User(account.getId(),String.valueOf(account.getPhone()),account.getEmail(),
+                                        account.getPassword(),name,account.getHeadportrait(),account.getSchool()));
+                                nickname.setText(name);
+                            }
+                        }
+
                     }
                 });
                 nickname_alertView.addExtView(view2);
@@ -195,8 +241,21 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                         this, AlertView.Style.Alert, new OnItemClickListener() {
                     @Override
                     public void onItemClick(Object o, int position) {
-                        showToast("输入的是" + new_phone.getText().toString().trim() + "\n"
-                                + phone_dialog_pwd.getText().toString().trim());
+                        if (o == phone_alertView && position != AlertView.CANCELPOSITION) {
+                            String newphone = new_phone.getText().toString().trim();
+                            String password = phone_dialog_pwd.getText().toString().trim();
+                            if (newphone.isEmpty()) {
+                                showToast("输入是空");
+                            } else {
+                                if (password.equals(account.getPassword())){
+                                    updateuser(new User(account.getId(),newphone,account.getEmail(),
+                                            account.getPassword(),account.getNickname(),account.getHeadportrait(),account.getSchool()));
+                                    phone.setText(newphone);
+                                }
+
+                                else showToast("密码输入错误");
+                            }
+                        }
                     }
                 });
                 phone_alertView.addExtView(view3);
@@ -211,8 +270,21 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                         this, AlertView.Style.Alert, new OnItemClickListener() {
                     @Override
                     public void onItemClick(Object o, int position) {
-                        showToast("输入的是" + dialog_old_pwd.getText().toString().trim() + "\n"
-                                + dialog_new_pwd.getText().toString().trim());
+                        if (o == pwd_alertView && position != AlertView.CANCELPOSITION) {
+                            String oldpwd = dialog_old_pwd.getText().toString().trim();
+                            String newpwd = dialog_new_pwd.getText().toString().trim();
+                            if (oldpwd.isEmpty() || newpwd.isEmpty()) {
+                                showToast("输入是空");
+                            } else {
+                                if (oldpwd.equals(account.getPassword())){
+                                    updateuser(new User(account.getId(),String.valueOf(account.getPhone()),account.getEmail(),
+                                            newpwd,account.getNickname(),account.getHeadportrait(),account.getSchool()));
+                                }
+
+                                else showToast("原密码输入错误");
+                            }
+                        }
+
                     }
                 });
                 pwd_alertView.addExtView(view4);
@@ -251,12 +323,17 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                      * updateemail post接口更改邮箱
                      */
                     public void onItemClick(Object o, int position) {
-                        if (email_update_security_code.getText().toString().trim().equals(String.valueOf(verificationCode))) {
-                            updateemail(account.getId(),String.valueOf(account.getPhone()),new_email.getText().toString().trim(),account.getPassword(),
-                                    account.getNickname(),account.getHeadportrait(),account.getSchool());
-                        } else {
-                            showToast("验证码错误，重新验证！");
+                        if (o == nickname_alertView && position != AlertView.CANCELPOSITION) {
+                            String newemail=new_email.getText().toString().trim();
+                            if (email_update_security_code.getText().toString().trim().equals(String.valueOf(verificationCode))) {
+                                updateuser(new User(account.getId(),String.valueOf(account.getPhone()),newemail,
+                                        account.getPassword(),account.getNickname(),account.getHeadportrait(),account.getSchool()));
+                                email.setText(newemail);
+                            } else {
+                                showToast("验证码错误，重新验证！");
+                            }
                         }
+
                     }
                 });
                 pwd_alertView.addExtView(view5);
@@ -282,13 +359,14 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         }
         if (Build.VERSION.SDK_INT >= 24) {
             takephoto_uri = FileProvider.getUriForFile(MyinfoActivity.this, "com.erradns.Sophix.provider", outputimage);
+
         } else {
             takephoto_uri = Uri.fromFile(outputimage);
         }
         try {
             Intent open_camera = new Intent("android.media.action.IMAGE_CAPTURE");
             open_camera.putExtra(MediaStore.EXTRA_OUTPUT, takephoto_uri);
-            startActivity(open_camera);
+            startActivityForResult(open_camera, TAKE_PHOTO);
         } catch (Exception e) {
             System.out.println("错误：" + e.toString());
         }
@@ -302,9 +380,8 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
     }
 
     /**
-     *
      * @param email 发送邮箱对象
-     * verificationCode  生成随机验证码
+     *              verificationCode  生成随机验证码
      */
     public void sendVerificationCode(final String email) {
         try {
@@ -328,9 +405,8 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
     }
 
     /**
-     *
      * @param context 上下文对象
-     * @param view button对象，不可选中的按钮
+     * @param view    button对象，不可选中的按钮
      */
     public static void SendPhoneYZM_BT(Context context, Button view) {
         CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(
@@ -342,49 +418,41 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
-    /**
-     *
-     * @param s1 id
-     * @param s2 手机号
-     * @param s3 email
-     * @param s4 pwd
-     * @param s5 nickname
-     * @param s6 headportrait
-     * @param s7 school
-     */
-    void updateemail(String s1, String s2, String s3, String s4, String s5, String s6, String s7) {
+
+    void updateuser(User user) {
         ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage("正在修改");
         dialog.show();
         FormBody.Builder frombody = new FormBody.Builder();
-        frombody.add("id", s1);
-        frombody.add("phone", s2);
-        frombody.add("email", s3);
-        frombody.add("password", s4);
-        frombody.add("nickname", s5);
-        frombody.add("headportrait", s6);
-        frombody.add("school", s7);
-        UtilHttp utilHttp2 = UtilHttp.obtain();
-        UtilHttp.ICallBack callback2 = new UtilHttp.ICallBack() {
+        frombody.add("id", user.getId());
+        frombody.add("phone", String.valueOf(user.getphone()));
+        frombody.add("email", user.getEmail());
+        frombody.add("password", user.getPassword());
+        frombody.add("nickname", user.getNickname());
+        frombody.add("headportrait", user.getHeadportrait());
+        frombody.add("school", user.getSchool());
+
+
+        UtilHttp utilHttp = UtilHttp.obtain();
+        UtilHttp.ICallBack callback = new UtilHttp.ICallBack() {
             @Override
             public void onFailure(String throwable) {
-                Log.i("TAG", "onFailure: " + throwable);
+                Log.i("TAG", "onFailure111: " + throwable);
                 showToast(throwable);
             }
 
             @Override
             public void onSuccess(String response) {
-                Gson gson3 = new Gson();
-                result = gson3.fromJson(response, new TypeToken<Result>() {
+                Gson gson = new Gson();
+                result = gson.fromJson(response, new TypeToken<Result>() {
                 }.getType());
-//                        Log.i("TAG", "onSuccess: " + result.getMessage(), null);
+                Log.i("TAG", "onSuccess: " + result.getCode() + "下次登录生效", null);
                 dialog.dismiss();
-                showToast(result.getMessage() );
+                showToast(result.getMessage());
             }
-
         };
         try {
-            utilHttp2.untilPostForm(frombody.build(), "user/updateuser", callback2);
+            utilHttp.untilPostForm(frombody.build(), "user/updateuser", callback);
         } catch (Exception e) {
             runOnUiThread(new Runnable() {
                 @Override
@@ -394,4 +462,108 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
             });
         }
     }
+
+    //修改头像
+    void updateicon(File file) {
+
+        OkHttpClient httpClient = new OkHttpClient().newBuilder().connectTimeout(3600000, TimeUnit.MILLISECONDS)
+                .readTimeout(3600000, TimeUnit.MILLISECONDS)
+                .build();
+
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage("正在修改");
+        dialog.show();
+
+        MediaType mediaType = MediaType.parse("application/octet-stream");//设置类型，类型为八位字节流
+        RequestBody requestBody = RequestBody.create(mediaType, file);//把文件与类型放入请求体
+
+        MultipartBody multipartBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("id", account.getId())
+                .addFormDataPart("phone", String.valueOf(account.getPhone()))
+                .addFormDataPart("email", account.getEmail())
+                .addFormDataPart("headportrait", account.getHeadportrait())
+                .addFormDataPart("nickname", account.getNickname())
+                .addFormDataPart("school", account.getSchool())
+                .addFormDataPart("file", file.getName(), requestBody)//文件名
+                .build();
+
+        Request request = new Request.Builder()
+                .url("http://81.71.163.138:8080/errand-1.0/user/uploadimg")
+
+                .post(multipartBody)
+                .build();
+        Call call = httpClient.newCall(request);
+        call.enqueue(new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.out.println("添加失败" + e);
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //在这里根据返回内容执行具体的操作
+                final String resdata = response.body().string();
+                Gson gson3 = new Gson();
+                result = gson3.fromJson(resdata, new TypeToken<Result>() {
+                }.getType());
+                if (result.getCode() == 100) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showToast("修改头像成功,请重新登录");
+                            dialog.dismiss();
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showToast("修改失败" + result.getMessage().toString());
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+    //图片uri转file
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    public static File uriToFileApiQ(Uri uri, Context context) {
+        File file = null;
+        if (uri == null) return file;
+        //android10以上转换
+        if (uri.getScheme().equals(ContentResolver.SCHEME_FILE)) {
+            file = new File(uri.getPath());
+        } else if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+            //把文件复制到沙盒目录
+            ContentResolver contentResolver = context.getContentResolver();
+            String displayName = System.currentTimeMillis() + Math.round((Math.random() + 1) * 1000)
+                    + "." + MimeTypeMap.getSingleton().getExtensionFromMimeType(contentResolver.getType(uri));
+
+//            注释掉的方法可以获取到原文件的文件名，但是比较耗时
+//            Cursor cursor = contentResolver.query(uri, null, null, null, null);
+//            if (cursor.moveToFirst()) {
+//                String displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));}
+
+            try {
+                InputStream is = contentResolver.openInputStream(uri);
+                File cache = new File(context.getCacheDir().getAbsolutePath(), displayName);
+                FileOutputStream fos = new FileOutputStream(cache);
+                FileUtils.copy(is, fos);
+                file = cache;
+                fos.close();
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
+    }
+
 }
+
+

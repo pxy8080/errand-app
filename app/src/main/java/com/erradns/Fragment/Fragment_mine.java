@@ -81,12 +81,14 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
         exit_login.setOnClickListener(this);
 
         portrait = rootView.findViewById(R.id.portrait);
-        GlideUtil.loadImageViewSize(getActivity(), account.getHeadportrait(), 30, 30, portrait);
+        GlideUtil.loadImageViewLodingSize(getActivity(), account.getHeadportrait(), 30, 30, portrait,
+                R.drawable.loading, R.drawable.init_icon);
 
         tip_tx = rootView.findViewById(R.id.tip_tx);
         id_tx = rootView.findViewById(R.id.id_tx);
         exit_login = rootView.findViewById(R.id.exit_login);
         exit_login.setOnClickListener(this);
+
 
         if (!account.getIslogin()) {
             tip_tx.setVisibility(View.INVISIBLE);
@@ -173,7 +175,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
         editor.putString("user_id", "");
         editor.putInt("user_phone", 0);
         editor.putString("user_email", "");
-        editor.putString("user_password","");
+        editor.putString("user_password", "");
         editor.putString("user_nickname", "");
         editor.putString("user_headportrait", "");
         editor.putString("user_school", "");

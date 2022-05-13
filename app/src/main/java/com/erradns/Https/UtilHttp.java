@@ -12,13 +12,15 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class UtilHttp {
-    private static String baseUrl = "http://10.0.2.2:8080/";//本地地址
+    //    private static String baseUrl = "http://10.0.2.2:8080/";//本地地址
+    private static String baseUrl = "http://81.71.163.138:8080/errand-1.0/";//本地地址
     private static OkHttpClient client;
     private static UtilHttp mInstance;
     private Handler mHandler;
@@ -97,15 +99,12 @@ public class UtilHttp {
             public void onResponse(Call call, Response response) throws IOException {
                 boolean isSuccessful = response.isSuccessful();
                 sendSuccessCallback(callBack, isSuccessful, response);
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        contentTv.setText(res);
-//                    }
-//                });
             }
         });
     }
+
+
+
     //提交json
 
     /**
@@ -113,7 +112,7 @@ public class UtilHttp {
      * @param postJson: 请求的json形势
      * @return: 结果
      */
-    void untilPostJson(String url, String postJson, final ICallBack callBack) {
+    public void untilPostJson(String url, String postJson, final ICallBack callBack) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), postJson);
         Request request = new Request.Builder()
                 .url(baseUrl + url)
@@ -200,7 +199,6 @@ public class UtilHttp {
 
     public interface ICallBack {
         void onFailure(String throwable);
-
         void onSuccess(String response);
     }
 }
