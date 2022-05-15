@@ -21,7 +21,7 @@ import com.erradns.Activity.mine.FeedbackActivity;
 import com.erradns.Activity.LoginActivity;
 import com.erradns.Activity.mine.MoneyActivity;
 import com.erradns.Activity.MyinfoActivity;
-import com.erradns.Model.account;
+import com.erradns.Model.User;
 import com.erradns.Sophix.R;
 import com.erradns.Util.GlideUtil;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
@@ -33,7 +33,7 @@ import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 public class Fragment_mine extends Fragment implements View.OnClickListener {
     private View rootView;
     private RelativeLayout mine_center;
-    private account account;
+    private User account=new User();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private LinearLayout money, order_managerment, bill_record, about_app, feedback; //余额，订单管理，账单，关于，反馈
@@ -43,7 +43,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
 
-    public Fragment_mine(account account) {
+    public Fragment_mine(User account) {
         this.account = account;
     }
 
@@ -90,7 +90,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
         exit_login.setOnClickListener(this);
 
 
-        if (!account.getIslogin()) {
+        if (account.getId().isEmpty()) {
             tip_tx.setVisibility(View.INVISIBLE);
             exit_login.setVisibility(View.INVISIBLE);
         } else {
@@ -106,7 +106,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mine_center:
-                if (account.getIslogin()) {
+                if (!account.getId().isEmpty()) {
                     Intent to_mine_info = new Intent(getActivity(), MyinfoActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -115,7 +115,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.money:
-                if (account.getIslogin()) {
+                if (!account.getId().isEmpty()) {
                     Intent to_mine_info = new Intent(getActivity(), MoneyActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -124,7 +124,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.order_managerment:
-                if (account.getIslogin()) {
+                if (!account.getId().isEmpty()) {
                     Intent to_mine_info = new Intent(getActivity(), MoneyActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -133,7 +133,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.bill_record:
-                if (account.getIslogin()) {
+                if (!account.getId().isEmpty()) {
                     Intent to_mine_info = new Intent(getActivity(), LoginActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -142,7 +142,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.about_app:
-                if (account.getIslogin()) {
+                if (!account.getId().isEmpty()) {
                     Intent to_mine_info = new Intent(getActivity(), AboutActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -151,7 +151,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.feedback:
-                if (account.getIslogin()) {
+                if (!account.getId().isEmpty()) {
                     Intent to_mine_info = new Intent(getActivity(), FeedbackActivity.class);
                     startActivity(to_mine_info);
                 } else {
@@ -172,14 +172,13 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
     void savepersonalmessage() {
         SharedPreferences pref = getActivity().getSharedPreferences("userinfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("user_id", "");
-        editor.putInt("user_phone", 0);
-        editor.putString("user_email", "");
-        editor.putString("user_password", "");
-        editor.putString("user_nickname", "");
-        editor.putString("user_headportrait", "");
-        editor.putString("user_school", "");
-        editor.putBoolean("user_islogin", false);
+        editor.putString("user_id", null);
+        editor.putString("user_phone", null);
+        editor.putString("user_email", null);
+        editor.putString("user_password", null);
+        editor.putString("user_nickname", null);
+        editor.putString("user_headportrait", null);
+        editor.putString("user_school", null);
         editor.commit();
     }
 }

@@ -31,6 +31,6 @@ private AnimationDrawable animationDrawable;
                 startActivity(mainIntent);
                 finish();
             }
-        }, 2000);
+        }, 500);
     }
 }

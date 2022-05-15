@@ -124,7 +124,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         nickname.setText(account.getNickname());
-        phone.setText(String.valueOf(account.getPhone()));
+        phone.setText(account.getphone());
         email.setText(account.getEmail());
 
         icon = findViewById(R.id.icon);
@@ -215,8 +215,10 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                                 showToast("输入是空");
 
                             } else {
-                                updateuser(new User(account.getId(),String.valueOf(account.getPhone()),account.getEmail(),
-                                        account.getPassword(),name,account.getHeadportrait(),account.getSchool()));
+                                User user = new User(account.getId(), account.getphone(), account.getEmail(),
+                                        account.getPassword(), name, account.getHeadportrait(), account.getSchool());
+                                updateuser(user);
+                                savepersonalmessage(user);
                                 nickname.setText(name);
                             }
                         }
@@ -233,7 +235,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
             case R.id.phone_tx:
                 View view3 = getLayoutInflater().inflate(R.layout.phone_dialog, null);
                 final TextView old_phone = view3.findViewById(R.id.old_phone);
-                old_phone.setText("原手机号：" + account.getPhone());
+                old_phone.setText("原手机号：" + account.getphone());
                 final EditText new_phone = view3.findViewById(R.id.new_phone);
                 final EditText phone_dialog_pwd = view3.findViewById(R.id.phone_dialog_pwd);
                 phone_alertView = new AlertView("修改手机", null,
@@ -247,13 +249,13 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                             if (newphone.isEmpty()) {
                                 showToast("输入是空");
                             } else {
-                                if (password.equals(account.getPassword())){
-                                    updateuser(new User(account.getId(),newphone,account.getEmail(),
-                                            account.getPassword(),account.getNickname(),account.getHeadportrait(),account.getSchool()));
+                                if (password.equals(account.getPassword())) {
+                                    User user = new User(account.getId(), newphone, account.getEmail(),
+                                            account.getPassword(), account.getNickname(), account.getHeadportrait(), account.getSchool());
+                                    updateuser(user);
+                                    savepersonalmessage(user);
                                     phone.setText(newphone);
-                                }
-
-                                else showToast("密码输入错误");
+                                } else showToast("密码输入错误");
                             }
                         }
                     }
@@ -276,12 +278,12 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                             if (oldpwd.isEmpty() || newpwd.isEmpty()) {
                                 showToast("输入是空");
                             } else {
-                                if (oldpwd.equals(account.getPassword())){
-                                    updateuser(new User(account.getId(),String.valueOf(account.getPhone()),account.getEmail(),
-                                            newpwd,account.getNickname(),account.getHeadportrait(),account.getSchool()));
-                                }
-
-                                else showToast("原密码输入错误");
+                                if (oldpwd.equals(account.getPassword())) {
+                                    User user = new User(account.getId(), account.getphone(), account.getEmail(),
+                                            newpwd, account.getNickname(), account.getHeadportrait(), account.getSchool());
+                                    updateuser(user);
+                                    savepersonalmessage(user);
+                                } else showToast("原密码输入错误");
                             }
                         }
 
@@ -316,18 +318,14 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                         "取消", null, new String[]{"完成"},
                         this, AlertView.Style.Alert, new OnItemClickListener() {
                     @Override
-                    /**
-                     * 点击完成事件
-                     * email_update_security_code 输入的验证码
-                     * verificationCode 生成的验证码
-                     * updateemail post接口更改邮箱
-                     */
                     public void onItemClick(Object o, int position) {
                         if (o == nickname_alertView && position != AlertView.CANCELPOSITION) {
-                            String newemail=new_email.getText().toString().trim();
+                            String newemail = new_email.getText().toString().trim();
                             if (email_update_security_code.getText().toString().trim().equals(String.valueOf(verificationCode))) {
-                                updateuser(new User(account.getId(),String.valueOf(account.getPhone()),newemail,
-                                        account.getPassword(),account.getNickname(),account.getHeadportrait(),account.getSchool()));
+                                User user = new User(account.getId(), account.getphone(), newemail,
+                                        account.getPassword(), account.getNickname(), account.getHeadportrait(), account.getSchool());
+                                updateuser(user);
+                                savepersonalmessage(user);
                                 email.setText(newemail);
                             } else {
                                 showToast("验证码错误，重新验证！");
@@ -480,7 +478,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         MultipartBody multipartBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("id", account.getId())
-                .addFormDataPart("phone", String.valueOf(account.getPhone()))
+                .addFormDataPart("phone", account.getphone())
                 .addFormDataPart("email", account.getEmail())
                 .addFormDataPart("headportrait", account.getHeadportrait())
                 .addFormDataPart("nickname", account.getNickname())
@@ -543,11 +541,6 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
             ContentResolver contentResolver = context.getContentResolver();
             String displayName = System.currentTimeMillis() + Math.round((Math.random() + 1) * 1000)
                     + "." + MimeTypeMap.getSingleton().getExtensionFromMimeType(contentResolver.getType(uri));
-
-//            注释掉的方法可以获取到原文件的文件名，但是比较耗时
-//            Cursor cursor = contentResolver.query(uri, null, null, null, null);
-//            if (cursor.moveToFirst()) {
-//                String displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));}
 
             try {
                 InputStream is = contentResolver.openInputStream(uri);

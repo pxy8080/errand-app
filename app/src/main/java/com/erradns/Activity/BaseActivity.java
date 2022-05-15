@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.erradns.Model.account;
+import com.erradns.Model.User;
 import com.erradns.Sophix.R;
 import com.erradns.Util.CountDownTimerUtils;
 import com.erradns.Util.RandomNumber;
@@ -19,42 +22,39 @@ import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 
 public class BaseActivity extends AppCompatActivity {
-    account account = new account();
-    private TextView line;
+    public User account = new User();
     public static String TAG = "TAG";
     public long verificationCode = 0;
-
+public ImageView back_img;
+public TextView title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
 //        System.out.println("状态栏高"+ QMUIDisplayHelper.getStatusBarHeight(this));
-        QMUIStatusBarHelper.translucent(this);
-        QMUIStatusBarHelper.setStatusBarLightMode(this);
-
+//        QMUIStatusBarHelper.translucent(this);
+//        QMUIStatusBarHelper.setStatusBarLightMode(this);
         getpersonalmessage();
-        System.out.println("获取信息"+account.getHeadportrait());
     }
+
 
     void getpersonalmessage() {
         SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
         String id = sharedPreferences.getString("user_id", "");
-        int phone = sharedPreferences.getInt("user_phone", 0);
+        String phone = sharedPreferences.getString("user_phone", "");
         String email = sharedPreferences.getString("user_email", "");
-        String password=sharedPreferences.getString("user_password", "");
+        String password = sharedPreferences.getString("user_password", "");
         String nickname = sharedPreferences.getString("user_nickname", "");
         String headportrait = sharedPreferences.getString("user_headportrait", "");
         String school = sharedPreferences.getString("user_school", "");
-        Boolean islogin = sharedPreferences.getBoolean("user_islogin", false);
         account.setId(id);
-        account.setPhone(phone);
+        account.setphone(phone);
         account.setEmail(email);
         account.setPassword(password);
         account.setNickname(nickname);
         account.setHeadportrait(headportrait);
         account.setSchool(school);
-        account.setIslogin(islogin);
     }
 
 
@@ -96,17 +96,16 @@ public class BaseActivity extends AppCompatActivity {
 
 
     //存储个人账户信息，后面每个活动都可以获取
-    void savepersonalmessage(account account) {
+    void savepersonalmessage(User account) {
         SharedPreferences pref = getSharedPreferences("userinfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("user_id", account.getId());
-        editor.putInt("user_phone", account.getPhone());
+        editor.putString("user_phone", account.getphone());
         editor.putString("user_email", account.getEmail());
         editor.putString("user_password", account.getPassword());
         editor.putString("user_nickname", account.getNickname());
         editor.putString("user_headportrait", account.getHeadportrait());
         editor.putString("user_school", account.getSchool());
-        editor.putBoolean("user_islogin", account.getIslogin());
         editor.commit();
     }
 }

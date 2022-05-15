@@ -23,7 +23,6 @@ import android.widget.TextView;
 import com.erradns.Https.UtilHttp;
 import com.erradns.Model.Result;
 import com.erradns.Model.User;
-import com.erradns.Model.account;
 import com.erradns.Sophix.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
@@ -53,7 +52,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private boolean issave = false;//是否记住密码
     private String saveemail, savepwd;
     private Result result = new Result();
-    private account account = new account();
+    private User account = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -240,15 +239,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         Gson gson2 = new Gson();
                         if (result.getCode() == 100) {
                             account = gson2.fromJson(new Gson().toJson(result.getData()),
-                                    new TypeToken<account>() {
+                                    new TypeToken<User>() {
                             }.getType());
-                            System.out.println("11111" + account.getHeadportrait());
-                            account.setIslogin(true);
                             dialog2.dismiss();
                             Intent home_intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(home_intent);
                         } else {
-                            account.setIslogin(false);
                             dialog2.dismiss();
                             showToast("账号密码错误，请重新输入");
                         }
@@ -338,17 +334,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
     //存储个人账户信息，后面每个活动都可以获取
-    void savepersonalmessage(account account) {
+    void savepersonalmessage(User account) {
         SharedPreferences pref = getSharedPreferences("userinfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("user_id", account.getId());
-        editor.putInt("user_phone", account.getPhone());
+        editor.putString("user_phone", account.getphone());
         editor.putString("user_email", account.getEmail());
         editor.putString("user_password", account.getPassword());
         editor.putString("user_nickname", account.getNickname());
         editor.putString("user_headportrait", account.getHeadportrait());
         editor.putString("user_school", account.getSchool());
-        editor.putBoolean("user_islogin", account.getIslogin());
         editor.commit();
     }
 }

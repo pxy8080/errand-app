@@ -24,9 +24,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.erradns.Activity.home.ServerActivity;
 import com.erradns.Adapter.TaskAdapter;
 import com.erradns.Sophix.R;
 import com.synnapps.carouselview.CarouselView;
@@ -48,7 +50,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     private String mParam2;
     private SearchView searchView;
     private RecyclerView home_recyclerview;
-
+    private RelativeLayout service_1, service_2, service_3, service_4;
 
     public Fragment_home() {
     }
@@ -134,6 +136,18 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
         add_menu.setOnClickListener(this);
         drawerLayout = rootView.findViewById(R.id.drawer_layout);
 
+        service_1=rootView.findViewById(R.id.service_1);
+        service_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent server1=new Intent(getActivity(), ServerActivity.class);
+                startActivity(server1);
+            }
+        });
+        service_2=rootView.findViewById(R.id.service_2);
+        service_3=rootView.findViewById(R.id.service_3);
+        service_4=rootView.findViewById(R.id.service_4);
+
 
 
     }
@@ -141,77 +155,11 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
 
 
 
-//    private void initSearchView() {
-//        searchView=rootView.findViewById(R.id.search);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
-//        {
-//            //输入完成后，提交时触发的方法，一般情况是点击输入法中的搜索按钮才会触发，表示现在正式提交了
-//            public boolean onQueryTextSubmit(String query)
-//            {
-//                if(TextUtils.isEmpty(query))
-//                {
-//                    Toast.makeText(getActivity(), "请输入查找内容！", Toast.LENGTH_SHORT).show();
-//                    listView.setAdapter(adapter);
-//                }
-//                else
-//                {
-//                    findList.clear();
-//                    for(int i = 0; i < list.size(); i++)
-//                    {
-//                        iconInformation information = list.get(i);
-//                        if(information.getName().equals(query))
-//                        {
-//                            findList.add(information);
-//                            break;
-//                        }
-//                    }
-//                    if(findList.size() == 0)
-//                    {
-//                        Toast.makeText(getActivity(), "查找的商品不在列表中", Toast.LENGTH_SHORT).show();
-//                    }
-//                    else
-//                    {
-//                        Toast.makeText(getActivity(), "查找成功", Toast.LENGTH_SHORT).show();
-//                        findAdapter = new listViewAdapter(getActivity(), findList);
-//                        listView.setAdapter(findAdapter);
-//                    }
-//                }
-//                return true;
-//            }
-//            //在输入时触发的方法，当字符真正显示到searchView中才触发，像是拼音，在输入法组词的时候不会触发
-//            public boolean onQueryTextChange(String newText)
-//            {
-//                if(TextUtils.isEmpty(newText))
-//                {
-//                    listView.setAdapter(adapter);
-//                }
-//                else
-//                {
-//                    findList.clear();
-//                    for(int i = 0; i < list.size(); i++)
-//                    {
-//                        iconInformation information = list.get(i);
-//                        if(information.getName().contains(newText))
-//                        {
-//                            findList.add(information);
-//                        }
-//                    }
-//                    findAdapter = new listViewAdapter(getActivity(), findList);
-//                    findAdapter.notifyDataSetChanged();
-//                    listView.setAdapter(findAdapter);
-//                }
-//                return true;
-//            }
-//        });
-//    }
-
-
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
 //            imageView.setImageResource(sampleImages[position]);
-//            Glide.with(getActivity()).load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F10048724177%2F1000.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1653621577&t=619e48af3ceb11873fab986a9811b4e7")
-//                    .into(imageView);
+
             Glide.with(getActivity()).load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.aiimg.com%2Fuploads%2Fallimg%2F200603%2F263915-200603113151.jpg&refer=http%3A%2F%2Fimg.aiimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1653621968&t=6bbaf01ed311451e2e33d6571bc1a47d")
                     .into(imageView);
         }
@@ -224,7 +172,9 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
             case R.id.add_menu:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-
+//            case R.id.service_1:
+//                Log.i(TAG, "onClick: 点击了服务1");
+//                break;
             default:
                 break;
         }

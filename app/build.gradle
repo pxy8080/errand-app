@@ -61,6 +61,8 @@ dependencies {
     implementation files('libs\\activation.jar')
     implementation files('libs\\additionnal.jar')
     implementation files('libs\\mail.jar')
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.LoginActivity.ext:junit:1.1.2'
     androidTestImplementation 'androidx.LoginActivity.espresso:espresso-core:3.3.0'
@@ -99,4 +101,7 @@ dependencies {
 
     //弹窗对话
     implementation 'com.bigkoo:alertview:1.0.3'
+//
+//    //Edittext
+//    implementation 'com.github.andyxialm:TyperEditText:1.0.2'
 }

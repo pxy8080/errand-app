@@ -84,7 +84,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
 
         viewPager2 = findViewById(R.id.viewpager2);
-        viewPager2.setY(QMUIStatusBarHelper.getStatusbarHeight(this));//QMUIStatusBarHelper.getStatusbarHeight(this)
+//        viewPager2.setY(QMUIStatusBarHelper.getStatusbarHeight(this));//QMUIStatusBarHelper.getStatusbarHeight(this)
 
         navigation_home.setOnClickListener(new View.OnClickListener() {
             @Override
