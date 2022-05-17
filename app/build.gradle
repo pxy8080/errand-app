@@ -101,7 +101,7 @@ dependencies {
 
     //弹窗对话
     implementation 'com.bigkoo:alertview:1.0.3'
-//
-//    //Edittext
-//    implementation 'com.github.andyxialm:TyperEditText:1.0.2'
+
+    //chat
+//    implementation 'com.github.stfalcon-studio:Chatkit:[last_version]'
 }

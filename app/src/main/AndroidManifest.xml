@@ -28,6 +28,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
+            android:name="com.erradns.Activity.home.LocationActivity"
+            android:exported="true" />
+        <activity
             android:name="com.erradns.Activity.home.ServerActivity"
             android:exported="true" />
         <activity
