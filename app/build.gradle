@@ -102,6 +102,9 @@ dependencies {
     //弹窗对话
     implementation 'com.bigkoo:alertview:1.0.3'
 
+    //悬浮菜单
+    implementation 'com.yw.game.floatmenu:FloatMenu:2.0.1'
+
     //chat
 //    implementation 'com.github.stfalcon-studio:Chatkit:[last_version]'
 }
