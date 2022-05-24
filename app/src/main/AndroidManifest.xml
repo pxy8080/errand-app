@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.erradns.Sophix">
+    package="com.errands.Sophix">
     <!-- 允许程序设置内置sd卡的读权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许程序设置内置sd卡的写权限 -->
@@ -18,7 +18,7 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYstemS" />
 
     <application
-        android:name=".SophixStubApplication"
+        android:name="com.errands.Sophix.SophixStubApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -28,31 +28,37 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
-            android:name="com.erradns.Activity.home.LocationActivity"
+            android:name="com.errands.Activity.message.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.errands.Sophix.AddressActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.errands.Activity.home.LocationActivity"
             android:exported="true" />
         <activity
-            android:name="com.erradns.Activity.home.ServerActivity"
+            android:name="com.errands.Activity.home.ServerActivity"
             android:exported="true" />
         <activity
-            android:name="com.erradns.Activity.mine.MoneyActivity"
+            android:name="com.errands.Activity.mine.MoneyActivity"
             android:exported="true" />
         <activity
-            android:name="com.erradns.Activity.mine.FeedbackActivity"
+            android:name="com.errands.Activity.mine.AddressActivity"
             android:exported="true" />
         <activity
-            android:name="com.erradns.Activity.mine.AboutActivity"
+            android:name="com.errands.Activity.mine.AboutActivity"
             android:exported="true" />
         <activity
-            android:name="com.erradns.Activity.MyinfoActivity"
+            android:name="com.errands.Activity.MyinfoActivity"
             android:exported="true" /> <!-- 忘记密码 -->
         <activity
-            android:name="com.erradns.Activity.ForgetPwdActivity"
+            android:name="com.errands.Activity.ForgetPwdActivity"
             android:exported="true" /> <!-- HOME -->
         <activity
-            android:name="com.erradns.Activity.HomeActivity"
+            android:name="com.errands.Activity.HomeActivity"
             android:exported="true" /> <!-- 动画帧活动 -->
         <activity
-            android:name="com.erradns.Activity.StartActivity"
+            android:name="com.errands.Activity.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,20 +67,20 @@
             </intent-filter>
         </activity> <!-- 主活动 -->
         <activity
-            android:name="com.erradns.Activity.MainActivity"
+            android:name="com.errands.Activity.MainActivity"
             android:exported="true" /> <!-- 复用活动 -->
         <activity
-            android:name="com.erradns.Activity.BaseActivity"
+            android:name="com.errands.Activity.BaseActivity"
             android:exported="true" /> <!-- 登录 -->
         <activity
-            android:name="com.erradns.Activity.LoginActivity"
+            android:name="com.errands.Activity.LoginActivity"
             android:exported="true" /> <!-- 高德地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="79a641e20a05e6a7d3e4e32be020585c" /> <!-- 文件管理，打开相机相册 -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.erradns.Sophix.provider"
+            android:authorities="com.errands.Sophix.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

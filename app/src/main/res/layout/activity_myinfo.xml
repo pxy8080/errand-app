@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.erradns.Activity.MyinfoActivity">
+    tools:context="com.errands.Activity.MyinfoActivity">
 
     <include layout="@layout/title_bar" />
 
@@ -102,15 +102,15 @@
             android:text="地址"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="30dp"
-            android:layout_toLeftOf="@+id/go_3"
-            android:gravity="center"
-            android:text="桂林电子科技大学花江校区10栋412" />
+<!--        <TextView-->
+<!--            android:id="@+id/address"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginRight="30dp"-->
+<!--            android:layout_toLeftOf="@+id/go_3"-->
+<!--            android:gravity="center"-->
+<!--            android:text="桂林电子科技大学花江校区10栋412" />-->
 
         <ImageView
             android:id="@+id/go_3"

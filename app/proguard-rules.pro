@@ -13,7 +13,7 @@
 #防止inline
 -dontoptimize
 
--keepclassmembers class com.erradns.Sophix.MainApplication {
+-keepclassmembers class com.errands.Sophix.MainApplication {
     public <init>();
 }
 -dontwarn com.squareup.okhttp3.**

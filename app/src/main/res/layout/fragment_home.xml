@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.erradns.Fragment.Fragment_home">
+    tools:context="com.errands.Fragment.Fragment_home">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

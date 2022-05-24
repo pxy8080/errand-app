@@ -104,6 +104,8 @@ dependencies {
 
     //悬浮菜单
     implementation 'com.yw.game.floatmenu:FloatMenu:2.0.1'
+//任务类型选择
+    implementation 'com.karumi:expandableselector:1.0.0'
 
     //chat
 //    implementation 'com.github.stfalcon-studio:Chatkit:[last_version]'
