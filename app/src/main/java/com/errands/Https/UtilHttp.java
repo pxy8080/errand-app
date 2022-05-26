@@ -17,8 +17,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class UtilHttp {
-    //    private static String baseUrl = "http://10.0.2.2:8080/";//本地地址
-    private static String baseUrl = "http://81.71.163.138:8080/errand-1.0/";//本地地址
+        private static String baseUrl = "http://10.0.2.2:8080/";//本地地址
+//    private static String baseUrl = "http://81.71.163.138:8080/errand-1.0/";//本地地址
     private static OkHttpClient client;
     private static UtilHttp mInstance;
     private Handler mHandler;

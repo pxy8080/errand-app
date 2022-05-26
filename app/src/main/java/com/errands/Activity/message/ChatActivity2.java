@@ -3,6 +3,7 @@ package com.errands.Activity.message;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,8 +12,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.errands.Adapter.MsgAdapter;
+import com.errands.Chat.PublicData;
+import com.errands.Chat.SocketThread;
 import com.errands.Model.Msg;
 import com.errands.Sophix.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +50,6 @@ public class ChatActivity2 extends AppCompatActivity implements View.OnClickList
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String content = inputText.getText().toString();
                 if (!"".equals(content)) {
                     Msg msg = new Msg(content, Msg.TYPE_SENT);
@@ -54,7 +59,20 @@ public class ChatActivity2 extends AppCompatActivity implements View.OnClickList
                     // 将ListView定位到最后一行
                     msgListView.setSelection(msgList.size());
                     // 清空输入框中的内容
-                    inputText.setText("");
+                    inputText.setText(null);
+                    JSONObject json = new JSONObject();
+
+                    try {
+                        json.put("msg", content);
+                        json.put("to", "80c2524fc84c11ec9bf500163e0ce512");
+                        //把ui线程的消息发送给非ui线程
+                        Message msg2 = new Message();
+                        msg2.what = PublicData.Send_MSG_Code;
+                        msg2.obj = json.toString();
+                        SocketThread.reHandler.sendMessage(msg2);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

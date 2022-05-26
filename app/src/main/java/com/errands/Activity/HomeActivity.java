@@ -23,6 +23,7 @@ import com.yw.game.floatmenu.FloatItem;
 import com.yw.game.floatmenu.FloatLogoMenu;
 import com.yw.game.floatmenu.FloatMenuView;
 
+import java.net.Socket;
 import java.util.ArrayList;
 
 
@@ -85,7 +86,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                         }
                     });
         }
-
     }
 
     private void initData() {
@@ -132,6 +132,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         navigation_mine.setOnClickListener(this);
         navigation_home.setSelected(true);
         navigation_home.performClick();
+
 
         if(!account.getId().isEmpty()){
             SocketThread socketThread=new SocketThread(handler,account.getId());

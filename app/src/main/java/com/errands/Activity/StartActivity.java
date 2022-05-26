@@ -54,13 +54,10 @@ public class StartActivity extends BaseActivity {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query("address", new String[]{"id", "User_id", "address"}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
-            Log.i(TAG, "onCreate: address表存在");
             fetchaddress();
-            System.out.println("获取得address" + addresses.toString());
         } else {
             getaddresses();
             fetchaddress();
-            System.out.println("获取得address" + addresses.toString());
         }
 
 
@@ -109,7 +106,6 @@ public class StartActivity extends BaseActivity {
             values.put("User_id", address.get(i).getUser_id());
             values.put("address", address.get(i).getAddress());
             db.insert("address", null, values);
-            System.out.println("插入成功" + address.get(i).getAddress() + "---" + address.get(i).getUser_id());
         }
         db.close();
     }
