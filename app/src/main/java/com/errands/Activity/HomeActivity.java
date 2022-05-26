@@ -3,6 +3,7 @@ package com.errands.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import android.widget.LinearLayout;
@@ -13,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.errands.Activity.home.ServerActivity;
 import com.errands.Adapter.ViewPager2Adapter;
+import com.errands.Chat.SocketThread;
 import com.errands.Fragment.Fragment_home;
 import com.errands.Fragment.Fragment_message;
 import com.errands.Fragment.Fragment_mine;
@@ -31,6 +33,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private Fragment fragment_mine;
     private ViewPager2 viewPager2;
     private FloatLogoMenu mFloatMenu;//悬浮菜单
+    public Handler handler;
     ArrayList<FloatItem> itemList = new ArrayList<>();
     ArrayList<Fragment> fragments = new ArrayList<>();
     private int[] menuIcons = new int[]{R.drawable.addtask};
@@ -66,8 +69,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                     .showWithListener(new FloatMenuView.OnMenuClickListener() {
                         @Override
                         public void onItemClick(int position, String title) {
-//                            Toast.makeText(HomeActivity.this, "position " + position + " title:" + title + " is clicked.", Toast.LENGTH_SHORT).show();
-//                            Log.i(TAG, "onItemClick: "+position);
                             switch (position){
                                 case 0:
                                     Intent server=new Intent(HomeActivity.this, ServerActivity.class);
@@ -131,6 +132,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         navigation_mine.setOnClickListener(this);
         navigation_home.setSelected(true);
         navigation_home.performClick();
+
+        if(!account.getId().isEmpty()){
+            SocketThread socketThread=new SocketThread(handler,account.getId());
+            socketThread.start();
+        }
 
 
         viewPager2 = findViewById(R.id.viewpager2);

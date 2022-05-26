@@ -1,0 +1,9 @@
+Index: app/src/main/tip.md
+===================================================================
+diff --git a/app/src/main/tip.md b/app/src/main/tip.md
+deleted file mode 100644
+--- a/app/src/main/tip.md	(revision 3b01d1df82fe098ffc24ae554468c1312615fbe1)
++++ /dev/null	(revision 3b01d1df82fe098ffc24ae554468c1312615fbe1)
+@@ -1,1 +0,0 @@
+-yuweyquie
+\ No newline at end of file
