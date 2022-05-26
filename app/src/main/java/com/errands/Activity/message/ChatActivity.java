@@ -80,8 +80,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener{
         fromText=findViewById(R.id.fromid);
         toText=findViewById(R.id.toid);
 
-//        back_img=findViewById(R.id.back_img);
-//        back_img.setOnClickListener(this);
+
     }
 
     @Override
@@ -94,24 +93,6 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener{
         }
 
     }
-
-//    public class SocketHandler extends Handler {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            switch (msg.what) {
-//                case PublicData.Send_MSG_Code:
-//                    try {
-//                        JSONObject json = new JSONObject((String) msg.obj);
-//                        MyBean bean = new MyBean(json.getString("msg"), getTime(System.currentTimeMillis()), json.getString("from"), 1);
-//                        infolist.append("\n" + msg.obj.toString());
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                        Log.e("来自错误消息", e.getMessage());
-//                    }
-//                    break;
-//            }
-//        }
-//    }
 
     private String getTime(long millTime) {
         Date d = new Date(millTime);
