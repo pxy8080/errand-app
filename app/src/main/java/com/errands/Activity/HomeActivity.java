@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.LinearLayout;
@@ -14,17 +16,35 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.errands.Activity.home.ServerActivity;
 import com.errands.Adapter.ViewPager2Adapter;
+import com.errands.Chat.PublicData;
 import com.errands.Chat.SocketThread;
 import com.errands.Fragment.Fragment_home;
 import com.errands.Fragment.Fragment_message;
 import com.errands.Fragment.Fragment_mine;
+import com.errands.Https.UtilHttp;
+import com.errands.Model.Msg;
+import com.errands.Model.OrderBase;
+import com.errands.Model.Result;
 import com.errands.Sophix.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yw.game.floatmenu.FloatItem;
 import com.yw.game.floatmenu.FloatLogoMenu;
 import com.yw.game.floatmenu.FloatMenuView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
@@ -38,13 +58,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     ArrayList<FloatItem> itemList = new ArrayList<>();
     ArrayList<Fragment> fragments = new ArrayList<>();
     private int[] menuIcons = new int[]{R.drawable.addtask};
-    String[] MENU_ITEMS = {"下单"};
+    private String[] MENU_ITEMS = {"下单"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+//        getOrderBase();
+//        System.out.println("得到的orderbase" + orderBase.toString());
         initData();
         FloatMenuView();
         initView();
@@ -70,9 +92,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                     .showWithListener(new FloatMenuView.OnMenuClickListener() {
                         @Override
                         public void onItemClick(int position, String title) {
-                            switch (position){
+                            switch (position) {
                                 case 0:
-                                    Intent server=new Intent(HomeActivity.this, ServerActivity.class);
+                                    Intent server = new Intent(HomeActivity.this, ServerActivity.class);
                                     startActivity(server);
                                     break;
                                 default:
@@ -134,9 +156,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         navigation_home.performClick();
 
 
-        if(!account.getId().isEmpty()){
-            SocketThread socketThread=new SocketThread(handler,account.getId());
-            socketThread.start();
+        if (!account.getId().isEmpty()) {
+
         }
 
 
@@ -187,6 +208,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
     }
+
+
 
 
     //导航栏选中颜色变换

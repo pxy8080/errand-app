@@ -1,12 +1,14 @@
 package com.errands.Activity.mine;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ExpandableListView;
 
 import com.errands.Activity.BaseActivity;
 import com.errands.Sophix.R;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 public class AboutActivity extends BaseActivity implements View.OnClickListener {
-
+private ExpandableTextView expandableTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,9 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         title=findViewById(R.id.title);
         title.setText("关于跑腿");
 
+
+        expandableTextView=findViewById(R.id.expand_text_view);
+        expandableTextView.setText(getResources().getString(R.string.about_app));
     }
 
     @Override

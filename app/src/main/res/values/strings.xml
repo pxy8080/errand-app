@@ -13,4 +13,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_address">添加地址</string>
+    <string name="about_app">成员分工如下：\n
+        覃其洲：\n
+        彭新宇：\n
+        王云峰：\n
+        韩昕峰：\n
+    </string>
+    <string name="app_version">乐知版本：1.0</string>
 </resources>

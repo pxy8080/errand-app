@@ -13,20 +13,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.errands.Model.Msg;
+import com.errands.Model.MyMessage;
 import com.errands.Sophix.R;
+
 
 import java.util.List;
 
-public class MsgAdapter extends ArrayAdapter<Msg> {
-    private int resourceId;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-    public MsgAdapter(Context context, int textViewResourceId, List<Msg> objects) {
+public class MsgAdapter extends ArrayAdapter<MyMessage> {
+
+    public MsgAdapter(Context context, int textViewResourceId, List<MyMessage> objects) {
         super(context, textViewResourceId, objects);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Msg msg = getItem(position);
+        MyMessage msg = getItem(position);
         View view;
         ViewHolder viewHolder;
         if (convertView == null) {
@@ -43,30 +46,39 @@ public class MsgAdapter extends ArrayAdapter<Msg> {
             viewHolder.leftLayout.setVisibility(View.VISIBLE);
             viewHolder.rightLayout.setVisibility(View.GONE);
             viewHolder.leftMsg.setText(msg.getContent());
+            viewHolder.left_time.setText(msg.getTime());
         } else if (msg.getType() == Msg.TYPE_SENT) {
             // 如果是发出的消息，则显示右边的消息布局，将左边的消息布局隐藏
             viewHolder.rightLayout.setVisibility(View.VISIBLE);
             viewHolder.leftLayout.setVisibility(View.GONE);
             viewHolder.rightMsg.setText(msg.getContent());
+            viewHolder.right_time.setText(msg.getTime());
         }
         return view;
     }
 
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView leftMsg;
-        LinearLayout leftLayout;
-        TextView rightMsg;
-        LinearLayout rightLayout;
+        TextView leftMsg; //左边消息
+        LinearLayout leftLayout; //左边布局
+        TextView rightMsg; //右边消息
+        LinearLayout rightLayout; //右边布局
+        TextView left_time;  //左边的时间
+        TextView right_time; //右边时间
+        CircleImageView l_oppositeuser_icon; //左边用户头像
+        CircleImageView r_oppositeuser_icon; //右边用户头像
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             leftMsg = itemView.findViewById(R.id.left_msg);
             leftLayout = itemView.findViewById(R.id.left_layout);
             rightMsg = itemView.findViewById(R.id.right_msg);
-            rightLayout=itemView.findViewById(R.id.right_layout);
-        }
+            rightLayout = itemView.findViewById(R.id.right_layout);
 
+            left_time = itemView.findViewById(R.id.left_time);
+            right_time = itemView.findViewById(R.id.right_time);
+            l_oppositeuser_icon = itemView.findViewById(R.id.l_oppositeuser_icon);
+            r_oppositeuser_icon = itemView.findViewById(R.id.r_oppositeuser_icon);
+        }
     }
 }

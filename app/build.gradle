@@ -109,4 +109,6 @@ dependencies {
 
     //chat
 //    implementation 'com.github.stfalcon-studio:Chatkit:[last_version]'
+//折叠textview
+    implementation 'com.ms-square:expandableTextView:0.1.4'
 }

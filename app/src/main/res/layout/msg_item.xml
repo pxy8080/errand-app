@@ -4,34 +4,88 @@
     android:orientation="vertical"
     android:padding="10dp">
 
+
     <LinearLayout
         android:id="@+id/left_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:background="@color/Blue">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/left_msg"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/l_oppositeuser_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/account_logo"/>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:textColor="#fff" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/left_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="10dp"
+                android:textColor="@color/service_bg1"
+                android:text="收到消息的时间" />
+
+            <TextView
+                android:id="@+id/left_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@color/Blue"
+                android:text="收到的消息"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/right_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:background="@color/Yellow">
 
-        <TextView
-            android:id="@+id/right_msg"
+        <LinearLayout
+            android:id="@+id/right_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp" />
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_gravity="right">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/right_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="10dp"
+                    android:textColor="@color/service_bg1"
+                    android:text="发送消息的时间" />
+
+                <TextView
+                    android:id="@+id/right_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/Yellow"
+                    android:text="发送一个消息"
+                    android:layout_margin="10dp" />
+
+            </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/r_oppositeuser_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/account_logo"/>
+
+
+        </LinearLayout>
 </LinearLayout>

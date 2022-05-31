@@ -46,8 +46,8 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener{
             }
         };
 
-        SocketThread socketThread=new SocketThread(handler,"1");
-        socketThread.start();
+//        SocketThread socketThread=new SocketThread(handler,"1",this,);
+//        socketThread.start();
 
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override

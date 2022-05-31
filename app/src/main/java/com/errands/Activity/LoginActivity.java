@@ -333,7 +333,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
     //存储个人账户信息，后面每个活动都可以获取
-    void savepersonalmessage(User account) {
+    public void savepersonalmessage(User account) {
         SharedPreferences pref = getSharedPreferences("userinfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("user_id", account.getId());

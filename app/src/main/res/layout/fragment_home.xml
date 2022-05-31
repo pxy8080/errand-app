@@ -1,10 +1,11 @@
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.errands.Fragment.Fragment_home">
+    tools:context="com.errands.Fragment.Fragment_home"
+    android:orientation="horizontal">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -71,7 +72,5 @@
         android:orientation="horizontal"
         android:focusable="true">
 
-        <include layout="@layout/fg_left"/>
-
     </LinearLayout>
-</androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>

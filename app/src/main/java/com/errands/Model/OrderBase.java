@@ -9,16 +9,36 @@ public class OrderBase {
     private String type;
     private String name;
     private int state;
+    private String date;
+    private String time;
 
-    public OrderBase(String id, String user_id_send, String user_id_receive, String myAddress, String taskAddress, String type, String name, int state) {
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public OrderBase(String id, String user_id_send, String user_id_receive, String myAddress, String taskAddress, String type, String name, int state, String date, String time) {
         this.id = id;
-        this.User_id_send = user_id_send;
-        this.User_id_receive = user_id_receive;
+        User_id_send = user_id_send;
+        User_id_receive = user_id_receive;
         this.myAddress = myAddress;
         this.taskAddress = taskAddress;
         this.type = type;
         this.name = name;
         this.state = state;
+        this.date = date;
+        this.time = time;
     }
 
     public OrderBase() {
@@ -35,6 +55,8 @@ public class OrderBase {
                 ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", state=" + state +
+                ", date=" + date +
+                ", time='" + time + '\'' +
                 '}';
     }
 

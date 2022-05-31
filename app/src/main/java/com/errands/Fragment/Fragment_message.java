@@ -83,21 +83,7 @@ public class Fragment_message extends Fragment {
     }
 
     private void initThread() {
-        Handler handler;
-        //handler=new SocketHandler();
-        //创建连接socket服务器的线程并启动
-        String userid = "1";
-        handler = new Handler() {
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                switch (msg.what) {
-                    case PublicData.Send_MSG_Code:
-                        break;
-                }
-            }
-        };
-        SocketThread socketThread = new SocketThread(handler, userid);
-        socketThread.start();
+
 
     }
 }

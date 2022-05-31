@@ -1,5 +1,6 @@
 package com.errands.Chat;
 
+import android.content.Context;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
@@ -7,7 +8,10 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
-import org.json.JSONException;
+import com.errands.Adapter.MsgAdapter;
+import com.errands.DB.messagehandle;
+import com.errands.Model.MyMessage;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -16,6 +20,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SocketThread extends Thread {
     public Socket socket;
@@ -23,11 +29,13 @@ public class SocketThread extends Thread {
     public OutputStream outputStream;
     public Handler mainHandler;
     public String mUserID;
+    public Context mcontext;
 
-    public SocketThread(Handler handler, String userID) {
-
+    public SocketThread(Handler handler, String userID, Context context) {
+        mcontext = context;
         mainHandler = handler;
         mUserID = userID;
+
     }
 
     @Override
@@ -40,11 +48,7 @@ public class SocketThread extends Thread {
             JSONObject json = new JSONObject();
             json.put("msg", mUserID);
             json.put("to", "userIDmessage");
-//            JSONObject json=new JSONObject("{" +
-//                    "\"msg\":hello_我来自APP!}");
-//            outputStream.write((json+"\n").getBytes(StandardCharsets.UTF_8));//\n是萨松一行数据结束符
             outputStream.write((json + "\n").getBytes(StandardCharsets.UTF_8));
-//            读取数据  启动一个子线程来监听并接收服务器消息
             new Thread() {
                 @Override
                 public void run() {
@@ -53,18 +57,31 @@ public class SocketThread extends Thread {
                         String serverinfo = null;
                         while ((serverinfo = br.readLine()) != null) {
                             Log.i("来自服务器的消息", serverinfo);
+                            com.alibaba.fastjson.JSONObject json = com.alibaba.fastjson.JSONObject.parseObject(serverinfo);
+                            String from = json.getString("from");
+                            String message = json.getString("msg");
+                            String time = json.getString("time");
+                            MyMessage m=new MyMessage(from,1,message,time);
+
+
+
 //                            把服务器的消息发送ui线程进行显示
                             Message msg = new Message();
-                            msg.what = PublicData.Send_MSG_Code;
+                            msg.what = PublicData.Rev_MSG_Code;
                             msg.obj = serverinfo;
                             mainHandler.sendMessage(msg);
+                            messagehandle.savemessbymsg(m, mcontext);
                         }
+//
+
                     } catch (IOException e) {
                         e.printStackTrace();
                         Log.e(PublicData.ERROR_INFO, e.getMessage());
                     }
                 }
             }.start();
+
+
             //3.关闭连接
 //            socket.close();
             //非UI线程与UI线程消息的循环
@@ -81,6 +98,7 @@ public class SocketThread extends Thread {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+
                             break;
 
                     }
@@ -92,5 +110,4 @@ public class SocketThread extends Thread {
             Log.i("来自报错", e.getMessage());
         }
     }
-
 }

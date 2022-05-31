@@ -16,11 +16,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.errands.Activity.BillRecordActivity;
 import com.errands.Activity.mine.AboutActivity;
 import com.errands.Activity.mine.FeedbackActivity;
 import com.errands.Activity.LoginActivity;
 import com.errands.Activity.mine.MoneyActivity;
 import com.errands.Activity.MyinfoActivity;
+import com.errands.Activity.mine.Order_managerment_Activity;
 import com.errands.Model.User;
 import com.errands.Sophix.R;
 import com.errands.Util.GlideUtil;
@@ -125,7 +127,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 break;
             case R.id.order_managerment:
                 if (!account.getId().isEmpty()) {
-                    Intent to_mine_info = new Intent(getActivity(), MoneyActivity.class);
+                    Intent to_mine_info = new Intent(getActivity(), Order_managerment_Activity.class);
                     startActivity(to_mine_info);
                 } else {
                     Intent to_login = new Intent(getActivity(), LoginActivity.class);
@@ -134,7 +136,7 @@ public class Fragment_mine extends Fragment implements View.OnClickListener {
                 break;
             case R.id.bill_record:
                 if (!account.getId().isEmpty()) {
-                    Intent to_mine_info = new Intent(getActivity(), LoginActivity.class);
+                    Intent to_mine_info = new Intent(getActivity(), BillRecordActivity.class);
                     startActivity(to_mine_info);
                 } else {
                     Intent to_login = new Intent(getActivity(), LoginActivity.class);
