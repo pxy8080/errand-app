@@ -3,39 +3,36 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_about.xml" value="0.25" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_address.xml" value="0.3605128205128205" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_chat.xml" value="0.3619791666666667" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_chat2.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_myinfo.xml" value="0.36614583333333334" />
-        <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_order_managerment.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_server.xml" value="0.33" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activitychat.xml" value="0.36614583333333334" />
-        <entry key="..\:/Android/sophix/app/src/main/res/layout/fg_left.xml" value="0.36614583333333334" />
-        <entry key="..\:/Android/sophix/app/src/main/res/layout/fragment_home.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/fragment_message.xml" value="0.253125" />
-        <entry key="..\:/Android/sophix/app/src/main/res/layout/fragment_mine.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/layout_add_address.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/layout_address.xml" value="0.3651041666666667" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/msg_item.xml" value="0.3651041666666667" />
-        <entry key="..\:/Android/sophix/app/src/main/res/layout/service.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/singe_chat.xml" value="0.2520833333333333" />
-        <entry key="..\:/Android/sophix/app/src/main/res/layout/task_layout.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/title_bar.xml" value="0.36614583333333334" />
         <entry key="app/src/main/res/drawable/account_logo.xml" value="0.20925925925925926" />
+        <entry key="app/src/main/res/drawable/search_selector.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.37448559670781895" />
+        <entry key="app/src/main/res/layout/activity_accept_order.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_address.xml" value="0.43833904628460785" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.270810599520017" />
+        <entry key="app/src/main/res/layout/activity_bill_record.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.1549702770229012" />
         <entry key="app/src/main/res/layout/activity_chat2.xml" value="0.19985835745557906" />
         <entry key="app/src/main/res/layout/activity_feedback.xml" value="0.18270371891115822" />
-        <entry key="app/src/main/res/layout/activity_forget_pwd.xml" value="0.14444444444444443" />
+        <entry key="app/src/main/res/layout/activity_forget_pwd.xml" value="0.3459706371554702" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.14444444444444443" />
         <entry key="app/src/main/res/layout/activity_location.xml" value="0.14444444444444443" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.14444444444444443" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14444444444444443" />
         <entry key="app/src/main/res/layout/activity_money.xml" value="0.23226846022646291" />
         <entry key="app/src/main/res/layout/activity_myinfo.xml" value="0.3083259863029154" />
+        <entry key="app/src/main/res/layout/activity_order_managerment.xml" value="0.12552083333333333" />
         <entry key="app/src/main/res/layout/activity_server.xml" value="0.26372528048271926" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.14444444444444443" />
         <entry key="app/src/main/res/layout/billing_records.xml" value="0.2557291666666667" />
