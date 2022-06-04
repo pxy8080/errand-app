@@ -1,17 +1,17 @@
 package com.errands.Model;
 
-
-public class DetailOrder extends OrderBase {
+public class Order {
     private String orderId;
+    private String name;
     private String description;
     private String evidence;
     private int amount;
     private double estimation;
     private String picture;
 
-
-    public DetailOrder(String id, String user_id_send, String user_id_receive, String myAddress, String taskAddress, String type, String name, int state, String date, String time, String orderId, String description, String evidence, int amount, double estimation, String picture) {
+    public Order(String orderId, String name, String description, String evidence, int amount, double estimation, String picture) {
         this.orderId = orderId;
+        this.name = name;
         this.description = description;
         this.evidence = evidence;
         this.amount = amount;
@@ -19,16 +19,20 @@ public class DetailOrder extends OrderBase {
         this.picture = picture;
     }
 
-    public String getPicture() {
-        return picture;
+    public Order() {
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
-    public DetailOrder() {
-
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId='" + orderId + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", evidence='" + evidence + '\'' +
+                ", amount=" + amount +
+                ", estimation=" + estimation +
+                ", picture='" + picture + '\'' +
+                '}';
     }
 
 
@@ -40,6 +44,13 @@ public class DetailOrder extends OrderBase {
         this.orderId = orderId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getDescription() {
         return description;
@@ -73,15 +84,11 @@ public class DetailOrder extends OrderBase {
         this.estimation = estimation;
     }
 
-    @Override
-    public String toString() {
-        return "DetailOrder{" +
-                "orderId='" + orderId + '\'' +
-                ", description='" + description + '\'' +
-                ", evidence='" + evidence + '\'' +
-                ", amount=" + amount +
-                ", estimation=" + estimation +
-                ", picture='" + picture + '\'' +
-                '}';
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

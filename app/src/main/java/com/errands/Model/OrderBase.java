@@ -11,6 +11,7 @@ public class OrderBase {
     private int state;
     private String date;
     private String time;
+    private String price;
 
     public String getDate() {
         return date;
@@ -28,7 +29,18 @@ public class OrderBase {
         this.time = time;
     }
 
-    public OrderBase(String id, String user_id_send, String user_id_receive, String myAddress, String taskAddress, String type, String name, int state, String date, String time) {
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public OrderBase() {
+    }
+
+    public OrderBase(String id, String user_id_send, String user_id_receive, String myAddress, String taskAddress, String type, String name, int state, String date, String time, String price) {
         this.id = id;
         User_id_send = user_id_send;
         User_id_receive = user_id_receive;
@@ -39,9 +51,7 @@ public class OrderBase {
         this.state = state;
         this.date = date;
         this.time = time;
-    }
-
-    public OrderBase() {
+        this.price = price;
     }
 
     @Override
@@ -55,8 +65,9 @@ public class OrderBase {
                 ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", state=" + state +
-                ", date=" + date +
+                ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
+                ", price='" + price + '\'' +
                 '}';
     }
 

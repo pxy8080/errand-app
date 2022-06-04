@@ -30,6 +30,7 @@ import com.errands.Sophix.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -135,7 +136,6 @@ public class AddressActivity extends BaseActivity implements View.OnClickListene
 
                 @Override
                 public void onSuccess(String response) {
-                    Log.i("TAG", "添加地址返回 " + response);
                     Gson gson = new Gson();
                     Result result = new Result();
                     result = gson.fromJson(response, new TypeToken<Result>() {

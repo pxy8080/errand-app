@@ -132,7 +132,7 @@ public class UtilHttp {
         });
     }
 
-    void untilPostString(String url, String postString, final ICallBack callBack) {
+    public void untilPostString(String url, String postString, final ICallBack callBack) {
         MediaType mediaType = MediaType.parse("text/x-markdown; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, postString);
         Request request = new Request.Builder()
@@ -166,6 +166,7 @@ public class UtilHttp {
 
         try {
             final String responseString = response.body().string();
+            System.out.println("是否成功"+responseString);
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {

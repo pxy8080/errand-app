@@ -60,7 +60,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     private SearchView searchView;
     private RecyclerView home_recyclerview;
     private Result result = new Result();
-    private List<DetailOrder> detailOrders = new ArrayList<>();
+    private List<OrderBase> orderBases = new ArrayList<>();
     private Handler handler;
 
     public Fragment_home() {
@@ -102,12 +102,12 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
                         Gson gson2 = new Gson();
 
                         if (result.getCode() == 100) {
-                            detailOrders = gson2.fromJson(new Gson().toJson(result.getData()),
-                                    new TypeToken<List<DetailOrder>>() {
+                            orderBases = gson2.fromJson(new Gson().toJson(result.getData()),
+                                    new TypeToken<List<OrderBase>>() {
                                     }.getType());
-                            Log.i(TAG, "handleMessage: 获取订单信息" + detailOrders.size());
+                            Log.i(TAG, "handleMessage: 获取订单信息" + orderBases.size());
 
-                            TaskAdapter adapter = new TaskAdapter(detailOrders, getActivity());
+                            TaskAdapter adapter = new TaskAdapter(orderBases, getActivity());
 
                             home_recyclerview.setAdapter(adapter);
                             adapter.setOnItemClikListener(new TaskAdapter.OnItemClikListener() {
@@ -149,7 +149,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
                 Gson gson1 = new Gson();
                 result = gson1.fromJson(response, new TypeToken<Result>() {
                 }.getType());
-                System.out.println("获取result" + result.getData().toString());
+//                System.out.println("获取result" + result.getData().toString());
                 Message message = new Message();
                 message.obj = new Gson().toJson(result.getData());
                 message.what = 1;   //标志消息的标志
@@ -158,7 +158,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
         };
 
         try {
-            utilHttp.utilGet("order/showAllOrder", callback);
+            utilHttp.utilGet("order/showOrderStartTimeDesc", callback);
         } catch (Exception e) {
             e.printStackTrace();
         }

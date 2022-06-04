@@ -44,7 +44,7 @@ public class GlideUtil{
 
     //设置加载中以及加载失败图片并且指定大小
     public static void loadImageViewLodingSize(Context mContext, String path, int width, int height, ImageView mImageView, int lodingImage, int errorImageView) {
-        Glide.with(mContext).load(path).override(width, height).placeholder(lodingImage).error(errorImageView).into(mImageView);
+        Glide.with(mContext).load(path).skipMemoryCache(true).override(width, height).placeholder(lodingImage).error(errorImageView).into(mImageView);
     }
 
     //设置跳过内存缓存

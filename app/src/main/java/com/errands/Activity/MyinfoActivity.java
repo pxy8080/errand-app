@@ -2,6 +2,7 @@ package com.errands.Activity;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -66,10 +67,6 @@ import okhttp3.Response;
 public class MyinfoActivity extends BaseActivity implements View.OnClickListener, OnItemClickListener {
     private static final int TAKE_PHOTO = 1;
     private static final int CHOOSE_PHOTO = 2;
-    private Toolbar title_bar;
-    private TextView title;
-    private ImageView back, icon;
-    private RelativeLayout head_icon, nickname_tx, address_tx, phone_tx, update_pwd_tx, email_tx;
     private TextView nickname, phone, email;
     private Uri takephoto_uri;
     private AlertView phone_alertView, pwd_alertView, nickname_alertView;
@@ -91,24 +88,24 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initView() {
-        title_bar = findViewById(R.id.title_bar);
+        Toolbar title_bar = findViewById(R.id.title_bar);
         title_bar.setY(QMUIStatusBarHelper.getStatusbarHeight(this));
-        title = findViewById(R.id.title);
+        TextView title = findViewById(R.id.title);
         title.setText("个人中心");
-        back = findViewById(R.id.back_img);
+        ImageView back = findViewById(R.id.back_img);
         back.setOnClickListener(this);
 
-        head_icon = findViewById(R.id.head_icon);
+        RelativeLayout head_icon = findViewById(R.id.head_icon);
         head_icon.setOnClickListener(this);
-        nickname_tx = findViewById(R.id.nickname_tx);
+        RelativeLayout nickname_tx = findViewById(R.id.nickname_tx);
         nickname_tx.setOnClickListener(this);
-        address_tx = findViewById(R.id.address_tx);
+        RelativeLayout address_tx = findViewById(R.id.address_tx);
         address_tx.setOnClickListener(this);
-        phone_tx = findViewById(R.id.phone_tx);
+        RelativeLayout phone_tx = findViewById(R.id.phone_tx);
         phone_tx.setOnClickListener(this);
-        update_pwd_tx = findViewById(R.id.update_pwd_tx);
+        RelativeLayout update_pwd_tx = findViewById(R.id.update_pwd_tx);
         update_pwd_tx.setOnClickListener(this);
-        email_tx = findViewById(R.id.email_tx);
+        RelativeLayout email_tx = findViewById(R.id.email_tx);
         email_tx.setOnClickListener(this);
 
         nickname = findViewById(R.id.nickname);
@@ -119,7 +116,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         phone.setText(account.getphone());
         email.setText(account.getEmail());
 
-        icon = findViewById(R.id.icon);
+        ImageView icon = findViewById(R.id.icon);
         GlideUtil.loadImageViewLodingSize(this, account.getHeadportrait(), 50, 50, icon,
                 R.drawable.loading, R.drawable.init_icon);
     }
@@ -148,6 +145,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -424,7 +422,6 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         frombody.add("nickname", user.getNickname());
         frombody.add("headportrait", user.getHeadportrait());
         frombody.add("school", user.getSchool());
-
 
         UtilHttp utilHttp = UtilHttp.obtain();
         UtilHttp.ICallBack callback = new UtilHttp.ICallBack() {

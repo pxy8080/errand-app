@@ -24,8 +24,8 @@ private ExpandableTextView expandableTextView;
         title.setText("关于跑腿");
 
 
-        expandableTextView=findViewById(R.id.expand_text_view);
-        expandableTextView.setText(getResources().getString(R.string.about_app));
+//        expandableTextView=findViewById(R.id.expand_text_view);
+//        expandableTextView.setText(getResources().getString(R.string.about_app));
     }
 
     @Override
