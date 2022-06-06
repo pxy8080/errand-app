@@ -49,20 +49,17 @@ import java.util.List;
 
 public class ServerActivity extends BaseActivity implements View.OnClickListener {
     private Spinner add_select, type_select;
-    private List<String> addresses = new ArrayList<>();
-    private List<String> item = new ArrayList<>();
-    private ImageView location, task_type;
-    private TextView nickname, task_address;
-    private TextView phone;
+    private final List<String> addresses = new ArrayList<>();
+    private final List<String> item = new ArrayList<>();
+    private ImageView task_type;
+    private TextView task_address;
     private RecyclerView recyclerview;
     private int ORDER_TYPE;
     private final List<Order> orders = new ArrayList<>();
     private Orderdetail_buy_Adapter orderdetail_buy_adapter;
     private Orderdetail_send_Adapter orderdetail_send_adapter;
     private Orderdetail_take_Adapter orderdetail_take_adapter;
-    private Button issue;
     private String myAddress;
-    private AlertView buy_alterview, send_alterview, take_alertView;
     private EditText remark_input, price_input;
 
     @Override
@@ -84,15 +81,15 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
         back_img.setOnClickListener(this);
         title = findViewById(R.id.title);
         title.setText("任务发布");
-        nickname = findViewById(R.id.nickname);
+        TextView nickname = findViewById(R.id.nickname);
         nickname.setText("发布者：" + account.getNickname());
         task_type = findViewById(R.id.task_type);
-        phone = findViewById(R.id.phone);
-        phone.setText("Phone:" + account.getphone());
+        TextView phone = findViewById(R.id.phone);
+        phone.setText("Phone:" + account.getPhone());
         add_select = findViewById(R.id.add_select);
         type_select = findViewById(R.id.type_select);
         initSpinner();
-        location = findViewById(R.id.location);
+        ImageView location = findViewById(R.id.location);
         location.setOnClickListener(this);
         recyclerview = findViewById(R.id.goods_recyclerview);
         task_address = findViewById(R.id.task_address);
@@ -100,7 +97,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
         ImageView add_goods = findViewById(R.id.add_goods);
         add_goods.setOnClickListener(this);
 
-        issue = findViewById(R.id.issue);
+        Button issue = findViewById(R.id.issue);
         issue.setOnClickListener(this);
 
         price_input = findViewById(R.id.price_input);
@@ -193,11 +190,11 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
         //依靠DatabaseHelper带全部参数的构造函数创建数据库
         AddressDBHelper dbHelper = new AddressDBHelper(ServerActivity.this, "address.db", null, 1);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor cursor = db.query("address", new String[]{"id", "User_id", "address"}, null, null, null, null, null);
+        @SuppressLint("Recycle") Cursor cursor = db.query("address", new String[]{"id", "User_id", "address"}, null, null, null, null, null);
         System.out.println("值" + cursor.moveToNext());
         while (cursor.moveToNext()) {
             @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex("id"));
-            @SuppressLint("Range") String User_id = cursor.getString(cursor.getColumnIndex("User_id"));
+            @SuppressLint("Range") String User_id = cursor.getString(cursor.getColumnIndex("user_id"));
             @SuppressLint("Range") String address = cursor.getString(cursor.getColumnIndex("address"));
             addresses.add(address);
         }
@@ -218,12 +215,19 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
             case R.id.add_goods:
                 switch (ORDER_TYPE) {
                     case 0:
-                        View buyview = getLayoutInflater().inflate(R.layout.buy_alterview, null);
+                        @SuppressLint("InflateParams") View buyview = getLayoutInflater().inflate(R.layout.buy_alterview, null);
                         final EditText add_description = buyview.findViewById(R.id.add_description);
                         final EditText add_amount = buyview.findViewById(R.id.add_amount);
                         final EditText add_estimation = buyview.findViewById(R.id.add_estimation);
                         final EditText add_name = buyview.findViewById(R.id.add_name);
-                        buy_alterview = new AlertView("添加物品", null,
+                        //判断输入是都为空
+                        //                                if (o == buy_alterview && position != AlertView.CANCELPOSITION) {
+                        //                                    if (description.isEmpty() && amount.isEmpty() && estimation.isEmpty() && name.isEmpty()) {
+                        //                                        showToast("输入是空");
+                        //                                    } else {
+                        //                                    }
+                        //                                }
+                        AlertView buy_alterview = new AlertView("添加物品", null,
                                 "取消", null, new String[]{"完成"},
                                 this, AlertView.Style.Alert, new OnItemClickListener() {
                             @Override
@@ -247,9 +251,9 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                         buy_alterview.show();
                         break;
                     case 1:
-                        View sendview = getLayoutInflater().inflate(R.layout.send_alterview, null);
+                        @SuppressLint("InflateParams") View sendview = getLayoutInflater().inflate(R.layout.send_alterview, null);
                         final EditText add_description2 = sendview.findViewById(R.id.add_description);
-                        send_alterview = new AlertView("添加物品", null,
+                        AlertView send_alterview = new AlertView("添加物品", null,
                                 "取消", null, new String[]{"完成"},
                                 this, AlertView.Style.Alert, new OnItemClickListener() {
                             @Override
@@ -263,11 +267,11 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                         send_alterview.show();
                         break;
                     case 2:
-                        View takeview = getLayoutInflater().inflate(R.layout.take_alterview, null);
+                        @SuppressLint("InflateParams") View takeview = getLayoutInflater().inflate(R.layout.take_alterview, null);
                         final EditText add_description3 = takeview.findViewById(R.id.add_description);
                         final EditText add_evidence = takeview.findViewById(R.id.add_evidence);
 
-                        take_alertView = new AlertView("添加物品", null,
+                        AlertView take_alertView = new AlertView("添加物品", null,
                                 "取消", null, new String[]{"完成"},
                                 this, AlertView.Style.Alert, new OnItemClickListener() {
                             @Override
@@ -341,20 +345,15 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 1:
-                Uri selectedImage = data.getData();
-                System.out.println("选择的路径" + selectedImage.toString());
-                Bitmap bitmap = null;
-                try {
-                    bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(selectedImage));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-            default:
-                break;
+        if (requestCode == 1) {
+            Uri selectedImage = data.getData();
+            System.out.println("选择的路径" + selectedImage.toString());
+            Bitmap bitmap = null;
+            try {
+                bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(selectedImage));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

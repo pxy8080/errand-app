@@ -29,6 +29,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 
+import com.alibaba.fastjson.JSON;
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
 import com.errands.Activity.mine.AddressActivity;
@@ -71,7 +72,6 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
     private Uri takephoto_uri;
     private AlertView phone_alertView, pwd_alertView, nickname_alertView;
     private long verificationCode = 0;
-    private String account_email;
     private Result result = new Result();
 
     @Override
@@ -84,7 +84,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initData() {
-        account_email = account.getEmail();
+        String account_email = account.getEmail();
     }
 
     private void initView() {
@@ -113,7 +113,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         nickname.setText(account.getNickname());
-        phone.setText(account.getphone());
+        phone.setText(account.getPhone());
         email.setText(account.getEmail());
 
         ImageView icon = findViewById(R.id.icon);
@@ -190,7 +190,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                 }).show();
                 break;
             case R.id.nickname_tx:
-                View view2 = getLayoutInflater().inflate(R.layout.nickname_dialog, null);
+                @SuppressLint("InflateParams") View view2 = getLayoutInflater().inflate(R.layout.nickname_dialog, null);
                 final TextView old_nickname = view2.findViewById(R.id.old_nickname);
                 old_nickname.setText("原昵称：" + account.getNickname());
                 final EditText new_nickname = view2.findViewById(R.id.new_nickname);
@@ -205,8 +205,8 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                                 showToast("输入是空");
 
                             } else {
-                                User user = new User(account.getId(), account.getphone(), account.getEmail(),
-                                        account.getPassword(), name, account.getHeadportrait(), account.getSchool());
+                                User user = new User(account.getId(), account.getPhone(), account.getEmail(),
+                                        account.getPassword(), name, account.getHeadportrait(), account.getSchool(), account.getMoney());
                                 updateuser(user);
                                 savepersonalmessage(user);
                                 nickname.setText(name);
@@ -226,7 +226,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
             case R.id.phone_tx:
                 View view3 = getLayoutInflater().inflate(R.layout.phone_dialog, null);
                 final TextView old_phone = view3.findViewById(R.id.old_phone);
-                old_phone.setText("原手机号：" + account.getphone());
+                old_phone.setText("原手机号：" + account.getPhone());
                 final EditText new_phone = view3.findViewById(R.id.new_phone);
                 final EditText phone_dialog_pwd = view3.findViewById(R.id.phone_dialog_pwd);
                 phone_alertView = new AlertView("修改手机", null,
@@ -242,7 +242,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                             } else {
                                 if (password.equals(account.getPassword())) {
                                     User user = new User(account.getId(), newphone, account.getEmail(),
-                                            account.getPassword(), account.getNickname(), account.getHeadportrait(), account.getSchool());
+                                            account.getPassword(), account.getNickname(), account.getHeadportrait(), account.getSchool(), account.getMoney());
                                     updateuser(user);
                                     savepersonalmessage(user);
                                     phone.setText(newphone);
@@ -255,7 +255,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                 phone_alertView.show();
                 break;
             case R.id.update_pwd_tx:
-                View view4 = getLayoutInflater().inflate(R.layout.pwd_dialog, null);
+                @SuppressLint("InflateParams") View view4 = getLayoutInflater().inflate(R.layout.pwd_dialog, null);
                 final EditText dialog_old_pwd = view4.findViewById(R.id.dialog_old_pwd);
                 final EditText dialog_new_pwd = view4.findViewById(R.id.dialog_new_pwd);
                 pwd_alertView = new AlertView("修改密码", null,
@@ -270,8 +270,8 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                                 showToast("输入是空");
                             } else {
                                 if (oldpwd.equals(account.getPassword())) {
-                                    User user = new User(account.getId(), account.getphone(), account.getEmail(),
-                                            newpwd, account.getNickname(), account.getHeadportrait(), account.getSchool());
+                                    User user = new User(account.getId(), account.getPhone(), account.getEmail(),
+                                            newpwd, account.getNickname(), account.getHeadportrait(), account.getSchool(), account.getMoney());
                                     updateuser(user);
                                     savepersonalmessage(user);
                                 } else showToast("原密码输入错误");
@@ -287,7 +287,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                 /**
                  * view5 email更改对话框布局
                  */
-                View view5 = getLayoutInflater().inflate(R.layout.email_dialog, null);
+                @SuppressLint("InflateParams") View view5 = getLayoutInflater().inflate(R.layout.email_dialog, null);
                 final EditText email_update_security_code = view5.findViewById(R.id.email_update_security_code);
                 final Button btn_send_security_code = view5.findViewById(R.id.btn_send_security_code);
                 final EditText new_email = view5.findViewById(R.id.new_email);
@@ -298,9 +298,6 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                     public void onClick(View view) {
                         //按钮不可选中
                         SendPhoneYZM_BT(MyinfoActivity.this, btn_send_security_code);
-                        /**
-                         * new_email  输入的新验证码
-                         */
                         sendVerificationCode(new_email.getText().toString().trim());
                     }
                 });
@@ -313,8 +310,8 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
                         if (o == nickname_alertView && position != AlertView.CANCELPOSITION) {
                             String newemail = new_email.getText().toString().trim();
                             if (email_update_security_code.getText().toString().trim().equals(String.valueOf(verificationCode))) {
-                                User user = new User(account.getId(), account.getphone(), newemail,
-                                        account.getPassword(), account.getNickname(), account.getHeadportrait(), account.getSchool());
+                                User user = new User(account.getId(), account.getPhone(), newemail,
+                                        account.getPassword(), account.getNickname(), account.getHeadportrait(), account.getSchool(), account.getMoney());
                                 updateuser(user);
                                 savepersonalmessage(user);
                                 email.setText(newemail);
@@ -414,14 +411,14 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage("正在修改");
         dialog.show();
-        FormBody.Builder frombody = new FormBody.Builder();
-        frombody.add("id", user.getId());
-        frombody.add("phone", String.valueOf(user.getphone()));
-        frombody.add("email", user.getEmail());
-        frombody.add("password", user.getPassword());
-        frombody.add("nickname", user.getNickname());
-        frombody.add("headportrait", user.getHeadportrait());
-        frombody.add("school", user.getSchool());
+//        FormBody.Builder frombody = new FormBody.Builder();
+//        frombody.add("id", user.getId());
+//        frombody.add("phone", String.valueOf(user.getphone()));
+//        frombody.add("email", user.getEmail());
+//        frombody.add("password", user.getPassword());
+//        frombody.add("nickname", user.getNickname());
+//        frombody.add("headportrait", user.getHeadportrait());
+//        frombody.add("school", user.getSchool());
 
         UtilHttp utilHttp = UtilHttp.obtain();
         UtilHttp.ICallBack callback = new UtilHttp.ICallBack() {
@@ -442,7 +439,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
             }
         };
         try {
-            utilHttp.untilPostForm(frombody.build(), "user/updateuser", callback);
+            utilHttp.untilPostString("user/updateuser", JSON.toJSON(user).toString(), callback);
         } catch (Exception e) {
             runOnUiThread(new Runnable() {
                 @Override
@@ -470,7 +467,7 @@ public class MyinfoActivity extends BaseActivity implements View.OnClickListener
         MultipartBody multipartBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("id", account.getId())
-                .addFormDataPart("phone", account.getphone())
+                .addFormDataPart("phone", account.getPhone())
                 .addFormDataPart("email", account.getEmail())
                 .addFormDataPart("headportrait", account.getHeadportrait())
                 .addFormDataPart("nickname", account.getNickname())

@@ -24,9 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StartActivity extends BaseActivity {
-    private ImageView animation;
-    private AnimationDrawable animationDrawable;
-    private List<Address> addresses = new ArrayList<>();
+    private final List<Address> addresses = new ArrayList<>();
     private Result result = new Result();
 
     @Override
@@ -34,9 +32,9 @@ public class StartActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        animation = findViewById(R.id.animation);
+        ImageView animation = findViewById(R.id.animation);
         animation.setBackgroundResource(R.drawable.animation);
-        animationDrawable = (AnimationDrawable) animation.getBackground();
+        AnimationDrawable animationDrawable = (AnimationDrawable) animation.getBackground();
 
         animationDrawable.start();
         new Handler().postDelayed(new Runnable() {
@@ -52,7 +50,7 @@ public class StartActivity extends BaseActivity {
 
         AddressDBHelper dbHelper = new AddressDBHelper(StartActivity.this, "address.db", null, 1);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor cursor = db.query("address", new String[]{"id", "User_id", "address"}, null, null, null, null, null);
+        @SuppressLint("Recycle") Cursor cursor = db.query("address", new String[]{"id", "user_id", "address"}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             fetchaddress();
         } else {
@@ -82,14 +80,13 @@ public class StartActivity extends BaseActivity {
                             new TypeToken<List<Address>>() {
                             }.getType());
                     saveaddress(address);
-                    System.out.println("地址信息" + address.toString());
                 } else {
                     Toast.makeText(StartActivity.this, "错误，请重新输入", Toast.LENGTH_SHORT).show();
                 }
             }
         };
         try {
-            utilHttp.utilGet("address/listalladdress", callback);
+            utilHttp.utilGet("address/showAddressById?Id="+account.getId(), callback);
         } catch (Exception e) {
             Log.i(TAG, "getaddresses: " + e.toString());
         }
@@ -103,7 +100,7 @@ public class StartActivity extends BaseActivity {
 
         for (int i = 0; i < address.size(); i++) {
             values.put("id", address.get(i).getId());
-            values.put("User_id", address.get(i).getUser_id());
+            values.put("user_id", address.get(i).getUser_id());
             values.put("address", address.get(i).getAddress());
             db.insert("address", null, values);
         }
@@ -114,13 +111,12 @@ public class StartActivity extends BaseActivity {
         //依靠DatabaseHelper带全部参数的构造函数创建数据库
         AddressDBHelper dbHelper = new AddressDBHelper(StartActivity.this, "address.db", null, 1);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor cursor = db.query("address", new String[]{"id", "User_id", "address"}, null, null, null, null, null);
-        System.out.println("值" + cursor.moveToNext());
+        @SuppressLint("Recycle") Cursor cursor = db.query("address", new String[]{"id", "user_id", "address"}, null, null, null, null, null);
         while (cursor.moveToNext()) {
             @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex("id"));
-            @SuppressLint("Range") String User_id = cursor.getString(cursor.getColumnIndex("User_id"));
+            @SuppressLint("Range") String user_id = cursor.getString(cursor.getColumnIndex("user_id"));
             @SuppressLint("Range") String address = cursor.getString(cursor.getColumnIndex("address"));
-            addresses.add(new Address(id, User_id, address));
+            addresses.add(new Address(id, user_id, address));
         }
         db.close();
     }

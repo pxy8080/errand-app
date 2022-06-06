@@ -9,11 +9,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.List;
 
+
+//添加订单的图片Adapter
 public class ViewPager2Adapter extends FragmentStateAdapter {
     private List<Fragment> views;
+
     public ViewPager2Adapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> views) {
         super(fragmentManager, lifecycle);
-        this.views=views;
+        this.views = views;
     }
 
     @NonNull

@@ -28,6 +28,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
         <activity
+            android:name="com.errands.Activity.home.AcceptActivity"
+            android:exported="false" />
+        <activity
             android:name="com.errands.Activity.BillRecordActivity"
             android:exported="false" />
         <activity

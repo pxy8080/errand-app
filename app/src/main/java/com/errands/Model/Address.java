@@ -2,12 +2,12 @@ package com.errands.Model;
 
 public class Address {
     private String  id;
-    private String User_id;
+    private String user_id;
     private String address;
 
-    public Address(String id, String User_id, String address) {
+    public Address(String id, String user_id, String address) {
         this.id = id;
-        User_id = User_id;
+        this.user_id = user_id;
         this.address = address;
     }
 
@@ -23,11 +23,11 @@ public class Address {
     }
 
     public String getUser_id() {
-        return User_id;
+        return user_id;
     }
 
-    public void setUser_id(String User_id) {
-        User_id = User_id;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getAddress() {
@@ -36,14 +36,5 @@ public class Address {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    @Override
-    public String toString() {
-        return "Address{" +
-                "id='" + id + '\'' +
-                ", User_id='" + User_id + '\'' +
-                ", address='" + address + '\'' +
-                '}';
     }
 }

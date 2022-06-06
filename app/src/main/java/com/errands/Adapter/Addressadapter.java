@@ -74,7 +74,6 @@ public class Addressadapter extends RecyclerView.Adapter<Addressadapter.MyHolder
                 });
                 alertview.addExtView(updateview);
                 alertview.show();
-                Log.i("TAG", "onClick: 点击了修改" + position);
 
             }
         });
@@ -109,7 +108,7 @@ public class Addressadapter extends RecyclerView.Adapter<Addressadapter.MyHolder
     }
 
 
-    private void updateAddress(String id, String User_id, String newaddress) {
+    private void updateAddress(String id, String user_id, String newaddress) {
         ProgressDialog dialog = new ProgressDialog(mcontext);
         dialog.setMessage("正在修改");
         dialog.show();
@@ -129,11 +128,11 @@ public class Addressadapter extends RecyclerView.Adapter<Addressadapter.MyHolder
         db.update("address", contentValues, "id=?", new String[]{id});
         // 释放连接
         db.close();
-
+        System.out.println("user_id111:"+user_id);
         //请求服务器修改后台地址数据
         FormBody.Builder frombody = new FormBody.Builder();
         frombody.add("id", id);
-        frombody.add("User_id", User_id);
+        frombody.add("user_id", user_id);
         frombody.add("address", newaddress);
         UtilHttp utilHttp = new UtilHttp();
         UtilHttp.ICallBack iCallBack = new UtilHttp.ICallBack() {

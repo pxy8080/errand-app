@@ -1,5 +1,6 @@
 package com.errands.Model;
 
+
 /**
  * id 账号id
  * phone 用户电话
@@ -18,22 +19,12 @@ public class User {
     private String nickname;
     private String headportrait;
     private String school;
+    private double money;
 
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "  id='" + id + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email +'\''+
-                ", password='" + password +'\''+
-                ", nickname='" + nickname + '\'' +
-                ", headportrait='" + headportrait +'\''+
-                ", school='" + school + '\'' +
-                '}';
+    public User() {
     }
 
-    public User(String id, String phone, String email, String password, String nickname, String headportrait, String school) {
+    public User(String id, String phone, String email, String password, String nickname, String headportrait, String school, double money) {
         this.id = id;
         this.phone = phone;
         this.email = email;
@@ -41,9 +32,7 @@ public class User {
         this.nickname = nickname;
         this.headportrait = headportrait;
         this.school = school;
-    }
-
-    public User() {
+        this.money = money;
     }
 
     public String getId() {
@@ -54,11 +43,11 @@ public class User {
         this.id = id;
     }
 
-    public String getphone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setphone(String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -100,6 +89,14 @@ public class User {
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
     }
 }
 

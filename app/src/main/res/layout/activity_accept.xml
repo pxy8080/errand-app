@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.errands.Activity.home.AcceptActivity">
+
+    <include layout="@layout/title_bar" />
+
+    <ImageView
+        android:id="@+id/employee_logo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/title_bar"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/account_logo" />
+
+    <TextView
+        android:id="@+id/my_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/employee_logo"
+        android:layout_toEndOf="@+id/employee_logo"
+        android:maxLines="2"
+        android:text="@string/my_address" />
+
+    <TextView
+        android:id="@+id/task_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_address"
+        android:layout_alignStart="@+id/my_address"
+        android:maxLines="2"
+        android:text="@string/task_address" />
+
+    <ListView
+        android:id="@+id/goodslistview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/employee_logo" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toStartOf="@+id/accept"
+        android:text="@string/price" />
+
+    <Button
+        android:id="@+id/accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:text="@string/accept" />
+</RelativeLayout>

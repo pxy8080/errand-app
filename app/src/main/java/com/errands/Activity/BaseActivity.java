@@ -2,6 +2,7 @@ package com.errands.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -50,7 +51,7 @@ public class BaseActivity extends AppCompatActivity {
         String headportrait = sharedPreferences.getString("user_headportrait", "");
         String school = sharedPreferences.getString("user_school", "");
         account.setId(id);
-        account.setphone(phone);
+        account.setPhone(phone);
         account.setEmail(email);
         account.setPassword(password);
         account.setNickname(nickname);
@@ -97,11 +98,12 @@ public class BaseActivity extends AppCompatActivity {
 
 
     //存储个人账户信息，后面每个活动都可以获取
+    @SuppressLint("ApplySharedPref")
     public void savepersonalmessage(User account) {
         SharedPreferences pref = getSharedPreferences("userinfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("user_id", account.getId());
-        editor.putString("user_phone", account.getphone());
+        editor.putString("user_phone", account.getPhone());
         editor.putString("user_email", account.getEmail());
         editor.putString("user_password", account.getPassword());
         editor.putString("user_nickname", account.getNickname());

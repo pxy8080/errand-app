@@ -1,6 +1,7 @@
 package com.errands.Fragment;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,9 +25,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.errands.Activity.HomeActivity;
 import com.errands.Activity.LoginActivity;
+import com.errands.Activity.home.AcceptActivity;
 import com.errands.Activity.home.ServerActivity;
 import com.errands.Adapter.TaskAdapter;
 import com.errands.Https.UtilHttp;
@@ -54,9 +57,6 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     private ImageView add_menu;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private CarouselView cardView;
-    private String mParam1;
-    private String mParam2;
     private SearchView searchView;
     private RecyclerView home_recyclerview;
     private Result result = new Result();
@@ -79,52 +79,50 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
     }
 
+    @SuppressLint({"HandlerLeak", "InflateParams"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, null);
-        cardView = rootView.findViewById(R.id.banner);
+        CarouselView cardView = rootView.findViewById(R.id.banner);
         cardView.setPageCount(sampleImages.length);
         cardView.setImageListener(imageListener);
         initview();
         getOrderBase();
         handler = new Handler() {
+            @SuppressLint("HandlerLeak")
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
-                switch (msg.what) {
-                    case 1:
-                        Gson gson2 = new Gson();
+                if (msg.what == 1) {
+                    Gson gson2 = new Gson();
+                    if (result.getCode() == 100) {
+                        orderBases = gson2.fromJson(new Gson().toJson(result.getData()),
+                                new TypeToken<List<OrderBase>>() {
+                                }.getType());
 
-                        if (result.getCode() == 100) {
-                            orderBases = gson2.fromJson(new Gson().toJson(result.getData()),
-                                    new TypeToken<List<OrderBase>>() {
-                                    }.getType());
-                            Log.i(TAG, "handleMessage: 获取订单信息" + orderBases.size());
-
-                            TaskAdapter adapter = new TaskAdapter(orderBases, getActivity());
-
-                            home_recyclerview.setAdapter(adapter);
-                            adapter.setOnItemClikListener(new TaskAdapter.OnItemClikListener() {
-                                @Override
-                                public void onItem(int position) {
-                                    Log.i("TAG", "onItem: 点击了" + position);
-                                    Toast.makeText(getActivity(), "点击了" + position, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            break;
-                        }
+                        TaskAdapter adapter = new TaskAdapter(orderBases, getActivity());
+                        home_recyclerview.setAdapter(adapter);
+                        adapter.setOnItemClikListener(new TaskAdapter.OnItemClikListener() {
+                            @Override
+                            public void onItem(int position) {
+                                Intent intent = new Intent(getActivity(), AcceptActivity.class);
+                                intent.putExtra("orderbase", JSON.toJSON(orderBases.get(position)).toString());
+                                startActivity(intent);
+                            }
+                        });
+                    }
                 }
 
             }
         };
 
-
+//广告点击
         cardView.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
@@ -136,6 +134,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
+    //获取订单
     private void getOrderBase() {
         UtilHttp utilHttp = UtilHttp.obtain();
         UtilHttp.ICallBack callback = new UtilHttp.ICallBack() {
@@ -173,6 +172,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     }
 
 
+    //广告图片
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
@@ -185,10 +185,6 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            default:
-                break;
-        }
     }
 
 

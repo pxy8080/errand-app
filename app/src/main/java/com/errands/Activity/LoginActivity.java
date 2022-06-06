@@ -46,10 +46,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private TextInputEditText login_email, login_pwd, register_email, register_pwd, register_nickname, register_phone, register_code_input;
     private CheckBox remember_pwd;
     private Button login, register;
-    private TextView login_forget_pwd;
 
     private boolean issave = false;//是否记住密码
-    private String saveemail, savepwd;
     private Result result = new Result();
     private User account = new User();
 
@@ -87,7 +85,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         register_phone = findViewById(R.id.register_phone_input);
         remember_pwd = findViewById(R.id.remember_pwd);
         //忘记密码
-        login_forget_pwd = findViewById(R.id.login_forget_pwd);
+        TextView login_forget_pwd = findViewById(R.id.login_forget_pwd);
         login_forget_pwd.setOnClickListener(this);
         //选择学校
         school_choose = findViewById(R.id.school_choose);
@@ -205,14 +203,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     void initData() {
         //获取输入框上次存储的账号密码
         SharedPreferences sp = getSharedPreferences("message", MODE_PRIVATE);
-        saveemail = sp.getString("email", "");
-        savepwd = sp.getString("password", "");
+        String saveemail = sp.getString("email", "");
+        String savepwd = sp.getString("password", "");
         Boolean a = sp.getBoolean("remember_pwd", false);
         login_email.setText(saveemail);
         login_pwd.setText(savepwd);
         remember_pwd.setChecked(a);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -337,7 +336,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         SharedPreferences pref = getSharedPreferences("userinfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("user_id", account.getId());
-        editor.putString("user_phone", account.getphone());
+        editor.putString("user_phone", account.getPhone());
         editor.putString("user_email", account.getEmail());
         editor.putString("user_password", account.getPassword());
         editor.putString("user_nickname", account.getNickname());

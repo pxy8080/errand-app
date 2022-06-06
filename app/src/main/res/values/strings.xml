@@ -20,4 +20,9 @@
         韩昕峰：\n
     </string>
     <string name="app_version">乐知版本：1.0</string>
+    <string name="task_address">任务地址</string>
+    <string name="my_address">收货地址</string>
+    <string name="todo">TODO</string>
+    <string name="accept">接受</string>
+    <string name="price">价格</string>
 </resources>

@@ -1,11 +1,11 @@
 package com.errands.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,12 +21,17 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/*
+MsgAdapter消息界面的Adapter
+ */
+
 public class MsgAdapter extends ArrayAdapter<MyMessage> {
 
     public MsgAdapter(Context context, int textViewResourceId, List<MyMessage> objects) {
         super(context, textViewResourceId, objects);
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MyMessage msg = getItem(position);
@@ -58,7 +63,7 @@ public class MsgAdapter extends ArrayAdapter<MyMessage> {
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView leftMsg; //左边消息
         LinearLayout leftLayout; //左边布局
         TextView rightMsg; //右边消息

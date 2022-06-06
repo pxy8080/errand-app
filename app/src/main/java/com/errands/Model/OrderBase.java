@@ -2,8 +2,8 @@ package com.errands.Model;
 
 public class OrderBase {
     private String id;
-    private String User_id_send;
-    private String User_id_receive;
+    private String user_id_send;
+    private String user_id_receive;
     private String myAddress;
     private String taskAddress;
     private String type;
@@ -13,37 +13,10 @@ public class OrderBase {
     private String time;
     private String price;
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public OrderBase() {
-    }
-
     public OrderBase(String id, String user_id_send, String user_id_receive, String myAddress, String taskAddress, String type, String name, int state, String date, String time, String price) {
         this.id = id;
-        User_id_send = user_id_send;
-        User_id_receive = user_id_receive;
+        this.user_id_send = user_id_send;
+        this.user_id_receive = user_id_receive;
         this.myAddress = myAddress;
         this.taskAddress = taskAddress;
         this.type = type;
@@ -54,21 +27,7 @@ public class OrderBase {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "OrderBase{" +
-                "id='" + id + '\'' +
-                ", User_id_send='" + User_id_send + '\'' +
-                ", User_id_receive='" + User_id_receive + '\'' +
-                ", myAddress='" + myAddress + '\'' +
-                ", taskAddress='" + taskAddress + '\'' +
-                ", type='" + type + '\'' +
-                ", name='" + name + '\'' +
-                ", state=" + state +
-                ", date='" + date + '\'' +
-                ", time='" + time + '\'' +
-                ", price='" + price + '\'' +
-                '}';
+    public OrderBase() {
     }
 
     public String getId() {
@@ -80,19 +39,19 @@ public class OrderBase {
     }
 
     public String getUser_id_send() {
-        return User_id_send;
+        return user_id_send;
     }
 
     public void setUser_id_send(String user_id_send) {
-        User_id_send = user_id_send;
+        this.user_id_send = user_id_send;
     }
 
     public String getUser_id_receive() {
-        return User_id_receive;
+        return user_id_receive;
     }
 
     public void setUser_id_receive(String user_id_receive) {
-        User_id_receive = user_id_receive;
+        this.user_id_receive = user_id_receive;
     }
 
     public String getMyAddress() {
@@ -133,5 +92,29 @@ public class OrderBase {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

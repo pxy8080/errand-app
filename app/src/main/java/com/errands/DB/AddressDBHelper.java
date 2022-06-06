@@ -14,7 +14,7 @@ public class AddressDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         //创建数据库sql语句
-        String sql = "create table address(id varchar(32),User_id varchar(32),address varchar(128))";
+        String sql = "create table address(id varchar(32),user_id varchar(32),address varchar(128))";
         //执行sql语句
         sqLiteDatabase.execSQL(sql);
     }
