@@ -25,4 +25,8 @@
     <string name="todo">TODO</string>
     <string name="accept">接受</string>
     <string name="price">价格</string>
+    <string name="heading_code">在这里识别码:</string>
+    <string name="goodsname">商品名:</string>
+    <string name="amount">数量:</string>
+    <string name="input_descrition">在这里输入描述:</string>
 </resources>

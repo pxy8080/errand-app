@@ -1,18 +1,14 @@
 package com.errands.Activity.home;
 
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -52,9 +48,8 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
     private final List<String> addresses = new ArrayList<>();
     private final List<String> item = new ArrayList<>();
     private ImageView task_type;
-    private TextView task_address;
     private RecyclerView recyclerview;
-    private int ORDER_TYPE;
+    private String ORDER_TYPE = null;
     private final List<Order> orders = new ArrayList<>();
     private Orderdetail_buy_Adapter orderdetail_buy_adapter;
     private Orderdetail_send_Adapter orderdetail_send_adapter;
@@ -92,7 +87,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
         ImageView location = findViewById(R.id.location);
         location.setOnClickListener(this);
         recyclerview = findViewById(R.id.goods_recyclerview);
-        task_address = findViewById(R.id.task_address);
+        TextView task_address = findViewById(R.id.task_address);
 
         ImageView add_goods = findViewById(R.id.add_goods);
         add_goods.setOnClickListener(this);
@@ -131,7 +126,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
         item.add("代购");
         item.add("代送");
         item.add("代取");
-//任务类型的选择事件
+        //任务类型的选择事件
         typeForSpinner = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, item);
         type_select.setAdapter(typeForSpinner);
         type_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -141,7 +136,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                     case 0:
                         orders.clear();//重新选择类型，所有的order被清空
                         task_type.setImageResource(R.drawable.icon1);//选中类型，图标变化
-                        ORDER_TYPE = 0;
+                        ORDER_TYPE = "代购";
                         orderdetail_buy_adapter = new Orderdetail_buy_Adapter(orders, ServerActivity.this);
                         LinearLayoutManager manager1 = new LinearLayoutManager(ServerActivity.this);
                         //图片的点击事件
@@ -159,7 +154,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                     case 1:
                         orders.clear();//重新选择类型，所有的order被清空
                         task_type.setImageResource(R.drawable.icon3);
-                        ORDER_TYPE = 1;
+                        ORDER_TYPE = "代送";
                         orderdetail_send_adapter = new Orderdetail_send_Adapter(orders, ServerActivity.this);
                         LinearLayoutManager manager2 = new LinearLayoutManager(ServerActivity.this);
                         recyclerview.setLayoutManager(manager2);
@@ -168,7 +163,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                     case 2:
                         orders.clear();//重新选择类型，所有的order被清空
                         task_type.setImageResource(R.drawable.icon2);
-                        ORDER_TYPE = 2;
+                        ORDER_TYPE = "代取";
                         orderdetail_take_adapter = new Orderdetail_take_Adapter(orders, ServerActivity.this);
                         LinearLayoutManager manager3 = new LinearLayoutManager(ServerActivity.this);
                         recyclerview.setLayoutManager(manager3);
@@ -214,19 +209,12 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.add_goods:
                 switch (ORDER_TYPE) {
-                    case 0:
+                    case "代购":
                         @SuppressLint("InflateParams") View buyview = getLayoutInflater().inflate(R.layout.buy_alterview, null);
                         final EditText add_description = buyview.findViewById(R.id.add_description);
                         final EditText add_amount = buyview.findViewById(R.id.add_amount);
                         final EditText add_estimation = buyview.findViewById(R.id.add_estimation);
                         final EditText add_name = buyview.findViewById(R.id.add_name);
-                        //判断输入是都为空
-                        //                                if (o == buy_alterview && position != AlertView.CANCELPOSITION) {
-                        //                                    if (description.isEmpty() && amount.isEmpty() && estimation.isEmpty() && name.isEmpty()) {
-                        //                                        showToast("输入是空");
-                        //                                    } else {
-                        //                                    }
-                        //                                }
                         AlertView buy_alterview = new AlertView("添加物品", null,
                                 "取消", null, new String[]{"完成"},
                                 this, AlertView.Style.Alert, new OnItemClickListener() {
@@ -250,7 +238,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                         buy_alterview.addExtView(buyview);
                         buy_alterview.show();
                         break;
-                    case 1:
+                    case "代送":
                         @SuppressLint("InflateParams") View sendview = getLayoutInflater().inflate(R.layout.send_alterview, null);
                         final EditText add_description2 = sendview.findViewById(R.id.add_description);
                         AlertView send_alterview = new AlertView("添加物品", null,
@@ -266,7 +254,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                         send_alterview.addExtView(sendview);
                         send_alterview.show();
                         break;
-                    case 2:
+                    case "代取":
                         @SuppressLint("InflateParams") View takeview = getLayoutInflater().inflate(R.layout.take_alterview, null);
                         final EditText add_description3 = takeview.findViewById(R.id.add_description);
                         final EditText add_evidence = takeview.findViewById(R.id.add_evidence);
@@ -289,19 +277,18 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.issue:
                 String User_id_send = account.getId();
-                System.out.println("myAddress:" + myAddress);
                 String task_address = "111";
                 String name = remark_input.getText().toString();
                 String price = price_input.getText().toString();
-                OrderBase orderBase = new OrderBase(null, User_id_send, null, myAddress, task_address, String.valueOf(ORDER_TYPE), name, 0, null, null, price);
+                OrderBase orderBase = new OrderBase(null, User_id_send, null, myAddress, task_address, ORDER_TYPE, name, 0, null, null, price);
                 switch (ORDER_TYPE) {
-                    case 0:
+                    case "代购":
                         order_post(orderBase, orders, "buyorder");
                         break;
-                    case 1:
+                    case "代送":
                         order_post(orderBase, orders, "sendorder");
                         break;
-                    case 2:
+                    case "代取":
                         order_post(orderBase, orders, "takeorder");
                         break;
                     default:

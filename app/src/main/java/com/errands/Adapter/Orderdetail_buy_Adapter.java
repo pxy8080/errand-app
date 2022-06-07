@@ -84,13 +84,17 @@ public class Orderdetail_buy_Adapter extends RecyclerView.Adapter<Orderdetail_bu
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        ImageView add_taskpic, delete_goods;
-        private TextView add_description, add_goodsname, add_goodsamount, add_goodsestimation, add_goodsevidence;
+        private final ImageView delete_goods;
+        private final TextView add_description;
+        private final TextView add_goodsname;
+        private final TextView add_goodsamount;
+        private final TextView add_goodsestimation;
+        private final TextView add_goodsevidence;
         private int mPosition;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-            add_taskpic = itemView.findViewById(R.id.add_taskpic);
+            ImageView add_taskpic = itemView.findViewById(R.id.add_taskpic);
             delete_goods = itemView.findViewById(R.id.delete_goods);
             add_description = itemView.findViewById(R.id.add_description);
             add_goodsname = itemView.findViewById(R.id.add_goodsname);
@@ -107,6 +111,10 @@ public class Orderdetail_buy_Adapter extends RecyclerView.Adapter<Orderdetail_bu
                     }
                 }
             });
+        }
+
+        public void setmPosition(int mPosition) {
+            this.mPosition = mPosition;
         }
     }
 
