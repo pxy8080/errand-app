@@ -44,7 +44,9 @@ public class TaskAdapter extends RecyclerView.Adapter<VH> {
         holder.task_price.setText(String.valueOf(orderBase.get(position).getTaskAddress()));
         holder.task_time.setText(orderBase.get(position).getDate() + "\n" + orderBase.get(position).getTime());
         String testpath = "https://img0.baidu.com/it/u=3798217922,3880088897&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500";
-        GlideUtil.loadImageViewLodingSize(context, testpath, 60, 60, holder.task_user_portrait, R.drawable.goods, R.drawable.goods);
+
+        GlideUtil.loadImageView(context, testpath, holder.task_user_portrait);
+
         switch (orderBase.get(position).getType()) {
             case "代购":
                 holder.task_type.setImageResource(R.drawable.icon1);
