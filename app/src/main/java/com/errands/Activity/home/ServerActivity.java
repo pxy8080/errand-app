@@ -57,6 +57,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
     private Orderdetail_take_Adapter orderdetail_take_adapter;
     private String myAddress;
     private EditText remark_input, price_input;
+    private AlertView buy_alterview, send_alterview, take_alertView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,7 +217,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                         final EditText add_amount = buyview.findViewById(R.id.add_amount);
                         final EditText add_estimation = buyview.findViewById(R.id.add_estimation);
                         final EditText add_name = buyview.findViewById(R.id.add_name);
-                        AlertView buy_alterview = new AlertView("添加物品", null,
+                        buy_alterview = new AlertView("添加物品", null,
                                 "取消", null, new String[]{"完成"},
                                 this, AlertView.Style.Alert, new OnItemClickListener() {
                             @Override
@@ -226,14 +227,14 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                                 String estimation = add_estimation.getText().toString().trim();
                                 String name = add_name.getText().toString().trim();
                                 //判断输入是都为空
-//                                if (o == buy_alterview && position != AlertView.CANCELPOSITION) {
-//                                    if (description.isEmpty() && amount.isEmpty() && estimation.isEmpty() && name.isEmpty()) {
-//                                        showToast("输入是空");
-//                                    } else {
-                                orders.add(new Order(null, name, description, null, Integer.parseInt(amount), Double.parseDouble(estimation), null));
-                                orderdetail_buy_adapter.notifyItemInserted(orders.size());
-//                                    }
-//                                }
+                                if (o == buy_alterview && position != AlertView.CANCELPOSITION) {
+                                    if (description.isEmpty() || amount.isEmpty() || estimation.isEmpty() || name.isEmpty()) {
+                                        showToast("输入是空");
+                                    } else {
+                                        orders.add(new Order(null, name, description, null, Integer.parseInt(amount), Double.parseDouble(estimation), null));
+                                        orderdetail_buy_adapter.notifyItemInserted(orders.size());
+                                    }
+                                }
                             }
                         });
                         buy_alterview.addExtView(buyview);
@@ -242,14 +243,21 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                     case "代送":
                         @SuppressLint("InflateParams") View sendview = getLayoutInflater().inflate(R.layout.send_alterview, null);
                         final EditText add_description2 = sendview.findViewById(R.id.add_description);
-                        AlertView send_alterview = new AlertView("添加物品", null,
+                        send_alterview = new AlertView("添加物品", null,
                                 "取消", null, new String[]{"完成"},
                                 this, AlertView.Style.Alert, new OnItemClickListener() {
                             @Override
                             public void onItemClick(Object o, int position) {
                                 String description2 = add_description2.getText().toString().trim();
-                                orders.add(new Order(null, null, description2, null, 0, 0, null));
-                                orderdetail_send_adapter.notifyItemInserted(orders.size());
+                                //判断输入是都为空
+                                if (o == buy_alterview && position != AlertView.CANCELPOSITION) {
+                                    if (description2.isEmpty()) {
+                                        showToast("输入是空");
+                                    } else {
+                                        orders.add(new Order(null, null, description2, null, 0, 0, null));
+                                        orderdetail_send_adapter.notifyItemInserted(orders.size());
+                                    }
+                                }
                             }
                         });
                         send_alterview.addExtView(sendview);
@@ -260,15 +268,22 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                         final EditText add_description3 = takeview.findViewById(R.id.add_description);
                         final EditText add_evidence = takeview.findViewById(R.id.add_evidence);
 
-                        AlertView take_alertView = new AlertView("添加物品", null,
+                        take_alertView = new AlertView("添加物品", null,
                                 "取消", null, new String[]{"完成"},
                                 this, AlertView.Style.Alert, new OnItemClickListener() {
                             @Override
                             public void onItemClick(Object o, int position) {
                                 String description3 = add_description3.getText().toString().trim();
                                 String evidence = add_evidence.getText().toString().trim();
-                                orders.add(new Order(null, null, description3, evidence, 0, 0, null));
-                                orderdetail_take_adapter.notifyItemInserted(orders.size());
+                                //判断输入是都为空
+                                if (o == buy_alterview && position != AlertView.CANCELPOSITION) {
+                                    if (description3.isEmpty() || evidence.isEmpty()) {
+                                        showToast("输入是空");
+                                    } else {
+                                        orders.add(new Order(null, null, description3, evidence, 0, 0, null));
+                                        orderdetail_take_adapter.notifyItemInserted(orders.size());
+                                    }
+                                }
                             }
                         });
                         take_alertView.addExtView(takeview);

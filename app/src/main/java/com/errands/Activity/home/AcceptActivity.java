@@ -142,13 +142,13 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
                 onBackPressed();
                 break;
             case R.id.accept:
-//                if (Objects.equals(account.getId(), orderBase.getUser_id_send())) {
-//                    showToast("自己发的单还想接？");
-//                } else {
+                if (Objects.equals(account.getId(), orderBase.getUser_id_send())) {
+                    showToast("自己发的单还想接？");
+                } else {
                     orderBase.setState(1);
                     orderBase.setUser_id_receive(account.getId());
                     acceptorder(orderBase);
-//                }
+                }
                 break;
             default:
                 break;
