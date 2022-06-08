@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * AcceptActivity 接受订单详情Activity
@@ -33,6 +34,7 @@ import java.util.List;
 public class AcceptActivity extends BaseActivity implements View.OnClickListener {
     private Handler handler;
     GoodsAdapter goodsAdapter;
+    OrderBase orderBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
         //获取传过来的orderbase信息并解析
         String value = getIntent().getStringExtra("orderbase");
         Gson gson = new Gson();
-        OrderBase orderBase = gson.fromJson(value, OrderBase.class);
+        orderBase = gson.fromJson(value, OrderBase.class);
         initView(orderBase);
     }
 
@@ -140,11 +142,37 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
                 onBackPressed();
                 break;
             case R.id.accept:
-
+//                if (Objects.equals(account.getId(), orderBase.getUser_id_send())) {
+//                    showToast("自己发的单还想接？");
+//                } else {
+                    orderBase.setState(1);
+                    orderBase.setUser_id_receive(account.getId());
+                    acceptorder(orderBase);
+//                }
                 break;
             default:
                 break;
         }
-
     }
+
+    private void acceptorder(OrderBase orderBase) {
+        UtilHttp utilHttp = UtilHttp.obtain();
+        UtilHttp.ICallBack callback = new UtilHttp.ICallBack() {
+            @Override
+            public void onFailure(String throwable) {
+
+            }
+            @Override
+            public void onSuccess(String response) {
+
+            }
+        };
+        try {
+            utilHttp.untilPostJson("order/updateOrder", JSON.toJSON(orderBase).toString(), callback);
+        } catch (Exception e) {
+            showToast("修改基础订单发生错误");
+        }
+    }
+
+
 }

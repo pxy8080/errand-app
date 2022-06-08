@@ -38,21 +38,21 @@ public class TaskAdapter extends RecyclerView.Adapter<VH> {
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull VH holder, @SuppressLint("RecyclerView") int position) {
-        holder.task_state.setText("" + orderBase.get(position).getState());
+        holder.task_state.setText("" + orderBase.get(position).getName());
         holder.destination.setText("To:" + orderBase.get(position).getTaskAddress());
-        holder.employer.setText(orderBase.get(position).getName());
+        holder.employer.setText(orderBase.get(position).getUser_id_send());
         holder.task_price.setText(String.valueOf(orderBase.get(position).getTaskAddress()));
-        holder.task_time.setText(orderBase.get(position).getDate() + " " + orderBase.get(position).getTime());
-        String testpath = "http://81.71.163.138:8080/examples/test/99dacd765ba14d11b4b0a4d153a9ce3d-1652357283272.jpg";
+        holder.task_time.setText(orderBase.get(position).getDate() + "\n" + orderBase.get(position).getTime());
+        String testpath = "https://img0.baidu.com/it/u=3798217922,3880088897&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500";
         GlideUtil.loadImageViewLodingSize(context, testpath, 60, 60, holder.task_user_portrait, R.drawable.goods, R.drawable.goods);
         switch (orderBase.get(position).getType()) {
-            case "1":
+            case "代购":
                 holder.task_type.setImageResource(R.drawable.icon1);
                 break;
-            case "2":
+            case "代取":
                 holder.task_type.setImageResource(R.drawable.icon2);
                 break;
-            case "3":
+            case "代送":
                 holder.task_type.setImageResource(R.drawable.icon3);
                 break;
             default:

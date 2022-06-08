@@ -22,7 +22,7 @@
             android:id="@+id/task_user_portrait"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/order" />
@@ -31,9 +31,9 @@
             android:id="@+id/task_type"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/task_user_portrait"
+            android:layout_toEndOf="@+id/task_user_portrait"
             android:src="@drawable/icon1" />
 
 
@@ -42,38 +42,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/task_type"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/task_user_portrait"
-            android:text="这里是任务简介" />
+            android:layout_marginStart="10dp"
+            android:textSize="10sp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/task_user_portrait"
+            android:text="@string/task_description"
+            app:ignore="SmallSp" />
 
         <TextView
             android:id="@+id/employer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/task_user_portrait"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:text="发单人:111" />
 
         <TextView
             android:id="@+id/task_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/employer"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:textSize="12sp"
-            android:text="时间" />
+            android:layout_alignTop="@+id/task_user_portrait"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:maxLines="2"
+            android:text="@string/time"
+            android:textSize="10sp"
+            app:ignore="SmallSp" />
 
         <TextView
             android:id="@+id/destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/employer"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="to：桂林电子科技大学花江校区10栋围栏" />
+            android:text="@string/example_address" />
 
         <!--        <TextView-->
         <!--            android:id="@+id/Task_location"-->
@@ -91,7 +95,7 @@
             android:layout_width="27dp"
             android:layout_height="27dp"
             android:layout_below="@id/destination"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/price" />
 
@@ -100,24 +104,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/price_icon"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
             android:layout_marginBottom="5dp"
-            android:layout_toRightOf="@+id/price_icon"
+            android:layout_toEndOf="@+id/price_icon"
             android:gravity="center_vertical"
             android:text="16.00"
             android:textColor="@color/qmui_config_color_red"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <com.qmuiteam.qmui.layout.QMUIButton
             android:id="@+id/task_btn_accept"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_below="@+id/destination"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:backgroundTint="@color/service_bg3"
-            android:text="接受"
+            android:text="@string/accrpt"
             android:textColor="@color/white" />
     </RelativeLayout>
 

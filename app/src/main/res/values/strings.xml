@@ -29,4 +29,8 @@
     <string name="goodsname">商品名:</string>
     <string name="amount">数量:</string>
     <string name="input_descrition">在这里输入描述:</string>
+    <string name="time">时间</string>
+    <string name="example_address">to：桂林电子科技大学花江校区10栋围栏</string>
+    <string name="task_description">这里是任务简介</string>
+    <string name="accrpt">接受</string>
 </resources>

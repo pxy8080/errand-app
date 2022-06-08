@@ -26,6 +26,7 @@ import com.alibaba.fastjson.JSON;
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
 import com.errands.Activity.BaseActivity;
+import com.errands.Activity.HomeActivity;
 import com.errands.Adapter.Orderdetail_buy_Adapter;
 import com.errands.Adapter.Orderdetail_send_Adapter;
 import com.errands.Adapter.Orderdetail_take_Adapter;
@@ -126,7 +127,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
         item.add("代购");
         item.add("代送");
         item.add("代取");
-        //任务类型的选择事件
+//任务类型的选择事件
         typeForSpinner = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, item);
         type_select.setAdapter(typeForSpinner);
         type_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -294,6 +295,9 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                     default:
                         break;
                 }
+                Intent to_home = new Intent(this, HomeActivity.class);
+                showToast("发布订单成功");
+                startActivity(to_home);
                 break;
             default:
                 break;
