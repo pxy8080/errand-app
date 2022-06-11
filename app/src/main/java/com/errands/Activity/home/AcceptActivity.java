@@ -101,7 +101,6 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
                     }
                 }
             }
-
         };
 
     }
@@ -164,7 +163,7 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
             }
             @Override
             public void onSuccess(String response) {
-
+                Log.i(TAG, "接单onSuccess: "+response);
             }
         };
         try {

@@ -33,13 +33,9 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-
         getpersonalmessage();
 
-
-
     }
-
 
     void getpersonalmessage() {
         SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);

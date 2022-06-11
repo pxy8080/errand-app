@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.errands.Activity.mine.Order_managerment_Activity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/title_bar" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/order_managerment_tab"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/black"
+        app:tabMode="fixed"
+        app:tabIndicatorFullWidth="false"
+        android:layout_below="@+id/title_bar" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/order_managerment_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/order_managerment_tab" />
+</RelativeLayout>

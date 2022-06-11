@@ -9,15 +9,21 @@
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_chat2.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_feedback.xml" value="0.26145833333333335" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_myinfo.xml" value="0.36614583333333334" />
+        <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_order_managerment.xml" value="0.3605128205128205" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_server.xml" value="0.33" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activitychat.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/buy_alterview.xml" value="0.3651041666666667" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/fragment_home.xml" value="0.3605128205128205" />
+        <entry key="..\:/Android/sophix/app/src/main/res/layout/fragment_issue_.xml" value="0.16822916666666668" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/fragment_message.xml" value="0.253125" />
+        <entry key="..\:/Android/sophix/app/src/main/res/layout/fragment_receive_.xml" value="0.29375" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/goods.xml" value="0.3651041666666667" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/layout_add_address.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/layout_address.xml" value="0.3651041666666667" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/msg_item.xml" value="0.3651041666666667" />
+        <entry key="..\:/Android/sophix/app/src/main/res/layout/navigation.xml" value="0.36614583333333334" />
+        <entry key="..\:/Android/sophix/app/src/main/res/layout/order_management.xml" value="0.2765625" />
+        <entry key="..\:/Android/sophix/app/src/main/res/layout/order_simple.xml" value="0.2755208333333333" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/send_alterview.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/singe_chat.xml" value="0.2520833333333333" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/singe_task.xml" value="0.3605128205128205" />
