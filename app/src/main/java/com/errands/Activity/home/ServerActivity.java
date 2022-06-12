@@ -250,7 +250,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                             public void onItemClick(Object o, int position) {
                                 String description2 = add_description2.getText().toString().trim();
                                 //判断输入是都为空
-                                if (o == buy_alterview && position != AlertView.CANCELPOSITION) {
+                                if (o == send_alterview && position != AlertView.CANCELPOSITION) {
                                     if (description2.isEmpty()) {
                                         showToast("输入是空");
                                     } else {
@@ -276,7 +276,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                                 String description3 = add_description3.getText().toString().trim();
                                 String evidence = add_evidence.getText().toString().trim();
                                 //判断输入是都为空
-                                if (o == buy_alterview && position != AlertView.CANCELPOSITION) {
+                                if (o == take_alertView && position != AlertView.CANCELPOSITION) {
                                     if (description3.isEmpty() || evidence.isEmpty()) {
                                         showToast("输入是空");
                                     } else {
