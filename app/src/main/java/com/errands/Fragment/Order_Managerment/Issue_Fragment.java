@@ -20,6 +20,7 @@ import java.util.List;
 public class Issue_Fragment extends Fragment {
     List<OrderBase> issue_orders;
     Context context;
+    //发布的，sign为1
     public Issue_Fragment(List<OrderBase> issue_orders, Context context) {
         this.issue_orders=issue_orders;
         this.context=context;
@@ -37,8 +38,7 @@ public class Issue_Fragment extends Fragment {
         //拿到根view
         View rootview = inflater.inflate(R.layout.fragment_issue_, container, false);
         RecyclerView frg_issue_rv = rootview.findViewById(R.id.frg_issue_rv);
-        System.out.println("issue_orders  "+issue_orders.toString());
-        Order_management_adapter adapter=new Order_management_adapter(issue_orders,context,1);
+        Order_management_adapter adapter=new Order_management_adapter(issue_orders,context,0);
         LinearLayoutManager manager = new LinearLayoutManager(context);
         frg_issue_rv.setLayoutManager(manager);
         frg_issue_rv.setAdapter(adapter);

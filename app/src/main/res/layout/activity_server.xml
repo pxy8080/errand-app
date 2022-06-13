@@ -154,16 +154,17 @@
                     android:layout_marginTop="10dp"
                     android:text="任务地址:" />
 
-                <TextView
+                <EditText
                     android:id="@+id/task_address"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/remark_label2"
+                    android:background="@color/white"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="15dp"
-                    android:text="桂林电子科技大学10栋41211" />
+                    android:hint="输入地址:" />
 
                 <ImageView
                     android:id="@+id/location"

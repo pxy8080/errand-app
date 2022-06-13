@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_accept.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_address.xml" value="0.3605128205128205" />
+        <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_bill_record.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_chat.xml" value="0.3619791666666667" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_chat2.xml" value="0.36614583333333334" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_feedback.xml" value="0.26145833333333335" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_order_managerment.xml" value="0.3605128205128205" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_server.xml" value="0.33" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/activitychat.xml" value="0.36614583333333334" />
+        <entry key="..\:/Android/sophix/app/src/main/res/layout/bill_record.xml" value="0.30833333333333335" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/buy_alterview.xml" value="0.3651041666666667" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/fragment_home.xml" value="0.3605128205128205" />
         <entry key="..\:/Android/sophix/app/src/main/res/layout/fragment_issue_.xml" value="0.16822916666666668" />

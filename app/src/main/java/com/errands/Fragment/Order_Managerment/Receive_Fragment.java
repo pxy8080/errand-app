@@ -41,7 +41,7 @@ public class Receive_Fragment extends Fragment {
         RecyclerView frg_receive_rv=rootview.findViewById(R.id.frg_receive_rv);
         System.out.println("拿到的receive  "+receive_orders.toString());
 
-        Order_management_adapter adapter=new Order_management_adapter(receive_orders,context,0);
+        Order_management_adapter adapter=new Order_management_adapter(receive_orders,context,1);
         LinearLayoutManager manager = new LinearLayoutManager(context);
         frg_receive_rv.setLayoutManager(manager);
         frg_receive_rv.setAdapter(adapter);

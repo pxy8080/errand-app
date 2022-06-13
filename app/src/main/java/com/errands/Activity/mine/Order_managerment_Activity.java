@@ -2,47 +2,41 @@ package com.errands.Activity.mine;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.errands.Activity.BaseActivity;
-import com.errands.Activity.HomeActivity;
-import com.errands.Activity.LoginActivity;
 import com.errands.Fragment.Order_Managerment.Issue_Fragment;
 import com.errands.Fragment.Order_Managerment.Receive_Fragment;
 import com.errands.Https.UtilHttp;
-import com.errands.Model.Order;
+
 import com.errands.Model.OrderBase;
 import com.errands.Model.Result;
-import com.errands.Model.User;
+
 import com.errands.Sophix.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order_managerment_Activity extends BaseActivity implements View.OnClickListener {
-    private String[] mTitles = new String[]{"我接受的", "我发布的"};
+    private final String[] mTitles = new String[]{"我发布的", "我接受的"};
     private Handler handler;
-    private List<OrderBase> issue_orders = new ArrayList<>();
-    private List<OrderBase> receive_orders = new ArrayList<>();
+    private final List<OrderBase> issue_orders = new ArrayList<>();
+    private final List<OrderBase> receive_orders = new ArrayList<>();
     //设置Fragment类型集合
     private final ArrayList<Fragment> fragments = new ArrayList<Fragment>();
 
@@ -130,7 +124,6 @@ public class Order_managerment_Activity extends BaseActivity implements View.OnC
                 Gson gson = new Gson();
                 Result result = gson.fromJson(response, new TypeToken<Result>() {
                 }.getType());
-                System.out.println("获取到个人订单" + result.getData());
                 Message msg = new Message();
                 msg.what = 1;
                 msg.obj = result.getData();

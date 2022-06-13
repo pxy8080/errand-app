@@ -58,6 +58,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
     private String myAddress;
     private EditText remark_input, price_input;
     private AlertView buy_alterview, send_alterview, take_alertView;
+    private EditText task_address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,7 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
         ImageView location = findViewById(R.id.location);
         location.setOnClickListener(this);
         recyclerview = findViewById(R.id.goods_recyclerview);
-        TextView task_address = findViewById(R.id.task_address);
+        task_address = findViewById(R.id.task_address);
 
         ImageView add_goods = findViewById(R.id.add_goods);
         add_goods.setOnClickListener(this);
@@ -293,10 +294,10 @@ public class ServerActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.issue:
                 String User_id_send = account.getId();
-                String task_address = "111";
+                String taskaddress = task_address.getText().toString().trim();
                 String name = remark_input.getText().toString();
                 String price = price_input.getText().toString();
-                OrderBase orderBase = new OrderBase(null, User_id_send, null, myAddress, task_address, ORDER_TYPE, name, 0, null, null, price);
+                OrderBase orderBase = new OrderBase(null, User_id_send, null, myAddress, taskaddress, ORDER_TYPE, name, 0, null, null, price);
                 switch (ORDER_TYPE) {
                     case "代购":
                         order_post(orderBase, orders, "buyorder");

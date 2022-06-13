@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:pp="http://schemas.android.com/tools"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="#B3E6E8E7"
+    pp:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/bill_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" />
+
+        <TextView
+            android:id="@+id/bill_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bill_employee"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"/>
+
+        <TextView
+            android:id="@+id/bill_employee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bill_id"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:id="@+id/bill_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bill_employee"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:id="@+id/bill_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bill_time"
+            android:layout_alignParentEnd="true"
+            android:textSize="20sp"
+            android:layout_marginEnd="20dp"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
