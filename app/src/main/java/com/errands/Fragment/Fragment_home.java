@@ -138,7 +138,6 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
                 Gson gson1 = new Gson();
                 result = gson1.fromJson(response, new TypeToken<Result>() {
                 }.getType());
-//                System.out.println("获取result" + result.getData().toString());
                 Message message = new Message();
                 message.obj = new Gson().toJson(result.getData());
                 message.what = 1;   //标志消息的标志

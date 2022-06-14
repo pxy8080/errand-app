@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.errands.Https.UtilHttp;
 import com.errands.Model.Result;
 import com.errands.Model.User;
@@ -273,13 +274,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     String s5 = register_pwd.getText().toString().trim();
                     String s6 = register_nickname.getText().toString().trim();
                     String s7 = school_choose.getSelectedItem().toString();
-                    FormBody.Builder frombody = new FormBody.Builder();
-                    frombody.add("phone", s4);
-                    frombody.add("email", s3);
-                    frombody.add("password", s5);
-                    frombody.add("nickname", s6);
-                    frombody.add("headportrait", "www.oss.com");
-                    frombody.add("school", s7);
+                    User user=new User(null,s4,s3,s5,s6,"http://81.71.163.138:8080/examples/test/initlogo.jpg",s7,0);
                     UtilHttp utilHttp2 = UtilHttp.obtain();
                     UtilHttp.ICallBack callback2 = new UtilHttp.ICallBack() {
                         @Override
@@ -293,14 +288,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             Gson gson3 = new Gson();
                             result = gson3.fromJson(response, new TypeToken<Result>() {
                             }.getType());
-//                        Log.i("TAG", "onSuccess: " + result.getMessage(), null);
                             dialog.dismiss();
                             showToast(result.getMessage() + ",请返回登录界面登录");
                         }
 
                     };
                     try {
-                        utilHttp2.untilPostForm(frombody.build(), "user/adduser", callback2);
+                        utilHttp2.untilPostJson("user/adduser",JSON.toJSON(user).toString(),  callback2);
                     } catch (Exception e) {
                         runOnUiThread(new Runnable() {
                             @Override

@@ -62,8 +62,6 @@ public class ChatActivity2 extends BaseActivity implements View.OnClickListener 
             public void handleMessage(@NonNull Message msg) {
                 switch (msg.what) {
                     case PublicData.Send_MSG_Code:
-//                        MyTrafficStyle msg1 = new Msg("Hello guy.", Msg.TYPE_RECEIVED);
-//                        msgList.add(msg1);
                         break;
                 }
             }
@@ -114,7 +112,6 @@ public class ChatActivity2 extends BaseActivity implements View.OnClickListener 
 
     private void initMsgs() {
         oppositeuser_id = "4c191912c23811ec9bf500163e0ce512";
-
         msgList = messagehandle.getmessage(oppositeuser_id, this);
     }
 

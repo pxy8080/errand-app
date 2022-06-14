@@ -13,7 +13,6 @@ import javax.mail.internet.MimeMessage;
 
 public class SendEmailUtil {
 
-
     // 邮件发送协议
     private String PROTOCOL = "smtp";
     // SMTP邮件服务器
@@ -69,7 +68,7 @@ public class SendEmailUtil {
         // 获得Transport实例对象
         Transport transport = session.getTransport();
         // 打开连接
-        transport.connect("smtp.139.com", "9c049547ef9926354900");         //邮箱名字和刚才设置的授权密码
+        transport.connect("19167937606", "5364136d293d60454100");         //邮箱名字和刚才设置的授权密码
         // 将message对象传递给transport对象，将邮件发送出去
         transport.sendMessage(message, message.getAllRecipients());
         // 关闭连接
@@ -112,7 +111,7 @@ public class SendEmailUtil {
 
         private String username = "19167937606";     //邮箱名字
 
-        private String password = "Pxy12081217";     //邮箱授权密码
+        private String password = "Pxy12081217#";     //邮箱授权密码
 
         public MyAuthenticator() {
             super();

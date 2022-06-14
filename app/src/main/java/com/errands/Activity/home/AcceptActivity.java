@@ -1,6 +1,7 @@
 package com.errands.Activity.home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 
 import com.alibaba.fastjson.JSON;
 import com.errands.Activity.BaseActivity;
+import com.errands.Activity.mine.Order_managerment_Activity;
 import com.errands.Adapter.GoodsAdapter;
 import com.errands.Https.UtilHttp;
 import com.errands.Model.Order;
@@ -148,6 +150,9 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
                     orderBase.setUser_id_receive(account.getId());
                     acceptorder(orderBase);
                 }
+                showToast("接单成功");
+                Intent intent =new Intent(this, Order_managerment_Activity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

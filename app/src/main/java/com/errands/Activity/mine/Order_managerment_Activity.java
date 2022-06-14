@@ -69,12 +69,17 @@ public class Order_managerment_Activity extends BaseActivity implements View.OnC
                 List<OrderBase> orderBases = new ArrayList<>();
                 orderBases = gson.fromJson(JSON.toJSONString(msg.obj), new TypeToken<List<OrderBase>>() {
                 }.getType());
+                System.out.println("订单长度" + orderBases.size());
+                System.out.println("订单长度" + orderBases.get(0));
+                System.out.println("订单长度" + orderBases.get(1));
                 for (int i = 0; i < orderBases.size(); i++) {
-                    if (orderBases.get(i).getUser_id_send().equals(account.getId())) {
-                        issue_orders.add(orderBases.get(i));
-                    }
-                    if (orderBases.get(i).getUser_id_receive().equals(account.getId())) {
-                        receive_orders.add(orderBases.get(i));
+                    if (!orderBases.get(i).getUser_id_send().isEmpty()||!orderBases.get(i).getUser_id_receive().isEmpty()){
+                        if (orderBases.get(i).getUser_id_send().equals(account.getId())) {
+                            issue_orders.add(orderBases.get(i));
+                        }
+                        if (orderBases.get(i).getUser_id_receive()==account.getId()) {
+                            receive_orders.add(orderBases.get(i));
+                        }
                     }
                 }
                 //首先创建对应标题数量的类，需要继承Fragment
