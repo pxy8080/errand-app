@@ -21,7 +21,7 @@ public class SendEmailUtil {
     private String PORT = "25";
     // 是否要求身份认证
     private String IS_AUTH = "true";
-    // 是否启用调试模式（启用调试模式可打印客户端与服务器交互过程时一问一答的响应消息）
+    // user_id_receive启用调试模式（启用调试模式可打印客户端与服务器交互过程时一问一答的响应消息）
     private String IS_ENABLED_DEBUG_MOD = "true";
     // 发件人
     private String from = "19167937606@139.com";     //你新注册的邮箱

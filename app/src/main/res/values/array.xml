@@ -12,4 +12,17 @@
         <item>广西科技大学</item>
         <item>广西民族大学</item>
     </array>
+
+    <string-array name="ad_pic">
+        <item>http://www.free-ad.cn/skin/demo08/images/logo.png</item>
+        <item>https://nimg.ws.126.net/?url=http%3A%2F%2Fcms-bucket.ws.126.net%2F2022%2F0610%2Fae6993bdp00rd93n700lic000u000guc.png&amp;thumbnail=660x2147483647&amp;quality=80&amp;type=jpg</item>
+        <item>https://nimg.ws.126.net/?url=http%3A%2F%2Fcms-bucket.ws.126.net%2F2022%2F0614%2F5029cdd8p00rdgnvn007oc000n000h1c.png&amp;thumbnail=660x2147483647&amp;quality=80&amp;type=jpg</item>
+        <item>https://nimg.ws.126.net/?url=http%3A%2F%2Fcms-bucket.ws.126.net%2F2022%2F0614%2F01f674fcj00rdgeeg00owc000u0072wc.jpg&amp;thumbnail=660x2147483647&amp;quality=80&amp;type=jpg</item>
+    </string-array>
+    <string-array name="ad_target">
+        <item>http://sell.free-ad.cn/show-10599.html</item>
+        <item>https://www.163.com/caozhi/article/H9GUJ7N1000181TI.html</item>
+        <item>https://www.163.com/news/article/H9RE1V550001982T.html</item>
+        <item>https://jiankang.163.com/22/0614/14/H9R2579F0038804G.html</item>
+    </string-array>
 </resources>
