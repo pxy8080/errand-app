@@ -166,7 +166,6 @@ public class UtilHttp {
 
         try {
             final String responseString = response.body().string();
-            System.out.println("是否成功"+responseString);
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {

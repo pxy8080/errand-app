@@ -2,7 +2,10 @@ package com.errands.Fragment;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Handler;
 import android.os.Message;
+import android.preference.Preference;
 import android.util.Log;
 import android.view.LayoutInflater;
 
@@ -22,10 +26,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
+
 import com.bumptech.glide.Glide;
 import com.errands.Activity.home.AcceptActivity;
 import com.errands.Adapter.TaskAdapter;
 import com.errands.Https.UtilHttp;
+import com.errands.Model.Ad;
+
 import com.errands.Model.OrderBase;
 import com.errands.Model.Result;
 import com.errands.Sophix.R;
@@ -38,11 +45,9 @@ import com.synnapps.carouselview.ImageListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Fragment_home extends Fragment implements View.OnClickListener {
-    private static final String TAG = "tips";
-
-    int[] sampleImages = {R.drawable.logo, R.drawable.abc_vector_test, R.drawable.ali_feedback_common_back_btn_bg, R.drawable.logo, R.drawable.logo};
+    private String[] ad_target;
+    private String[] ad_pic;
     private View rootView;
     private ImageView add_menu;
     private static final String ARG_PARAM1 = "param1";
@@ -52,6 +57,7 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
     private Result result = new Result();
     private List<OrderBase> orderBases = new ArrayList<>();
     private Handler handler;
+    private List<Ad> datalist = new ArrayList<>();
 
     public Fragment_home() {
     }
@@ -75,12 +81,12 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
 
     }
 
-    @SuppressLint({"HandlerLeak", "InflateParams"})
+    @SuppressLint({"HandlerLeak", "InflateParams", "ResourceType"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, null);
         CarouselView cardView = rootView.findViewById(R.id.banner);
-        cardView.setPageCount(sampleImages.length);
+        cardView.setPageCount(4);
         cardView.setImageListener(imageListener);
         initview();
         getOrderBase();
@@ -108,21 +114,39 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
                         });
                     }
                 }
-
             }
         };
 
-//广告点击
+
+
+
+        getAdvertise();
+
+        //广告点击
         cardView.setImageClickListener(new ImageClickListener() {
+
             @Override
             public void onClick(int position) {
-                Uri uri = Uri.parse("https://www.baidu.com");
+                ad_target=getResources().getStringArray(R.array.ad_target);
+                System.out.println("1111111111"+ad_target[position]);
+                Uri uri = Uri.parse(ad_target[position]);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
         });
         return rootView;
     }
+
+    //广告图片
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            ad_pic=getResources().getStringArray(R.array.ad_pic);
+            System.out.println("1111111111"+ad_pic[position]);
+            Glide.with(getActivity()).load(ad_pic[position])
+                    .into(imageView);
+        }
+    };
 
     //获取订单
     private void getOrderBase() {
@@ -150,7 +174,44 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    //获取订单
+    private void getAdvertise() {
+        UtilHttp utilHttp = UtilHttp.obtain();
+        UtilHttp.ICallBack callback = new UtilHttp.ICallBack() {
+            @Override
+            public void onFailure(String throwable) {
+                Log.i("TAG", "getAdvertise onFailure: " + throwable);
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                Gson gson1 = new Gson();
+                result = gson1.fromJson(response, new TypeToken<Result>() {
+                }.getType());
+                SharedPreferences sharedPreferences = requireContext().getSharedPreferences("advertise",
+                        Context.MODE_PRIVATE); //私有数据
+                SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
+                datalist = new Gson().fromJson(JSON.toJSON(result.getData()).toString(),
+                        new TypeToken<List<Ad>>() {
+                        }.getType());
+                ArrayList<String> targets = new ArrayList<String>();
+                ArrayList<String> pictures = new ArrayList<String>();
+                for (int i = 0; i < datalist.size(); i++) {
+                    targets.add(datalist.get(i).getTarget());
+                    pictures.add(datalist.get(i).getPicture());
+                }
+                editor.putString("targets", targets.toString());
+                editor.putString("pictures", pictures.toString());
+                editor.commit();//提交修改
+            }
+        };
+        try {
+            utilHttp.utilGet("appdata/adList", callback);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initview() {
@@ -159,17 +220,6 @@ public class Fragment_home extends Fragment implements View.OnClickListener {
         home_recyclerview.setLayoutManager(staggeredGridLayoutManager);
 
     }
-
-
-    //广告图片
-    ImageListener imageListener = new ImageListener() {
-        @Override
-        public void setImageForPosition(int position, ImageView imageView) {
-//            imageView.setImageResource(sampleImages[position]);
-            Glide.with(getActivity()).load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.aiimg.com%2Fuploads%2Fallimg%2F200603%2F263915-200603113151.jpg&refer=http%3A%2F%2Fimg.aiimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1653621968&t=6bbaf01ed311451e2e33d6571bc1a47d")
-                    .into(imageView);
-        }
-    };
 
 
     @Override
