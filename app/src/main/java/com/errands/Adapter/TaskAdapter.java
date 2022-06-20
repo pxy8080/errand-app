@@ -56,7 +56,7 @@ public class TaskAdapter extends RecyclerView.Adapter<VH> {
     public void onBindViewHolder(@NonNull VH holder, @SuppressLint("RecyclerView") int position) {
         holder.task_state.setText("" + orderBase.get(position).getName());
         holder.destination.setText("To:" + orderBase.get(position).getTaskAddress());
-        holder.task_price.setText(String.valueOf(orderBase.get(position).getTaskAddress()));
+        holder.task_price.setText(String.valueOf(orderBase.get(position).getPrice()));
         holder.task_time.setText(orderBase.get(position).getDate() + "\n" + orderBase.get(position).getTime());
         getnicknameandhead(orderBase.get(position).getUser_id_send());
         handler = new Handler() {

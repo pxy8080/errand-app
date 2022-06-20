@@ -48,11 +48,6 @@ public class ChatActivity2 extends BaseActivity implements View.OnClickListener 
 
         initView();
 
-        msgListView = findViewById(R.id.msg_list_view);
-        inputText = findViewById(R.id.input_text);
-        send = findViewById(R.id.send);
-        to = findViewById(R.id.to);
-
         initMsgs();
         adapter = new MsgAdapter(ChatActivity2.this, R.layout.msg_item, msgList);
         msgListView.setAdapter(adapter);
@@ -108,6 +103,10 @@ public class ChatActivity2 extends BaseActivity implements View.OnClickListener 
         back_img.setOnClickListener(this);
         title = findViewById(R.id.title);
         title.setText("用户id");
+        msgListView = findViewById(R.id.msg_list_view);
+        inputText = findViewById(R.id.input_text);
+        send = findViewById(R.id.send);
+        to = findViewById(R.id.to);
     }
 
     private void initMsgs() {
