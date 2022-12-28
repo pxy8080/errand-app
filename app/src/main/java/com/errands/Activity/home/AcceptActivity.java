@@ -81,10 +81,12 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
                 super.handleMessage(msg);
                 Gson gson = new Gson();
                 List<Order> orders = new ArrayList<>();
+                System.out.println("获取的orders"+msg.obj);
                 orders = gson.fromJson(JSON.toJSON(msg.obj).toString(),
                         new TypeToken<List<Order>>() {
                         }.getType());
                 if (msg.what == 1) {
+                    System.out.println("跑到这里" + orderBase.getType()+"  "+orders.size());
                     switch (orderBase.getType()) {
                         case "代购":
                             goodsAdapter = new GoodsAdapter(orders, "代购", AcceptActivity.this);
@@ -120,8 +122,10 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
             public void onSuccess(String response) {
                 //解析成Result并且传result.getData()值给hanlde
                 Gson gson1 = new Gson();
+
                 Result result = gson1.fromJson(response, new TypeToken<Result>() {
                 }.getType());
+                System.out.println("获取的返回提"+result.getData());
                 Message message = new Message();
                 message.what = 1;
                 message.obj = result.getData();
@@ -129,7 +133,7 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
             }
         };
         try {
-            utilHttp.utilGet("order/showAllOrder?id=" + id, callback);
+            utilHttp.utilGet("order/showAllOrder?id=" + "72bd200beb3311ec928700163e0ce512", callback);
         } catch (Exception e) {
             showToast("拿到订单详情发生错误");
         }
@@ -151,7 +155,7 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
                     acceptorder(orderBase);
                 }
                 showToast("接单成功");
-                Intent intent =new Intent(this, Order_managerment_Activity.class);
+                Intent intent = new Intent(this, Order_managerment_Activity.class);
                 startActivity(intent);
                 break;
             default:
@@ -166,9 +170,10 @@ public class AcceptActivity extends BaseActivity implements View.OnClickListener
             public void onFailure(String throwable) {
 
             }
+
             @Override
             public void onSuccess(String response) {
-                Log.i(TAG, "接单onSuccess: "+response);
+                Log.i(TAG, "接单onSuccess: " + response);
             }
         };
         try {

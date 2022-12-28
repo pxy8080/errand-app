@@ -54,13 +54,13 @@ public class GoodsAdapter extends BaseAdapter {
         final TextView add_goodsamount;
         final TextView add_goodsestimation;
         final TextView add_goodsevidence;
-
+        final ImageView add_taskpic;
         add_description = view.findViewById(R.id.add_description);
         add_goodsname = view.findViewById(R.id.add_goodsname);
         add_goodsamount = view.findViewById(R.id.add_goodsamount);
         add_goodsestimation = view.findViewById(R.id.add_goodsestimation);
         add_goodsevidence = view.findViewById(R.id.add_goodsevidence);
-
+        add_taskpic = view.findViewById(R.id.add_taskpic);
         switch (type) {
             case "代购":
                 add_goodsevidence.setVisibility(View.INVISIBLE);
@@ -68,20 +68,23 @@ public class GoodsAdapter extends BaseAdapter {
                 add_goodsname.setText("商品名：" + orders.get(i).getName());
                 add_goodsamount.setText("商品数量：" + orders.get(i).getAmount());
                 add_goodsestimation.setText("商品单价：" + orders.get(i).getEstimation());
+                add_taskpic.setImageResource(R.drawable.erweima);
                 break;
             case "代送":
                 add_goodsname.setVisibility(View.INVISIBLE);
                 add_goodsamount.setVisibility(View.INVISIBLE);
                 add_goodsestimation.setVisibility(View.INVISIBLE);
                 add_goodsevidence.setVisibility(View.INVISIBLE);
+                add_taskpic.setImageResource(R.drawable.erweima);
                 add_description.setText("商品描述：" + orders.get(i).getDescription());
                 break;
             case "代取":
                 add_goodsname.setVisibility(View.INVISIBLE);
                 add_goodsamount.setVisibility(View.INVISIBLE);
                 add_goodsestimation.setVisibility(View.INVISIBLE);
-                add_description.setText("物品描述" + orders.get(i).getDescription());
-                add_goodsevidence.setText("物品凭据" + orders.get(i).getEvidence());
+                add_description.setText("物品描述：" + orders.get(i).getDescription());
+                add_taskpic.setImageResource(R.drawable.erweima);
+                add_goodsevidence.setText("取货码：" + orders.get(i).getEvidence());
                 break;
             default:
                 break;

@@ -1,0 +1,68 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/activity_about.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/activity_address.xml\" value=\"0.3605128205128205\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/activity_chat.xml\" value=\"0.3619791666666667\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/activity_chat2.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/activity_myinfo.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/activity_order_managerment.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/activity_server.xml\" value=\"0.33\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/activitychat.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/fg_left.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/fragment_home.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/fragment_message.xml\" value=\"0.253125\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/fragment_mine.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/layout_add_address.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/layout_address.xml\" value=\"0.3651041666666667\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/msg_item.xml\" value=\"0.3651041666666667\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/service.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/singe_chat.xml\" value=\"0.2520833333333333\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/task_layout.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"..\\:/Android/sophix/app/src/main/res/layout/title_bar.xml\" value=\"0.36614583333333334\" />\r\n        <entry key=\"app/src/main/res/drawable/account_logo.xml\" value=\"0.20925925925925926\" />\r\n        <entry key=\"app/src/main/res/layout/activity_about.xml\" value=\"0.37448559670781895\" />\r\n        <entry key=\"app/src/main/res/layout/activity_address.xml\" value=\"0.43833904628460785\" />\r\n        <entry key=\"app/src/main/res/layout/activity_base.xml\" value=\"0.270810599520017\" />\r\n        <entry key=\"app/src/main/res/layout/activity_chat.xml\" value=\"0.1549702770229012\" />\r\n        <entry key=\"app/src/main/res/layout/activity_chat2.xml\" value=\"0.19985835745557906\" />\r\n        <entry key=\"app/src/main/res/layout/activity_feedback.xml\" value=\"0.18270371891115822\" />\r\n        <entry key=\"app/src/main/res/layout/activity_forget_pwd.xml\" value=\"0.14444444444444443\" />\r\n        <entry key=\"app/src/main/res/layout/activity_home.xml\" value=\"0.14444444444444443\" />\r\n        <entry key=\"app/src/main/res/layout/activity_location.xml\" value=\"0.14444444444444443\" />\r\n        <entry key=\"app/src/main/res/layout/activity_login.xml\" value=\"0.14444444444444443\" />\r\n        <entry key=\"app/src/main/res/layout/activity_main.xml\" value=\"0.14444444444444443\" />\r\n        <entry key=\"app/src/main/res/layout/activity_money.xml\" value=\"0.23226846022646291\" />\r\n        <entry key=\"app/src/main/res/layout/activity_myinfo.xml\" value=\"0.3083259863029154\" />\r\n        <entry key=\"app/src/main/res/layout/activity_server.xml\" value=\"0.26372528048271926\" />\r\n        <entry key=\"app/src/main/res/layout/activity_start.xml\" value=\"0.14444444444444443\" />\r\n        <entry key=\"app/src/main/res/layout/billing_records.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/choose_photo.xml\" value=\"0.16111111111111112\" />\r\n        <entry key=\"app/src/main/res/layout/column.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/email_dialog.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/feedback.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/fg_left.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/fragment_home.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/fragment_message.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/fragment_mine.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/layout_add_address.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/layout_address.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/layout_signin.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/layout_signup.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/msg_item.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/navigation.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/nickname_dialog.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/order_management.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/phone_dialog.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/pwd_dialog.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/service.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/singe_chat.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/task_layout.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/layout/title_bar.xml\" value=\"0.2557291666666667\" />\r\n        <entry key=\"app/src/main/res/menu/main.xml\" value=\"0.2557291666666667\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -7,6 +7,7 @@
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_address.xml" value="0.3605128205128205" />
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_chat.xml" value="0.3619791666666667" />
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_chat2.xml" value="0.36614583333333334" />
++        <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_feedback.xml" value="0.22916666666666666" />
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_myinfo.xml" value="0.36614583333333334" />
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_order_managerment.xml" value="0.36614583333333334" />
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/activity_server.xml" value="0.33" />
+@@ -20,48 +21,9 @@
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/msg_item.xml" value="0.3651041666666667" />
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/service.xml" value="0.36614583333333334" />
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/singe_chat.xml" value="0.2520833333333333" />
++        <entry key="..\:/Android/sophix/app/src/main/res/layout/singe_task.xml" value="0.33" />
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/task_layout.xml" value="0.36614583333333334" />
+         <entry key="..\:/Android/sophix/app/src/main/res/layout/title_bar.xml" value="0.36614583333333334" />
+-        <entry key="app/src/main/res/drawable/account_logo.xml" value="0.20925925925925926" />
+-        <entry key="app/src/main/res/layout/activity_about.xml" value="0.37448559670781895" />
+-        <entry key="app/src/main/res/layout/activity_address.xml" value="0.43833904628460785" />
+-        <entry key="app/src/main/res/layout/activity_base.xml" value="0.270810599520017" />
+-        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.1549702770229012" />
+-        <entry key="app/src/main/res/layout/activity_chat2.xml" value="0.19985835745557906" />
+-        <entry key="app/src/main/res/layout/activity_feedback.xml" value="0.18270371891115822" />
+-        <entry key="app/src/main/res/layout/activity_forget_pwd.xml" value="0.14444444444444443" />
+-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.14444444444444443" />
+-        <entry key="app/src/main/res/layout/activity_location.xml" value="0.14444444444444443" />
+-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.14444444444444443" />
+-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14444444444444443" />
+-        <entry key="app/src/main/res/layout/activity_money.xml" value="0.23226846022646291" />
+-        <entry key="app/src/main/res/layout/activity_myinfo.xml" value="0.3083259863029154" />
+-        <entry key="app/src/main/res/layout/activity_server.xml" value="0.26372528048271926" />
+-        <entry key="app/src/main/res/layout/activity_start.xml" value="0.14444444444444443" />
+-        <entry key="app/src/main/res/layout/billing_records.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/choose_photo.xml" value="0.16111111111111112" />
+-        <entry key="app/src/main/res/layout/column.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/email_dialog.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/feedback.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/fg_left.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/fragment_message.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/fragment_mine.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/layout_add_address.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/layout_address.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/layout_signin.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/layout_signup.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/msg_item.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/navigation.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/nickname_dialog.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/order_management.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/phone_dialog.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/pwd_dialog.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/service.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/singe_chat.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/task_layout.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/layout/title_bar.xml" value="0.2557291666666667" />
+-        <entry key="app/src/main/res/menu/main.xml" value="0.2557291666666667" />
+       </map>
+     </option>
+   </component>
